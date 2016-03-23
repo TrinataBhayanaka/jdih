@@ -1,0 +1,32 @@
+
+{include file="template/meta.html"}
+
+{if $admin}
+<body class="hold-transition skin-blue-light sidebar-mini">
+{else}
+<body class="hold-transition login-page">
+{/if}
+
+	<script>
+		var basedomain = "{$basedomain}";
+		var app_domain = "{$app_domain}";
+	</script>
+	{if ($admin)}
+	<div class="wrapper">
+			
+			{include file= "template/header.html"} 
+			{include file= "template/sidebar.html"}
+			<div class="content-wrapper">
+
+				{$content}
+
+			</div>
+			{include file= "template/footer.html"}
+	</div>
+	{include file= "template/jsplugin.html"}
+	{else}
+		{$content}
+		{include file= "template/jsplugin.html"}
+	{/if}		
+</body>
+</html>	

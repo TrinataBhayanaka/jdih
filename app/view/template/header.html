@@ -1,0 +1,125 @@
+<div id="header" class="sticky {if $page.page eq 'home' && $page.function eq 'index'}transparent noborder{/if} clearfix">
+
+  <!-- TOP NAV -->
+  <header id="topNav">
+    <div class="full-container">
+
+      <!-- Mobile Menu Button -->
+      <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+
+      <!-- BUTTONS -->
+      <ul class="pull-right nav nav-pills nav-second-main">
+
+        <!-- SEARCH -->
+        <!--<li class="search">
+          <a href="javascript:;">
+            <i class="fa fa-search"></i>
+          </a>
+          <div class="search-box">
+            <form action="page-search-result-1.html" method="get">
+              <div class="input-group">
+                <input type="text" name="src" placeholder="Search" class="form-control" />
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">Search</button>
+                </span>
+              </div>
+            </form>
+          </div> 
+        </li>-->
+        <!-- /SEARCH -->
+
+      </ul>
+      <!-- /BUTTONS -->
+
+
+      <!-- Logo -->
+      <a class="logo pull-left" href="{$basedomain}">
+        <img src="{$basedomain}assets/images/logo_light.png" alt="" /> <!-- light logo -->
+        <img src="{$basedomain}assets/images/logo_dark.png" alt="" /> <!-- dark logo -->
+      </a>
+
+      <!-- 
+        Top Nav 
+        
+        AVAILABLE CLASSES:
+        submenu-dark = dark sub menu
+      -->
+      <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+        <nav class="nav-main">
+
+          <!--
+            NOTE
+            
+            For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
+            Direct Link Example: 
+
+            <li>
+              <a href="#">HOME</a>
+            </li>
+          -->
+          <ul id="topMain" class="nav nav-pills nav-main">
+            <li class="{if $page.page eq 'home' && $page.function eq 'index'}active{/if}"><!-- Open -->
+              <a href="{$basedomain}">
+                HOME
+              </a>
+            </li>
+            {if $user}
+            <li class="{if $page.page eq 'pengaduan' && $page.function eq 'index'}active{/if}"><!-- Log in -->
+              <a href="{$basedomain}pengaduan">
+                LAPOR PENGADUAN
+              </a>
+            </li>
+            {/if}
+            <li class="{if $page.page eq 'tatacara' && $page.function eq 'index'}active{/if}"><!-- Open -->
+              <a href="{$basedomain}tatacara">
+                TATA CARA
+              </a>
+            </li>
+            <li class="{if $page.page eq 'statistik' && $page.function eq 'index'}active{/if}"><!-- Open -->
+              <a href="{$basedomain}statistik">
+                STATISTIK PENGADUAN
+              </a>
+            </li>
+            {if $user}
+            <li class="{if $page.page eq 'profil' && $page.function eq 'index'}active{/if}"><!-- Log in -->
+              <a href="{$basedomain}profil">
+                EDIT PROFILE
+              </a>
+            </li>
+            <li class=""><!-- Log in -->
+              <a href="{$basedomain}home/logout">
+                LOG OUT
+              </a>
+            </li>
+            {else}
+             <li class=""><!-- Log in -->
+              <a href="{if $page.page eq 'home' && $page.function eq 'index'}#loginform{else}{$basedomain}#loginform{/if}" id="loginbutton">
+                LOG IN
+              </a>
+              
+            </li>
+            {/if}
+          </ul>
+
+        </nav>
+      </div>
+
+    </div>
+  </header>
+  <!-- /Top Nav -->
+
+</div>
+
+{literal}
+<script type="text/javascript">
+  $('#loginbutton').click(function(){
+    $('html, body').animate({
+        scrollTop: $( $.attr(this, 'href') ).offset().top
+    }, 500);
+    return false;
+});
+</script>
+{/literal}
+
