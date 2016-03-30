@@ -24,13 +24,13 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN MENU</li>
-        <li class="active">
+        <li class="{if $page.page eq 'home'}active{/if}">
           <a href="{$basedomain}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="">
-          <a href="#">
+        <li class="{if $page.page eq 'produk'}active{/if}">
+          <a href="{$basedomain}produk">
             <i class="fa fa-balance-scale"></i>
             <span>Produk Hukum</span>
           </a>
