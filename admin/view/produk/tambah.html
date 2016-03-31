@@ -1,0 +1,177 @@
+<section class="content-header">
+  <h1>
+    Produk Hukum
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="{$basedomain}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="{$basedomain}produk"><i class="fa fa-balance-scale"></i> Produk Hukum</a></li>
+    <li class="active">Tambah Produk Hukum</li>
+  </ol>
+</section>
+
+
+<section class="content">
+
+	<div class="row">
+
+		<div class="col-md-12">
+
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Tambah Produk Hukum</h3>
+        </div><!-- /.box-header -->
+        <form class="form-horizontal">
+          <div class="box-body">
+          
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">ID Produk Hukum</label>
+              <div class="col-xs-5">
+                <input type="text" class="form-control" readonly placeholder="Otomatis terisi">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Tanggal Upload</label>
+              <div class="col-xs-3">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                </div><!-- /.input group -->
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Jenis Produk Hukum</label>
+              <div class="col-xs-5">
+                <select class="form-control" style="width: 100%;">
+                  <option value="" disabled selected>- Pilih produk Hukum -</option>
+                  <option>Undang-undang Dasar Tahun 1945 dan Amandemen</option>
+                  <option>Undang-undang</option>
+                  <option>Perpu</option>
+                  <option>Peraturan Pemerintah (PP)</option>
+                  <option>Peraturan Presiden (perpres)</option>
+                  <option>Keputusan Presiden (Keppres)</option>
+                  <option>Instruksi Presiden (Inpres)</option>
+                  <option>Pemberlakuan Wajib SNI</option>
+                  <option>Peraturan Kepala BSN</option>
+                  <option>Keputusan Kepala BSN</option>
+                  <option>Surat Edaran Kepala BSN</option>
+                  <option>Rancangan</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Judul</label>
+              <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Silahkan isi judul produk hukum">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Nomor Produk Hukum</label>
+              <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Silahkan isi nomor produk hukum">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Tahun</label>
+              <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Silahkan isi tahun produk hukum">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Tentang</label>
+              <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="Silahkan isi perihal produk hukum">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Deskripsi Singkat</label>
+              <div class="col-xs-10">
+                 <textarea id="editor1" name="editor1" rows="5" cols="80"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Upload File</label>
+              <div class="col-xs-5">
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">File yang diperbolehkan .pdf dan maksimum 1Mb</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Status Akhir</label>
+              <div class="col-xs-3">
+                <select class="form-control" style="width: 100%;">
+                  <option value="" disabled selected>- Pilih Status Akhir -</option>
+                  <option>Rancangan</option>
+                  <option>Berlaku</option>
+                  <option>Perubahan</option>
+                  <option>Pencabutan</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Posisi dalam Website</label>
+              <div class="col-xs-3">
+                <select class="form-control" style="width: 100%;">
+                  <option value="" disabled selected>- Pilih Posisi -</option>
+                  <option>Headline</option>
+                  <option>Alur Produk Hukum</option>
+                  <option>Alur Berita Hukum</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Publish / Non-Publish</label>
+              <div class="col-xs-3">
+                <select class="form-control" style="width: 100%;">
+                  <option value="" disabled selected>- Pilih Status -</option>
+                  <option>Publish</option>
+                  <option>Non-Publish</option>
+                </select>
+              </div>
+            </div>
+            
+
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-info">Submit</button>
+            <button type="reset" class="btn btn-default pull-right">Reset</button>
+          </div><!-- /.box-footer -->
+        </form>
+      </div><!-- /.box -->
+		</div>
+
+	</div>
+</section>
+
+{literal}
+<script>
+    $(function () {
+        $("#example1").DataTable();
+        new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
+        $('#reservation').daterangepicker();
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+        CKEDITOR.replace('editor1');
+
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
+    })
+</script>
+{/literal}
