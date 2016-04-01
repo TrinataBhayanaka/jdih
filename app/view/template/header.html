@@ -1,125 +1,160 @@
-<div id="header" class="sticky {if $page.page eq 'home' && $page.function eq 'index'}transparent noborder{/if} clearfix">
+<header id="header-full-top" class="hidden-xs header-full">
+    <div class="container">
 
-  <!-- TOP NAV -->
-  <header id="topNav">
-    <div class="full-container">
-
-      <!-- Mobile Menu Button -->
-      <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
-        <i class="fa fa-bars"></i>
-      </button>
-
-      <!-- BUTTONS -->
-      <ul class="pull-right nav nav-pills nav-second-main">
-
-        <!-- SEARCH -->
-        <!--<li class="search">
-          <a href="javascript:;">
-            <i class="fa fa-search"></i>
-          </a>
-          <div class="search-box">
-            <form action="page-search-result-1.html" method="get">
-              <div class="input-group">
-                <input type="text" name="src" placeholder="Search" class="form-control" />
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="submit">Search</button>
-                </span>
-              </div>
-            </form>
-          </div> 
-        </li>-->
-        <!-- /SEARCH -->
-
-      </ul>
-      <!-- /BUTTONS -->
-
-
-      <!-- Logo -->
-      <a class="logo pull-left" href="{$basedomain}">
-        <img src="{$basedomain}assets/images/logo_light.png" alt="" /> <!-- light logo -->
-        <img src="{$basedomain}assets/images/logo_dark.png" alt="" /> <!-- dark logo -->
-      </a>
-
-      <!-- 
-        Top Nav 
-        
-        AVAILABLE CLASSES:
-        submenu-dark = dark sub menu
-      -->
-      <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
-        <nav class="nav-main">
-
-          <!--
-            NOTE
-            
-            For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
-            Direct Link Example: 
-
-            <li>
-              <a href="#">HOME</a>
-            </li>
-          -->
-          <ul id="topMain" class="nav nav-pills nav-main">
-            <li class="{if $page.page eq 'home' && $page.function eq 'index'}active{/if}"><!-- Open -->
-              <a href="{$basedomain}">
-                HOME
-              </a>
-            </li>
-            {if $user}
-            <li class="{if $page.page eq 'pengaduan' && $page.function eq 'index'}active{/if}"><!-- Log in -->
-              <a href="{$basedomain}pengaduan">
-                LAPOR PENGADUAN
-              </a>
-            </li>
-            {/if}
-            <li class="{if $page.page eq 'tatacara' && $page.function eq 'index'}active{/if}"><!-- Open -->
-              <a href="{$basedomain}tatacara">
-                TATA CARA
-              </a>
-            </li>
-            <li class="{if $page.page eq 'statistik' && $page.function eq 'index'}active{/if}"><!-- Open -->
-              <a href="{$basedomain}statistik">
-                STATISTIK PENGADUAN
-              </a>
-            </li>
-            {if $user}
-            <li class="{if $page.page eq 'profil' && $page.function eq 'index'}active{/if}"><!-- Log in -->
-              <a href="{$basedomain}profil">
-                EDIT PROFILE
-              </a>
-            </li>
-            <li class=""><!-- Log in -->
-              <a href="{$basedomain}home/logout">
-                LOG OUT
-              </a>
-            </li>
-            {else}
-             <li class=""><!-- Log in -->
-              <a href="{if $page.page eq 'home' && $page.function eq 'index'}#loginform{else}{$basedomain}#loginform{/if}" id="loginbutton">
-                LOG IN
-              </a>
-              
-            </li>
-            {/if}
-          </ul>
-
-        </nav>
-      </div>
-
+        <div class="header-full-title">
+      <!-- <img src="assets/img/color/blue/logobsn.png" width="25%"> -->
+            <!-- <h4 class="animated fadeInRight" style="color:#DA251E;margin-left:20px"></span></h4> -->
+            <p class="animated fadeInRight" style="text-align:left;margin-left:80px"><span style="color:#DA251E">Jaringan Dokumentasi dan Informasi Hukum</span><br>
+      <span style="color:#666666">Badan Standardisasi Nasional <br> National Standardization Agency of Indonesia</span></p>
     </div>
-  </header>
-  <!-- /Top Nav -->
+  
+        <nav class="top-nav">
+          
+          <div class="dropdown animated fadeInDown animation-delay-13">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-search-box animated fadeInUp">
+              <form role="form">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-ar btn-primary" type="button">Go!</button> 
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div> <!-- dropdown -->
+          
+          <div class="dropdown animated fadeInDown animation-delay-11">
+            <a href="#" class="dropdown-toggle" data-toggle="modal" data-target="#myModal">Find More</a>
+          </div>
+        
+         <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Pencarian Lanjutan</h4>
+            </div>
+            
+            <div class="modal-body">
+            <div class="panel-body">
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                <label for="select" class="col-sm-4 control-label">Jenis Pencarian</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" id="select">
+                    <option>Pilih Jenis Pencarian</option>
+                    <option>Produk Hukum</option>
+                    <option>Berita Hukum</option>
+                    <option>Referensi Buku</option>
+                    
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                <label for="select" class="col-sm-4 control-label">Tanggal</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" id="select">
+                    <option>Tanggal Terbaru</option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                <label for="select" class="col-sm-4 control-label">Tahun</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" id="select">
+                    <option>Pilih Tahun</option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    
+                    </select>
+                  </div>
+                </div>
+            
+                <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">Tentang</label>
+                <div class="col-sm-8">
+                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+                </div>
+                
+                <div class="form-group">
+                <label for="inputPassword3" class="col-sm-4 control-label">Nomor</label>
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+                </div>
+                
+                <div class="form-group">
+                <label for="select" class="col-sm-4 control-label">Status Akhir</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" id="select">
+                    <option>Pilih Status</option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    
+                    </select>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-ar btn-primary" data-dismiss="modal">Tampilkan</button>
+            <button type="button" class="btn btn-ar btn-default">Batal</button>
+            </div>
+          </div>
+          </div>
+        </div>
+            <!-- <ul class="top-nav-social hidden-sm">
+                <li><a href="#" class="animated fadeIn animation-delay-6 rss"><i class="fa fa-rss"></i></a></li>
+                <li><a href="#" class="animated fadeIn animation-delay-7 twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#" class="animated fadeIn animation-delay-8 facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#" class="animated fadeIn animation-delay-9 google-plus"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#" class="animated fadeIn animation-delay-9 instagram"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="#" class="animated fadeIn animation-delay-8 vine"><i class="fa fa-vine"></i></a></li>
+                <li><a href="#" class="animated fadeIn animation-delay-7 linkedin"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="#" class="animated fadeIn animation-delay-6 flickr"><i class="fa fa-flickr"></i></a></li>
+            </ul> -->
 
-</div>
+        <!--     <div class="dropdown animated fadeInDown animation-delay-11">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Login</a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-login-box animated flipCenter">
+                    <form role="form">
+                        <h4>Login Form</h4>
 
-{literal}
-<script type="text/javascript">
-  $('#loginbutton').click(function(){
-    $('html, body').animate({
-        scrollTop: $( $.attr(this, 'href') ).offset().top
-    }, 500);
-    return false;
-});
-</script>
-{/literal}
-
+                        <div class="form-group">
+                            <div class="input-group login-input">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                            <br>
+                            <div class="input-group login-input">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="checkbox pull-left">
+                                  <input type="checkbox" id="checkbox_remember1">
+                                  <label for="checkbox_remember1">
+                                     Remember me
+                                  </label>
+                            </div>
+                            <button type="submit" class="btn btn-ar btn-primary pull-right">Login</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>  -->
+        </nav>
+    </div> <!-- container -->
+</header> <!-- header-full -->
