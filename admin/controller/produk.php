@@ -33,6 +33,12 @@ class produk extends Controller {
 
 	}
 
+	public function tambah(){
+
+		return $this->loadView('produk/tambah');
+
+	}
+
 	
 }
 

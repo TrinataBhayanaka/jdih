@@ -7,23 +7,26 @@
 
 $ROUTES = array(
 		'home',
-                'statistik',
-                'profil',
-                'tatacara',
-                'pengaduan',
-		'register',
-                'recovery',
-                'login',
-                'user'
+		'prasyarat',
+		'about',
+		'produk',
+		'detail',
+		'kegiatan',
+		'kajian',
+		'kontak',
+		'detail_berita'
         );
 
 $ROUTES_IGNORE = array(
                 'home',
-                'statistik',
-                'tatacara',
-                'register',
-                'recovery',
-                'login',
+                'prasyarat',
+                'about',
+                'produk',
+                'detail',
+                'kegiatan',
+				'kajian',
+				'kontak',
+				'detail_berita'
         );
 ?>
 

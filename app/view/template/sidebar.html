@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default navbar-header-full navbar-dark yamm navbar-static-top" role="navigation" id="header">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </button>
+            <a id="ar-brand" class="navbar-brand hidden-lg hidden-md hidden-sm" href="{$basedomain}"><span style="color:#DA251E;margin-left:50px">JDIH</span></a>
+        </div> <!-- navbar-header -->
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+       <!--  <div class="pull-right">
+            <a href="javascript:void(0);" class="sb-icon-navbar sb-toggle-right"><i class="fa fa-bars"></i></a>
+        </div> -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="{if $page.page eq 'home'}active{/if}">
+                    <a href="{$basedomain}">Home</a>
+                </li>
+                <li class="{if $page.page eq 'prasyarat'}active{/if}">
+                    <a href="{$basedomain}prasyarat">Prasyarat</a>
+                    
+                </li>
+                <li class="{if $page.page eq 'about'}active{/if}">
+                    <a href="{$basedomain}about">Tentang JDIH BSN</a>
+                    
+                </li>
+                <li class="dropdown {if $page.page eq 'produk' || $page.page eq 'detail'}active{/if}">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Produk Hukum</a>
+                     <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                        <li><a href="{$basedomain}produk">Undang-undang Dasar Tahun 1945 </a></li>
+                        <li><a href="blog_left.html">Undang-undang</a></li>
+                        <li><a href="blog_full.html">Perpu</a></li>
+                        <li><a href="blog_masonry.html">Peraturan Pemerintah (PP)</a></li>
+                        <li><a href="blog2.html">Peraturan Presiden (Perpres)</a></li>
+                        <li><a href="single.html">Keputusan Presiden (Keppres)</a></li>
+                        <li><a href="single_full.html">Instruksi Presiden (Inpres)</a></li>
+						<li><a href="blog2.html">Pemberlakukan Wajib SNI</a></li>
+                        <li><a href="single.html">Peraturan Kepala BSN</a></li>
+                        <li><a href="single_full.html">Keputusan Kepala BSN</a></li>
+						<li><a href="single_full.html">Surat Edaran Kepala BSN</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown {if $page.page eq 'kegiatan' || $page.page eq 'kajian'}active{/if}">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Berita Hukum</a>
+                     <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                        <li><a href="{$basedomain}kegiatan">Kegiatan Hukum</a></li>
+                        <li><a href="{$basedomain}kajian">Kajian Hukum</a></li>
+                    </ul>
+                </li>
+                <li class="{if $page.page eq 'kontak'}active{/if}">
+                    <a href="{$basedomain}kontak">Kontak Kami</a>
+                </li>
+             </ul>
+        </div><!-- navbar-collapse -->
+    </div><!-- container -->
+</nav>

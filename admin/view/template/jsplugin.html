@@ -12,11 +12,16 @@
     <script src="{$basedomain}plugins/iCheck/icheck.min.js"></script>
     <script>
       $(function () {
-        $('input').iCheck({
-          checkboxClass: 'icheckbox_square-blue',
-          radioClass: 'iradio_square-blue',
-          increaseArea: '20%' // optional
+
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayHighlight : true,
+            todayBtn: 'linked'
         });
+
+        $(".select2").select2();
+
       });
     </script>
     <!-- Morris.js charts -->
@@ -42,6 +47,14 @@
     <script src="{$basedomain}plugins/fastclick/fastclick.min.js"></script>
     <!--Switchery [ OPTIONAL ]-->
     <script src="{$basedomain}plugins/switchery/switchery.min.js"></script>
+    <!-- InputMask -->
+    <script src="{$basedomain}plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="{$basedomain}plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="{$basedomain}plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <!-- Select2 -->
+    <script src="{$basedomain}plugins/select2/select2.full.min.js"></script>
+    <!-- CK Editor -->
+    <script src="{$basedomain}plugins/ckeditor/ckeditor.js"></script>
     <!-- DataTables -->
     <script src="{$basedomain}plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{$basedomain}plugins/datatables/dataTables.bootstrap.min.js"></script>
