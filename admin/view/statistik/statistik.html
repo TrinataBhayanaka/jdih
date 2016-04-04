@@ -1,0 +1,207 @@
+<section class="content-header">
+  <h1>
+    Statistik
+    <small>Senin, 22 Februari 2016</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Statistik</li>
+  </ol>
+</section>
+
+
+<section class="content">
+	<div class="row">
+	
+		<div class="col-md-6">
+			<div class="box box-success">
+				<div class="box-header with-border">
+				  <h3 class="box-title">Jumlah Produk Hukum per Februari 2016</h3>
+				  <div class="box-tools pull-right">
+				    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+				    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				  </div>
+				</div>
+				<div class="box-body chart-responsive">
+				  <div class="chart" id="bar-chart" style="height: 300px;"></div>
+				</div><!-- /.box-body -->
+			</div><!-- /.box -->
+		</div>
+
+		<div class="col-md-6">
+			<!-- DONUT CHART -->
+              <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Jumlah Unduh Produk Hukum Terpopuler</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <div class="box-body chart-responsive">
+                  <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                </div><!-- /.box-body -->
+             </div><!-- /.box -->
+		</div>
+
+	</div>
+
+<div class="box box-default">
+	<div class="box-header with-border">
+	  <h3 class="box-title">Statistik Laporan</h3>
+	  <div class="box-tools pull-right">
+		<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+		<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+	  </div>
+	</div><!-- /.box-header -->
+	
+	
+	
+	<div class="box-body">
+	
+	<div class="row">
+
+		<div class="col-xs-5">
+		  <div class="form-group">
+			<label>Pencarian:</label>
+			<div class="input-group">
+			  <div class="input-group-addon">
+				<i class="fa fa-calendar"></i>
+			  </div>
+			  <input type="text" class="form-control pull-right" id="reservation">
+			</div><!-- /.input group -->
+		  </div><!-- /.form group -->
+		</div>
+	  </div>
+	
+	  <div class="row">
+		<div class="col-md-6">
+		  <div class="form-group">
+			<label>Jenis Produk Hukum</label>
+			<select class="form-control select2" style="width: 100%;">
+			  <option selected="selected">Pilih Produk Hukum</option>
+			  <option></option>
+			  <option></option>
+			  <option></option>
+			  
+			</select>
+		  </div><!-- /.form-group -->
+		   <div class="form-group">
+			<label>Jenis Berita Hukum</label>
+			<select class="form-control select2" style="width: 100%;">
+			  <option selected="selected">Pilih Berita Hukum</option>
+			  <option></option>
+			  <option></option>
+			  <option></option>
+			  
+			</select>
+		  </div><!-- /.form-group -->
+		</div><!-- /.col -->
+		<div class="col-md-6">
+		 <div class="form-group">
+			<label>Tahun</label>
+			<select class="form-control select2" style="width: 100%;">
+			  <option selected="selected">Pilih Tahun</option>
+			  <option></option>
+			  <option></option>
+			  <option></option>
+			  
+			</select>
+		  </div><!-- /.form-group -->
+		  <div class="form-group">
+			<label>Status Akhir</label>
+			<select class="form-control select2" style="width: 100%;">
+			  <option selected="selected">Pilih Status</option>
+			  <option></option>
+			  <option></option>
+			  <option></option>
+			  
+			</select>
+		  </div><!-- /.form-group -->
+		</div><!-- /.col -->
+		
+		<div class="col-md-6">
+		 <div class="form-group">
+			<label>Publish/Non-Publish</label>
+			<select class="form-control select2" style="width: 100%;">
+			  <option selected="selected">Publish</option>
+			  <option>Non-Publish</option>
+			</select>
+		  </div><!-- /.form-group -->
+		</div><!-- /.col -->
+		 
+	  </div><!-- /.row -->
+	  
+	  <div class="pull-right">
+		   <button class="btn btn-sm btn-social btn-primary">
+			  <i class="fa fa-search"></i> View Report
+			</button>
+          <button class="btn btn-sm btn-social btn-info">
+			  <i class="fa fa-upload"></i> Export Report
+			</button>
+	  </div>
+	  
+	  <!--  <div>
+		  <ul class="pagination pagination-sm no-margin pull-center">
+			<li><a href="#">&laquo;</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">&raquo;</a></li>
+		  </ul>
+		</div> -->
+	</div><!-- /.box-body -->
+  </div><!-- /.box -->
+
+	
+</section>
+
+{literal}
+<script>
+	$(document).ready(function() {
+		new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
+	})
+    $(function () {
+    	//DONUT CHART
+        var donut = new Morris.Donut({
+          element: 'sales-chart',
+          resize: true,
+          colors: ["#3c8dbc", "#f56954", "#00a65a"],
+          data: [
+            {label: "Download Sales", value: 12},
+            {label: "In-Store Sales", value: 30},
+            {label: "Mail-Order Sales", value: 20}
+          ],
+          hideHover: 'auto'
+        });
+		
+		$(function () {
+        $("#example1").DataTable();
+        new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
+        $('#reservation').daterangepicker();
+    })
+
+        //BAR CHART
+        var bar = new Morris.Bar({
+          element: 'bar-chart',
+          resize: true,
+          data: [
+            {y: '2006', a: 100, b: 90},
+            {y: '2007', a: 75, b: 65},
+            {y: '2008', a: 50, b: 40},
+            {y: '2009', a: 75, b: 65},
+            {y: '2010', a: 50, b: 40},
+            {y: '2011', a: 75, b: 65},
+            {y: '2012', a: 100, b: 90}
+          ],
+          barColors: ['#00a65a', '#f56954'],
+          xkey: 'y',
+          ykeys: ['a', 'b'],
+          labels: ['CPU', 'DISK'],
+          hideHover: 'auto'
+        });
+
+        $("#example1").DataTable();
+    })
+</script>
+{/literal}
