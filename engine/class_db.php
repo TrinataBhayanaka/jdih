@@ -338,6 +338,32 @@ class Database
 		$this->close_connection();
 		
 	}
+
+	public function update($data=false,$table=false,$where=false,$dbuse=0)
+	{
+		global $dbConfig, $CONFIG;
+
+		if (!$data) return false;
+
+		$dataArray = array();
+		$this->keyconfig = $this->setAppKey();
+		
+		$this->open_connection($dbuse);
+
+		foreach ($data as $key => $val) {
+            $tmpset[] = $key." = '{$val}'";
+        }
+
+        $set = implode(',', $tmpset);
+
+        $query = "UPDATE {$table} SET {$set} WHERE {$where}";
+
+        $result = $this->query($query,$dbuse);
+
+        return true;
+
+		$this->close_connection();
+	}
         
         /* fungsi yang digunakan untuk execute query pada oracle secara otomatis akan di commit
          * jika fungsi ini dijalankan maka data yang di input tidak akan bisa di rollback kembali

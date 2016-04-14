@@ -356,7 +356,7 @@ function deleteFile($data=null, $path=null)
 	if ($path!='') $data = $path.'/'.$data;	
 	
 	$fileName = $CONFIG[$key]['upload_path'].$data;
-	
+
 	if (is_file($fileName)){
 		unlink($fileName);
 	}else{
@@ -950,5 +950,13 @@ function formatSizeUnits($bytes)
     }
 
     return $bytes;
+}
+
+function changeFormatDate($date,$old_format,$new_format)
+{
+	$date = DateTime::createFromFormat("{$old_format}",$date);
+	$new = $date->format("{$new_format}");
+
+	return $new;
 }
 ?>

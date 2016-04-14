@@ -5,7 +5,7 @@
   <ol class="breadcrumb">
     <li><a href="{$basedomain}"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="{$basedomain}produk"><i class="fa fa-balance-scale"></i> Produk Hukum</a></li>
-    <li class="active">Tambah Produk Hukum</li>
+    <li class="active">Edit Produk Hukum</li>
   </ol>
 </section>
 
@@ -18,9 +18,9 @@
 
       <div class="box box-primary">
         <div class="box-header">
-          <h3 class="box-title">Tambah Produk Hukum</h3>
+          <h3 class="box-title">Edit Produk Hukum</h3>
         </div><!-- /.box-header -->
-        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{$basedomain}produk/ins_produk">
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{$basedomain}produk/edit_produk">
           <div class="box-body">
           
             <!-- <div class="form-group">
@@ -37,7 +37,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" name="tanggal" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
+                  <input type="text" name="tanggal" value="{$data.tanggal}" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
                 </div><!-- /.input group -->
               </div>
             </div>
@@ -48,7 +48,7 @@
                 <select class="form-control" style="width: 100%;" name="id_jenis" required>
                   <option value="" disabled selected>- Pilih produk Hukum -</option>
                   {foreach $jenis as $val}
-                  <option value="{$val.id_jenis}">{$val.nama}</option>
+                  <option value="{$val.id_jenis}" {if $val.id_jenis eq $data.id_jenis}selected{/if}>{$val.nama}</option>
                   {/foreach}
                 </select>
               </div>
@@ -57,35 +57,35 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Judul <sup class="text-danger">*</sup></label>
               <div class="col-xs-5">
-                <input type="text" name="judul" class="form-control" placeholder="Silahkan isi judul produk hukum" required>
+                <input type="text" name="judul" value="{$data.judul}" class="form-control" placeholder="Silahkan isi judul produk hukum" required>
               </div>
             </div>
 
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Nomor Produk Hukum <sup class="text-danger">*</sup></label>
               <div class="col-xs-5">
-                <input type="text" name="nomor" class="form-control" placeholder="Silahkan isi nomor produk hukum" required>
+                <input type="text" name="nomor" value="{$data.nomor}" class="form-control" placeholder="Silahkan isi nomor produk hukum" required>
               </div>
             </div>
 
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Tahun <sup class="text-danger">*</sup></label>
               <div class="col-xs-5">
-                <input type="text" name="tahun" class="form-control" placeholder="Silahkan isi tahun produk hukum" data-inputmask="'mask': '9999'" data-mask required>
+                <input type="text" name="tahun" value="{$data.tahun}" class="form-control" placeholder="Silahkan isi tahun produk hukum" data-inputmask="'mask': '9999'" data-mask required>
               </div>
             </div>
 
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Tentang</label>
               <div class="col-xs-5">
-                <input type="text" name="tentang" class="form-control" placeholder="Silahkan isi perihal produk hukum">
+                <input type="text" name="tentang" value="{$data.tentang}" class="form-control" placeholder="Silahkan isi perihal produk hukum">
               </div>
             </div>
 
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Deskripsi Singkat <sup class="text-danger">*</sup></label>
               <div class="col-xs-10">
-                 <textarea id="editor1" name="deskripsi" rows="5" cols="80" required></textarea>
+                 <textarea id="editor1" name="deskripsi" rows="5" cols="80" required>{$data.deskripsi}</textarea>
               </div>
             </div>
 
@@ -97,7 +97,7 @@
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                   <div class="input-group">
                       <div class="form-control">
-                          <i class="fa fa-file fileupload-exists"></i> <span class="fileupload-preview"></span>
+                          <i class="fa fa-file fileupload-exists"></i> <span class="fileupload-preview">{$data.file_name}</span>
                       </div>
                       <div class="input-group-btn">
                         <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Hapus</a>
@@ -118,10 +118,10 @@
               <div class="col-xs-3">
                 <select name="status_akhir" class="form-control" style="width: 100%;" required>
                   <option value="" disabled selected>- Pilih Status Akhir -</option>
-                  <option value="Rancangan">Rancangan</option>
-                  <option value="Berlaku">Berlaku</option>
-                  <option value="Perubahan">Perubahan</option>
-                  <option value="Pencabutan">Pencabutan</option>
+                  <option value="Rancangan" {if $data.status_akhir eq 'Rancangan'}selected{/if}>Rancangan</option>
+                  <option value="Berlaku" {if $data.status_akhir eq 'Berlaku'}selected{/if}>Berlaku</option>
+                  <option value="Perubahan" {if $data.status_akhir eq 'Perubahan'}selected{/if}>Perubahan</option>
+                  <option value="Pencabutan" {if $data.status_akhir eq 'Pencabutan'}selected{/if}>Pencabutan</option>
                 </select>
               </div>
             </div>
@@ -131,8 +131,8 @@
               <div class="col-xs-3">
                 <select name="posisi" class="form-control" style="width: 100%;" required>
                   <option value="" disabled selected>- Pilih Posisi -</option>
-                  <option value="1">Headline</option>
-                  <option value="2">Alur Produk Hukum</option>
+                  <option value="1" {if $data.posisi eq 1}selected{/if}>Headline</option>
+                  <option value="2" {if $data.posisi eq 2}selected{/if}>Alur Produk Hukum</option>
                 </select>
               </div>
             </div>
@@ -142,12 +142,15 @@
               <div class="col-xs-3">
                 <select name="publish" class="form-control" style="width: 100%;" required>
                   <option value="" disabled selected>- Pilih Status -</option>
-                  <option value="1">Publish</option>
-                  <option value="2">Non-Publish</option>
+                  <option value="1" {if $data.publish eq 1}selected{/if}>Publish</option>
+                  <option value="2" {if $data.publish eq 2}selected{/if}>Non-Publish</option>
                 </select>
               </div>
             </div>
             {/if}
+
+            <input type="hidden" name="id_produk" value="{$data.id_produk}">
+            <input type="hidden" name="file" value="{$data.file}">
 
           </div><!-- /.box-body -->
           <div class="box-footer">
