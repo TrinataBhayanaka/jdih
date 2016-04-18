@@ -959,4 +959,11 @@ function changeFormatDate($date,$old_format,$new_format)
 
 	return $new;
 }
+
+function nowDate()
+{
+	$date = date("Y-m-d H:i:s");
+
+	return $date;
+}
 ?>

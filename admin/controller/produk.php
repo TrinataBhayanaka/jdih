@@ -39,7 +39,7 @@ class produk extends Controller {
 				$data[$key]['create_date'] = dateFormat($value['create_date'],'article');
 			}
 		}
-
+		
 		$this->view->assign('data',$data);
 		$this->view->assign('admin',$this->admin);
 

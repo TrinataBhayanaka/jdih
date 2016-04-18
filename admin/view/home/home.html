@@ -63,24 +63,34 @@
                     <th>Tanggal</th>
                     <th>Tgl Publish</th>
                     <th>Status</th>
+                    {if $admin.type eq 1}
                     <th>Publish/Non-Publish</th>
+                    {/if}
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                	<tr>
-                		<td>1</td>
-                		<td>Peraturan Pemerintah</td>
-                		<td>Peraturan Pemerintah Republik Indonesia</td>
-                		<td>12-02-2012</td>
-                		<td>13-02-2015</td>
-                		<td>Diubah</td>
-                		<td class="text-center"><input id="demo-sw-checked" type="checkbox" checked></td>
-                		<td class="text-center">
-                			<button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
-                			<button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
-                		</td>
-                	</tr>
+                {foreach $data as $key => $val}
+                  <tr>
+                    <td>{$key+1}</td>
+                    <td>{$val.id_jenis}</td>
+                    <td>{$val.judul}</td>
+                    <td>{$val.tanggal}</td>
+                    <td>{$val.create_date}</td>
+                    <td>{$val.status_akhir}</td>
+                    {if $admin.type eq 1}
+                    <td class="text-center"><input class="js-switch" type="checkbox" {if $val.publish eq 1}checked{/if} onchange="return changePublish({$val.id_produk},{$val.publish});"></td>
+                    {/if}
+                    <td class="text-center">
+                      <a href="{$basedomain}produk/edit/?id={$val.id_produk}">
+                          <button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
+                        </a>
+                        <a href="{$basedomain}produk/delete/?id={$val.id_produk}" onclick="return confirm('Apakah yakin dihapus?');">
+                          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                      </a>
+                    </td>
+                  </tr>
+                  {/foreach}
                 </tbody>
                 <tfoot>
                     <th>No</th>
@@ -89,7 +99,9 @@
                     <th>Tanggal</th>
                     <th>Tgl Publish</th>
                     <th>Status</th>
+                    {if $admin.type eq 1}
                     <th>Publish/Non-Publish</th>
+                    {/if}
                     <th>Aksi</th>
                 </tfoot>
               </table>
@@ -102,9 +114,6 @@
 
 {literal}
 <script>
-	$(document).ready(function() {
-		new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
-	})
     $(function () {
     	//DONUT CHART
         var donut = new Morris.Donut({
@@ -140,6 +149,19 @@
         });
 
         $("#example1").DataTable();
+
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function(html){
+          var switchery = new Switchery(html);
+        })
     })
+
+    function changePublish(item,state)
+    {
+      $.post(basedomain+"produk/ajaxPublish", {id: item, state: state},
+        function (resp,textStatus, jqXHR) {
+          location.reload();
+        });
+    }
 </script>
 {/literal}

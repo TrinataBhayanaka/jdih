@@ -1,7 +1,7 @@
 <section class="content-header">
   <h1>
     Daftar Berita Hukum
-    <small>Senin, 22 Januari 2016</small>
+    <small>{dateFormat(nowDate(),'article-day')}</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="{$basedomain}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -29,29 +29,6 @@
                 <a class="btn btn-social btn-bitbucket btn-sm" href="{$basedomain}berita/tambah">
                   <i class="fa fa-plus"></i> Tambah Berita Hukum
                 </a>
-              </div>
-            </div>
-
-            <div class="col-xs-5">
-              <div class="form-group">
-                <label>Pencarian:</label>
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right" id="reservation">
-                </div><!-- /.input group -->
-              </div><!-- /.form group -->
-            </div>
-
-            <div class="col-xs-4">
-              <div class="form-group">
-                <label>&nbsp;</label>
-                <div class="input-group">
-                  <a class="btn btn-social btn-dropbox btn-sm">
-                    <i class="fa fa-search"></i> Lihat
-                  </a>
-                </div>
               </div>
             </div>
 
