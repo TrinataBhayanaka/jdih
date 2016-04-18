@@ -1,0 +1,187 @@
+<section class="content-header">
+  <h1>
+    Produk Hukum
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="{$basedomain}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="{$basedomain}produk"><i class="fa fa-balance-scale"></i> Produk Hukum</a></li>
+    <li class="active">Edit Produk Hukum</li>
+  </ol>
+</section>
+
+
+<section class="content">
+
+	<div class="row">
+
+		<div class="col-md-12">
+
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Edit Produk Hukum</h3>
+        </div><!-- /.box-header -->
+        <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{$basedomain}produk/edit_produk">
+          <div class="box-body">
+          
+            <!-- <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">ID Produk Hukum</label>
+              <div class="col-xs-5">
+                <input type="text" class="form-control" readonly placeholder="Otomatis terisi">
+              </div>
+            </div> -->
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Tanggal Upload <sup class="text-danger">*</sup></label>
+              <div class="col-xs-3">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" name="tanggal" value="{$data.tanggal}" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
+                </div><!-- /.input group -->
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Jenis Produk Hukum <sup class="text-danger">*</sup></label>
+              <div class="col-xs-5">
+                <select class="form-control" style="width: 100%;" name="id_jenis" required>
+                  <option value="" disabled selected>- Pilih produk Hukum -</option>
+                  {foreach $jenis as $val}
+                  <option value="{$val.id_jenis}" {if $val.id_jenis eq $data.id_jenis}selected{/if}>{$val.nama}</option>
+                  {/foreach}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Judul <sup class="text-danger">*</sup></label>
+              <div class="col-xs-5">
+                <input type="text" name="judul" value="{$data.judul}" class="form-control" placeholder="Silahkan isi judul produk hukum" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Nomor Produk Hukum <sup class="text-danger">*</sup></label>
+              <div class="col-xs-5">
+                <input type="text" name="nomor" value="{$data.nomor}" class="form-control" placeholder="Silahkan isi nomor produk hukum" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Tahun <sup class="text-danger">*</sup></label>
+              <div class="col-xs-5">
+                <input type="text" name="tahun" value="{$data.tahun}" class="form-control" placeholder="Silahkan isi tahun produk hukum" data-inputmask="'mask': '9999'" data-mask required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Tentang</label>
+              <div class="col-xs-5">
+                <input type="text" name="tentang" value="{$data.tentang}" class="form-control" placeholder="Silahkan isi perihal produk hukum">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Deskripsi Singkat <sup class="text-danger">*</sup></label>
+              <div class="col-xs-10">
+                 <textarea id="editor1" name="deskripsi" rows="5" cols="80" required>{$data.deskripsi}</textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Upload File <sup class="text-danger">*</sup></label>
+              <div class="col-xs-5">
+               <!--  <input type="file" name="myfile" id="exampleInputFile">
+                <p class="help-block">File yang diperbolehkan .pdf dan maksimum 25Mb</p> -->
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                  <div class="input-group">
+                      <div class="form-control">
+                          <i class="fa fa-file fileupload-exists"></i> <span class="fileupload-preview">{$data.file_name}</span>
+                      </div>
+                      <div class="input-group-btn">
+                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Hapus</a>
+                        <span class="btn btn-default btn-file">
+                          <span class="fileupload-new">Pilih File</span>
+                          <span class="fileupload-exists">Ubah</span>
+                          <input type="file" name="myfile"/>
+                        </span>
+                      </div>
+                  </div>
+                </div>
+                <p class="help-block">File yang diperbolehkan .pdf dan maksimum 25Mb</p>  
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Status Akhir <sup class="text-danger">*</sup></label>
+              <div class="col-xs-3">
+                <select name="status_akhir" class="form-control" style="width: 100%;" required>
+                  <option value="" disabled selected>- Pilih Status Akhir -</option>
+                  <option value="Rancangan" {if $data.status_akhir eq 'Rancangan'}selected{/if}>Rancangan</option>
+                  <option value="Berlaku" {if $data.status_akhir eq 'Berlaku'}selected{/if}>Berlaku</option>
+                  <option value="Perubahan" {if $data.status_akhir eq 'Perubahan'}selected{/if}>Perubahan</option>
+                  <option value="Pencabutan" {if $data.status_akhir eq 'Pencabutan'}selected{/if}>Pencabutan</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Posisi dalam Website <sup class="text-danger">*</sup></label>
+              <div class="col-xs-3">
+                <select name="posisi" class="form-control" style="width: 100%;" required>
+                  <option value="" disabled selected>- Pilih Posisi -</option>
+                  <option value="1" {if $data.posisi eq 1}selected{/if}>Headline</option>
+                  <option value="2" {if $data.posisi eq 2}selected{/if}>Alur Produk Hukum</option>
+                </select>
+              </div>
+            </div>
+            {if $admin.type eq 1}
+            <div class="form-group">
+              <label for="inputEmail3" class="col-xs-2 control-label">Publish / Non-Publish <sup class="text-danger">*</sup></label>
+              <div class="col-xs-3">
+                <select name="publish" class="form-control" style="width: 100%;" required>
+                  <option value="" disabled selected>- Pilih Status -</option>
+                  <option value="1" {if $data.publish eq 1}selected{/if}>Publish</option>
+                  <option value="2" {if $data.publish eq 2}selected{/if}>Non-Publish</option>
+                </select>
+              </div>
+            </div>
+            {/if}
+
+            <input type="hidden" name="id_produk" value="{$data.id_produk}">
+            <input type="hidden" name="file" value="{$data.file}">
+
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-info">Submit</button>
+            <button type="reset" class="btn btn-default pull-right">Reset</button>
+          </div><!-- /.box-footer -->
+        </form>
+      </div><!-- /.box -->
+		</div>
+
+	</div>
+</section>
+
+{literal}
+<script>
+    $(function () {
+        $("#example1").DataTable();
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+        CKEDITOR.replace('editor1');
+
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+          checkboxClass: 'icheckbox_minimal-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
+
+
+
+    })
+</script>
+{/literal}
