@@ -27,9 +27,9 @@ class contentHelper extends Database {
         return true;
     }
 
-    function updateData($data,$table)
+    function updateData($data,$table,$cond)
     {
-       $this->update($data,$table,"id_produk = {$data['id_produk']}");
+       $this->update($data,$table,$cond);
 
        return true; 
     }

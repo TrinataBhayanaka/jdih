@@ -129,9 +129,25 @@ class produk extends Controller {
 		$data['tanggal'] = changeFormatDate($_POST['tanggal'],'d/m/Y','Y-m-d');
 
 
-		$this->contentHelper->updateData($data,'jdih_produk');
+		$this->contentHelper->updateData($data,'jdih_produk',"id_produk = {$data['id_produk']}");
 
 		echo "<script>alert('Data berhasil disimpan');window.location.href='".$basedomain."produk'</script>";
+		exit;
+	}
+
+	public function ajaxPublish()
+	{
+		$data['id_produk'] = $_POST['id'];
+		if($_POST['state'] == 1){
+			$data['publish'] = 2;
+		} else {
+			$data['publish'] = 1;
+		}
+
+		$data['create_date'] = date("Y-m-d H:i:s");
+
+		$this->contentHelper->updateData($data,'jdih_produk',"id_produk = {$data['id_produk']}");
+		return true;
 		exit;
 	}
 	

@@ -81,7 +81,7 @@
                 <td>{$val.create_date}</td>
                 <td>{$val.status_akhir}</td>
                 {if $admin.type eq 1}
-                <td class="text-center"><input class="js-switch" type="checkbox" {if $val.publish eq 1}checked{/if}></td>
+                <td class="text-center"><input class="js-switch" type="checkbox" {if $val.publish eq 1}checked{/if} onchange="return changePublish({$val.id_produk},{$val.publish});"></td>
                 {/if}
                 <td class="text-center">
                 	<a href="{$basedomain}produk/edit/?id={$val.id_produk}">
@@ -125,5 +125,13 @@
         })
         $('#reservation').daterangepicker();
     })
+
+    function changePublish(item,state)
+    {
+    	$.post(basedomain+"produk/ajaxPublish", {id: item, state: state},
+        function (resp,textStatus, jqXHR) {
+        	location.reload();
+        });
+    }
 </script>
 {/literal}
