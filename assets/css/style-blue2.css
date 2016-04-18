@@ -661,8 +661,8 @@ body {
     background-color: #fff;
 }
 h1, h2, h3, h4, h5, h6 {
-    color: #4d7db3;
-    font-family: "Lato",sans-serif;
+    color: #000;
+    font-family: "Open Sans",Arial,Helvetica,sans-serif;
     font-weight: 300;
     line-height: 120%;
     margin: 20px 0 17px;
@@ -677,7 +677,7 @@ h3 {
     font-size: 1.7em;
 }
 h4 {
-    font-size: 1.4em;
+    font-size: 1em;
 }
 h5 {
     font-size: 1.2em;
@@ -1062,7 +1062,7 @@ hr.double {
     background-color: #4d7db3;
     color: #fff;
     margin-bottom: 40px;
-    padding: 20px 0;
+    padding: 5px 0;
     position: relative;
 }
 .main-header.main-header-inverse {
@@ -2735,9 +2735,9 @@ textarea.form-control:focus {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     color: #fff;
     display: inline-block;
-    font-size: 1.1em;
+    font-size: 0.9em;
     margin: 0;
-    position: absolute;
+    position: relative;
     right: 10px;
     top: 0;
 }
@@ -2928,7 +2928,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     padding-right: 30px;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:active, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a {
-    background-color: #4d7db3;
+    background-color: #009AFC;
     background-image: linear-gradient(to top, #4571a2, #4d7db3);
     color: #fff;
 }
@@ -3221,25 +3221,25 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 }
 }
 #footer-widgets {
-    background-color: #F1F1F1;
+    background-color: #10699E;
     border-top: 1px solid #ccc;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
-    color: #444444;
+    color: #fff;
     margin-top: 30px;
     padding: 0 0 20px;
 }
 .footer-widget-title {
     color: #7197c2;
-    font-family: "Lato",sans-serif;
+    font-family: "Open Sans",Arial,Helvetica,sans-serif;
     font-size: 1.6em;
 }
 #footer-widgets a {
-    color: #444444;
+    color: #000;
     text-decoration: none;
     transition: all 0.25s ease 0s;
 }
 #footer-widgets a:hover {
-    color: #7197c2;
+    color: #000;
 }
 #footer {
     background-color: #333;
@@ -5156,13 +5156,14 @@ a.feature-icon {
     background-image: linear-gradient(to top, #FFFFFF);
 }
 .header-full-title {
-    background-image: url("../img/color/blue/logobsn.png");
+    background-image: url("../img/color/blue/logo1.jpg");
     background-position: left center;
     background-repeat: no-repeat;
     float: left;
     overflow: hidden;
-	font-family: "Muli";
+	font-family: "Open Sans",Arial,Helvetica,sans-serif;
     padding-left: 75px;
+	padding-top:10px;
 	margin-top: 10px;
 	background-size: 150px;
 
@@ -5438,7 +5439,7 @@ a.feature-icon {
     border-top: 1px solid #555;
 }
 .navbar-dark {
-    background-color: #444;
+    background-color: #32ADF3;
     background-image: none;
     box-shadow: none;
     color: #fff;
@@ -5454,7 +5455,7 @@ a.feature-icon {
     color: #fff;
 }
 .navbar-default.navbar-dark .navbar-nav > .open > a, .navbar-default.navbar-dark .navbar-nav > .open > a:hover, .navbar-default.navbar-dark .navbar-nav > .open > a:focus {
-    background-color: #4d7db3;
+    background-color: #009AFC;
     background-image: none;
     color: #fff;
 }
