@@ -46,18 +46,24 @@
               </tr>
             </thead>
             <tbody>
+			{foreach $data as $key => $val}
               <tr>
-                <td>1</td>
-                <td>Peraturan Pemerintah</td>
-                <td>Peraturan Pemerintah Republik Indonesia</td>
-                <td>13-02-2015</td>
-                <td>Publish</td>
-                <td class="text-center">
-                  <button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
-                  <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                <td>{$key+1}</td>
+                <td>{$val.jenis}</td>
+                <td>{$val.judul}</td>
+                <td>{$val.tanggal}</td>
+                <td>{if $val.publish == 1 } Publish {else} Non-Publish {/if}</td>
+                 <td class="text-center">
+                	<a href="{$basedomain}berita/edit_berita/?id={$val.id_berita}">
+                  		<button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
+                  	</a>
+                  	<a href="{$basedomain}berita/delete/?id={$val.id_berita}" onclick="return confirm('Apakah yakin dihapus?');">
+                  		<button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+                	</a>
                 </td>
               </tr>
             </tbody>
+			{/foreach}
             <tfoot>
                 <th>No</th>
                 <th>Jenis</th>
