@@ -128,7 +128,7 @@ class produk extends Controller {
 		$data['deskripsi'] = htmlentities(htmlspecialchars($_POST['deskripsi'], ENT_QUOTES));
 		$data['tanggal'] = changeFormatDate($_POST['tanggal'],'d/m/Y','Y-m-d');
 
-
+		
 		$this->contentHelper->updateData($data,'jdih_produk',"id_produk = {$data['id_produk']}");
 
 		echo "<script>alert('Data berhasil disimpan');window.location.href='".$basedomain."produk'</script>";
