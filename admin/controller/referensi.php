@@ -54,15 +54,21 @@ class referensi extends Controller {
 		
 		$data = $_POST;
 		$upload = uploadFile('myfile','ref');
+
 		
-		if($upload['status'] = 1){
-			$data['file'] = "file/".$upload['full_name'];
+		if($upload['status'] == 1){
+			$data['file'] = "ref/".$upload['full_name'];
 			$data['file_name'] = $upload['real_name'];
+		}
+		
+		$upload_cover = uploadFile('cover','ref');
+		if($upload_cover['status'] == 1){
+			$data['cover'] = "ref/".$upload_cover['full_name'];	
 		}
 		
 		$data['tanggal'] = changeFormatDate($_POST['tanggal'],'d/m/Y','Y-m-d');
 		$data['n_status'] = 1;
-
+		$data['resensi']=addslashes($data['resensi']);
 		$this->contentHelper->insertData($data,'jdih_referensi');
 
 		echo "<script>alert('Data berhasil disimpan');window.location.href='".$basedomain."referensi'</script>";
@@ -81,7 +87,7 @@ class referensi extends Controller {
 			deleteFile($data['ref']);
 			$upload = uploadFile('myfile','ref');
 
-			if($upload['status'] = 1){
+			if($upload['status'] == 1){
 				$data['file'] = "ref/".$upload['full_name'];
 				$data['file_name'] = $upload['real_name'];
 			}

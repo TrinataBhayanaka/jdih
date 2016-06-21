@@ -330,7 +330,7 @@ class Database
         $value = implode(',', $tmpvalue);
 
         $query = "INSERT INTO {$table} ({$field}) VALUES ($value)";
-
+		
         $result = $this->query($query,$dbuse);
 
         return true;
