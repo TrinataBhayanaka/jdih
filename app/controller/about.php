@@ -24,8 +24,13 @@ class about extends Controller {
 	}
 	
 	function index(){
-		//start sidebar
 		global $basedomain;
+
+		$data = $this->contentHelper->fetchData('jdih_konten',0,"type = 2");
+
+		$this->view->assign('data', $data);
+
+		//start sidebar
 		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
