@@ -184,10 +184,23 @@ class produk extends Controller {
     function ajaxSearchProduk()
     {
     	$num = $_GET['site'];
+    	$param['tanggal'] = $_GET['tgl'];
+    	$param['tahun'] = $_GET['thn'];
+    	$param['id_jenis'] = $_GET['jns'];
+    	$param['status_akhir'] = $_GET['sts'];
+
+    	$searchParam = array_filter($param);
+
+    	foreach ($searchParam as $key => $val) {
+            $tmpset[] = $key." = '{$val}'";
+        }
+
+        $set = implode(' AND ', $tmpset);
+        
     	$item_perpage = 3;
     	$position = ($num-1) * $item_perpage;
 
-    	$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1 AND publish = 1','tanggal',"{$position},{$item_perpage}");
+    	$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 AND {$set}",'tanggal',"{$position},{$item_perpage}");
 
     	foreach ($produk as $key => $value) {
     		$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
@@ -209,6 +222,9 @@ class produk extends Controller {
     	global $basedomain;
 
     	$searchParam = array_filter($_POST);
+    	if(isset($searchParam['tanggal'])){
+    		$searchParam['tanggal'] = changeFormatDate($searchParam['tanggal'],'d/m/Y','Y-m-d');
+    	}
     	foreach ($searchParam as $key => $val) {
             $tmpset[] = $key." = '{$val}'";
         }
@@ -232,6 +248,7 @@ class produk extends Controller {
 		$this->view->assign('totalProduk',$totalProduk);
 		$this->view->assign('tahun',$getTahun);
 		$this->view->assign('jenis',$jenis);
+		$this->view->assign('param',$searchParam);
 
 		// db($produk);
 
@@ -251,12 +268,11 @@ class produk extends Controller {
 		$param_berita = 'berita';
 		$count_berita = 'ref_berita';
 
-
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		//end sidebar
 		
-
+		
 		return $this->loadView('produk/search_produk');
     }
 
