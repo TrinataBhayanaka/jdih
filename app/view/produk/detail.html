@@ -1,12 +1,12 @@
 <header class="main-header">
     <div class="container">
-        <h1 class="page-title">Peraturan Pemerintah</h1>
+        <h1 class="page-title">{$content.0.jns_produk}</h1>
 
         <ol class="breadcrumb pull-right">
             <li><a href="#">Home</a></li>
             <li><a href="#">Produk Hukum</a></li>
-            <li><a href="#">Peraturan Pemerintah</a></li>
-            <li style="color:#000">Undang-undang Nomor 12 Tahun 2012</li>
+            <li><a href="#">{$content.0.jns_produk}</a></li>
+            <li style="color:#000">{$content.0.judul}</li>
         </ol>
     </div>
 </header>
@@ -17,86 +17,78 @@
         <div class="row">
          
             <div class="col-md-7 text-justify" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
-            
-                <h3>Undang - Undang Nomor 12 Tahun 2012</h3>
+				{foreach $content as $val}
+                <h3>{$val.judul}</h3>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form">
                             
                             <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Jenis Produk Hukum</label>
                                     <div class="col-sm-8">
-                                      <p>Undang-Undang</p>
+                                      <p>{$val.jns_produk}</p>
                                     </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Nomor</label>
                                     <div class="col-sm-8">
-                                      <p>12/VI/02/02/BSN</p>
+                                      <p>{$val.nomor}</p>
                                     </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Tahun</label>
                                     <div class="col-sm-8">
-                                      <p>2012</p>
+                                      <p>{$val.tahun}</p>
                                     </div>
                             </div>
                           
                              <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Tanggal Upload</label>
                                     <div class="col-sm-8">
-                                      <p>Rabu, 02 Desember 2015</p>
+                                      <p>{$val.new_fomat_tgl}</p>
                                     </div>
                               </div>
                               
-                              <div class="form-group">
+                              <!--<div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Tentang</label>
                                     <div class="col-sm-8">
                                       <p>Pelayanan Publik di Lingkungan Pemerintahan Non Kementrian</p>
                                     </div>
-                              </div>
+                              </div>-->
                               <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Deskripsi Singkat</label>
                                     <div class="col-sm-8">
-                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus hic dolor eaque quidem animi ullam quod veritatis magnam laborum, omnis quia placeat, aperiam voluptatibus, et! Praesentium cum iure quae voluptate ut? Praesentium id accusamus a fuga, quas quae non iusto, aspernatur saepe! Esse ratione eum suscipit, voluptatum omnis placeat vel.</p>
+                                     <p align="justify">{$val.ref_deskripsi}</p>
                                     </div>
                               </div>
                               
                             <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Status Akhir</label>
                                     <div class="col-sm-8">
-                                      <p>Berlaku</p>
+                                      <p>{$val.status_akhir}</p>
                                     </div>
                              </div>
                              
                             <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label" style="padding-top:0px">Diunduh Sebanyak</label>
                                     <div class="col-sm-8">
-                                      <p>2500 kali</p>
+                                      <p id="{$count_produk2|cat:'_'|cat:$val.id_produk}">{$val.hit} kali</p>
+									  <!--<label id="{$count_produk|cat:'_'|cat:$val.id_produk}"> {$val.hit} kali </label>-->
                                     </div>
                              </div>
                              
                             <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label">Unduh File</label>
                                     <div class="col-sm-8">
-                                      <button type="button" class="btn btn-ar btn-success">Download</button>
-                                    </div>
+                                      <a href="{$basedomain|cat:'public_assets/'|cat:$val.file}" class="btn btn-ar btn-success produk-hukum2" target="blank" id="{$param_produk2|cat:'_'|cat:$val.id_produk}">Download</a>
+								</div>
                              </div>
-                             
                         </form>
-                            
                     </div>
-                    
-                    <hr>
-                    
-                    
-                     <!-- <div class="content-box box-default"> -->
-                        <iframe src="{$basedomain}public_assets/CV_Jessica_Malaysia.pdf" width="650px" height="500px">
-						 
-						</iframe>
-                    <!-- </div> -->
-                    
+					<hr>
+                   <iframe src="{$basedomain}public_assets/{$val.file}" width="650px" height="500px"></iframe>
+                   {/foreach}
             </div>
         
             <div class="col-md-5">
@@ -110,19 +102,24 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div class="tab-pane active" id="peraturan">
-					{if $produk}
+					 {if $produk}
 					{foreach $produk as $value}
 					<div class="content-box box-default">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{$basedomain}assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
+								{if $value.cover}
+									<img src="{$basedomain}public_assets/$value.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{else}
+									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{/if}
+							</div>
                             <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">{$value.judul}</h4>
+                                 <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
-                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum" target="blank" id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
                                  <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
 								<br>
+								<!--<embed width="191" height="207" name="plugin" src="{$basedomain|cat:'public_assets/'|cat:$value.file}" type="application/pdf">-->
                                 <span class="label label-primary">{$value.Tahun}</span> 
                                 <span class="label label-primary">{$value.jns_produk}</span>
                             </div>
@@ -130,51 +127,6 @@
                     </div>
 					{/foreach}
 					{/if}
-                     <!--<div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="content-box box-default">
                         <div class="row">
                             <a href="#" class="pull-center">Selengkapnya</a>
@@ -183,54 +135,29 @@
                 </div>
                   
                   <div class="tab-pane" id="berita">
-                     <div class="content-box box-default">
-                        <div class="row text-left">
-                            <div class="col-md-12">
-                                <h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB </p>
-                            </div>
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
-                                <h6>Telah dibaca 2500 kali</h6>
-                            </div>
+                  {if $berita}
+				 {foreach $berita as $values}
+				 <div class="content-box box-default">
+                    <div class="row text-left">
+                        <div class="col-md-12">
+                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank"><h4 class="content-box-title">{$values.judul}</h4></a>
+                            <p>{dateFormat($values.tanggal,'article-day')}</p>
+                        </div>
+                        <div class="col-md-4">
+                            {if $values.file}
+								<img src="{$basedomain}public_assets/$values.file" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{else}
+								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{/if}
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank">Read More</a></p> 
+                           <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah dibaca {$values.hit} kali </label>
                         </div>
                     </div>
-                    
-                     <div class="content-box box-default">
-                        <div class="row text-left">
-                            <div class="col-md-12">
-                                <h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB </p>
-                            </div>
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/w2.jpg" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
-                                <h6>Telah dibaca 2500 kali</h6>
-                            </div>
-                        </div>
-                    </div>
-                    
-                     <div class="content-box box-default">
-                        <div class="row text-left">
-                            <div class="col-md-12">
-                                <h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB </p>
-                            </div>
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/w2.jpg" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
-                                <h6>Telah dibaca 2500 kali</h6>
-                            </div>
-                        </div>
-                    </div>
-                    
+                </div>
+				{/foreach}
+                {/if}
                     <div class="content-box box-default">
                         <div class="row">
                             <a href="#" class="pull-center">Selengkapnya</a>
@@ -243,3 +170,53 @@
         </div>
     </div>
 </section>
+{literal}
+<script>
+$(document).ready(function() {
+	$('.produk-hukum,.berita-hukum').on('click', function(){
+		var tmp = $(this).attr('id');
+		var tmp_split = tmp.split("_");
+		var id = tmp_split[1]; 
+		var inf = tmp_split[0];
+		var type ;
+		var text ;
+		var param ;
+		
+		if (inf == 'produk'){
+			type = 1;
+			text = 'Telah diunduh ';
+			param = 'ref_produk_'+id;
+		}else if(inf == 'berita'){
+			type = 2;
+			text = 'Telah dibaca ';
+			param = 'ref_berita_'+id;
+		}
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
+							if(data.hit > 0){
+								$('#'+param).text(text+data.hit+' kali');
+							}else{
+								//nothing	
+							}
+			},"JSON");
+	});
+	
+	$('.produk-hukum2').on('click', function(){
+		var tmp = $(this).attr('id');
+		var tmp_split = tmp.split("_");
+		var id = tmp_split[1]; 
+		
+		var	type = 1;
+		//var	text = 'Telah diunduh ';
+		var	param = 'ref_produk2_'+id;
+		
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
+							if(data.hit > 0){
+								$('#'+param).text(data.hit+' kali');
+							}else{
+								//nothing	
+							}
+			},"JSON");
+	});
+});	
+</script>
+{/literal}

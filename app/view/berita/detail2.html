@@ -1,32 +1,29 @@
 <header class="main-header">
-    <div class="container ">
-        <ol class="breadcrumb">
+    <div class="container">
+        <h1 class="page-title">Kajian Hukum</h1>
+
+        <ol class="breadcrumb pull-right">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Prasyarat</a></li>
+            <li><a href="#">Kajian Hukum</a></li>
+            <li style="color:#000">{$content.0.judul}</li>
         </ol>
     </div>
 </header>
 
+
 <section class="margin-bottom">
    <div class="container">
-   
-	<div class="row">
-		<div class="col-md-12">
-		 <h2 class="no-margin-top">Prasyarat</h2>
-		</div>
-	</div>
         <div class="row">
          
             <div class="col-md-7 text-justify" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
-            
-                <h2 class="right-line">Prasyarat Penggunaan Website JDIH BSN</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus hic dolor eaque quidem animi ullam quod veritatis magnam laborum, omnis quia placeat, aperiam voluptatibus, et! Praesentium cum iure quae voluptate ut? Praesentium id accusamus a fuga, quas quae non iusto, aspernatur saepe! Esse ratione eum suscipit, voluptatum omnis placeat vel.</p>
-                <p>Iusto harum est illum consequatur sint accusamus illo error beatae sit officiis quidem eius aliquid hic quisquam minima ducimus fugiat, qui nihil quis amet. Nemo unde accusantium ipsam inventore repudiandae excepturi molestias sapiente amet officia laboriosam facilis consectetur blanditiis, aut, cumque temporibus, quam beatae. Alias qui sint, numquam accusantium necessitatibus!</p>
-                <p>Nostrum nesciunt possimus rem dolorem, sapiente vero placeat, quaerat dolore voluptate esse nisi eveniet suscipit iure magnam illum ullam pariatur fugiat repellendus sunt, blanditiis recusandae assumenda quisquam! Doloremque provident laboriosam numquam fuga, asperiores, expedita nesciunt vero, hic voluptatum laborum cumque modi aut nemo deserunt ratione sequi iste. Nobis, quis, error.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus hic dolor eaque quidem animi ullam quod veritatis magnam laborum, omnis quia placeat, aperiam voluptatibus, et! Praesentium cum iure quae voluptate ut? Praesentium id accusamus a fuga, quas quae non iusto, aspernatur saepe! Esse ratione eum suscipit, voluptatum omnis placeat vel.</p>
-                <p>Iusto harum est illum consequatur sint accusamus illo error beatae sit officiis quidem eius aliquid hic quisquam minima ducimus fugiat, qui nihil quis amet. Nemo unde accusantium ipsam inventore repudiandae excepturi molestias sapiente amet officia laboriosam facilis consectetur blanditiis, aut, cumque temporibus, quam beatae. Alias qui sint, numquam accusantium necessitatibus!</p>
-                <p>Nostrum nesciunt possimus rem dolorem, sapiente vero placeat, quaerat dolore voluptate esse nisi eveniet suscipit iure magnam illum ullam pariatur fugiat repellendus sunt, blanditiis recusandae assumenda quisquam! Doloremque provident laboriosam numquam fuga, asperiores, expedita nesciunt vero, hic voluptatum laborum cumque modi aut nemo deserunt ratione sequi iste. Nobis, quis, error.</p>
+				{foreach $content as $val}
+                <h3>{$val.judul}</h3>
+				<p>{dateFormat($val.tanggal,'article-day')}</p>
+                    <hr>
+				<iframe src="{$basedomain}public_assets/{$val.file}" width="650px" height="500px"></iframe>
+                   {/foreach}
             </div>
+        
             <div class="col-md-5">
                 
                 <!-- Nav tabs -->
@@ -69,14 +66,14 @@
                         </div>
                     </div>
                 </div>
-                 
+                  
                   <div class="tab-pane" id="berita">
-					{if $berita}
+                  {if $berita}
 				 {foreach $berita as $values}
 				 <div class="content-box box-default">
                     <div class="row text-left">
                         <div class="col-md-12">
-                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}"><h4 class="content-box-title">{$values.judul}</h4></a>
+                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank"><h4 class="content-box-title">{$values.judul}</h4></a>
                             <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
@@ -87,7 +84,7 @@
 							{/if}
                         </div>
                         <div class="col-md-8 text-left">
-                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
+                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank">Read More</a></p> 
                            <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah dibaca {$values.hit} kali </label>
                         </div>
                     </div>
@@ -103,7 +100,7 @@
                   </div>
                 </div>
             </div>
-        
+        </div>
     </div>
 </section>
 {literal}
@@ -135,7 +132,6 @@ $(document).ready(function() {
 							}
 			},"JSON");
 	});
-	
 });	
 </script>
 {/literal}

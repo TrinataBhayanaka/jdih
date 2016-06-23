@@ -25,7 +25,7 @@ class home extends Controller {
 	
 	function index(){
 		global $basedomain;
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 4');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -46,7 +46,7 @@ class home extends Controller {
 				$tmp[$key]['hit'] = $hit_count['hit'];
 			}
 		}
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 4');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;
@@ -72,14 +72,15 @@ class home extends Controller {
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		
-		
+		$ref = $this->contentHelper->fetchData('jdih_referensi',1,'n_status = 1','id_ref DESC',8);
+		$this->view->assign('ref',$ref);
 		return $this->loadView('home');
     }
 	
 	function details(){
 	
 		$ref = $this->contentHelper->fetchData('jdih_referensi',1,'n_status = 1','id_ref DESC',8);
-		
+		// pr($ref);
 		$this->view->assign('ref',$ref);
 		return $this->loadView('home');
     }

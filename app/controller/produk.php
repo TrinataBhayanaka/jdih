@@ -98,6 +98,39 @@ class produk extends Controller {
 		$this->view->assign('count_berita',$count_berita);
 		//end sidebar
 		
+		//content
+		$id = $_GET['id'];
+		$where = "n_status = 1 and publish = 1 and posisi =1 and id_produk = {$id}";
+		$produk2 = $this->contentHelper->GetData('jdih_produk',1,$where,'id_produk ');
+		// pr($produk2);
+		// exit;
+		$jns_produk2 = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
+		if($produk2){
+			foreach ($produk2 as $keys=> $values2){
+				$tmp3[] = $values2;
+				$thn = explode('-',$values2['tanggal']);
+				$tmp3[$keys]['Tahun'] = $thn['0'];
+				if($jns_produk2){
+					foreach ($jns_produk2 as $val2){
+						if($values2['id_jenis'] == $val2['id_jenis']){
+							$ket_jns_produk = $val2['nama'];
+						}
+					}
+				}
+				$tmp3[$keys]['jns_produk'] = $ket_jns_produk;
+				$new_format_tgl2 = dateFormat($values2['tanggal'],'article-day');
+				$tmp3[$keys]['new_fomat_tgl'] = $new_format_tgl2;
+				$tmp3[$keys]['ref_deskripsi'] = html_entity_decode(htmlspecialchars_decode($values2['deskripsi'], ENT_NOQUOTES));
+				$hit_count2 = $this->contentHelper->statistik($values2['id_produk'],1);
+				$tmp3[$keys]['hit'] = $hit_count2['hit'];
+			}
+		}
+		$this->view->assign('content',$tmp3);
+		$param_produk2 = 'produk2';
+		$count_produk2 = 'ref_produk2';
+		$this->view->assign('param_produk2',$param_produk2);
+		$this->view->assign('count_produk2',$count_produk2);
+		
 		return $this->loadView('produk/detail');
     }
 
