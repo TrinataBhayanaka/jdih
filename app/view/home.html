@@ -136,8 +136,12 @@ $(document).ready(function() {
 					<div class="content-box box-default">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
+								{if $value.cover}
+									<img src="{$basedomain}public_assets/$value.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{else}
+									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{/if}
+							</div>
                             <div class="col-md-8 text-left">
                                  <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
@@ -166,15 +170,19 @@ $(document).ready(function() {
 				 <div class="content-box box-default">
                     <div class="row text-left">
                         <div class="col-md-12">
-                            <h4 class="content-box-title">{$values.judul}</h4>
+                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank"><h4 class="content-box-title">{$values.judul}</h4></a>
                             <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
-                            <img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
+                            {if $values.file}
+								<img src="{$basedomain}public_assets/$values.file" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{else}
+								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{/if}
                         </div>
                         <div class="col-md-8 text-left">
-                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}home/details/?id={$values.id_berita}" class="berita-hukum" target="blank" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
-                           <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah diunduh {$values.hit} kali </label>
+                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank">Read More</a></p> 
+                           <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah dibaca {$values.hit} kali </label>
                         </div>
                     </div>
                 </div>
@@ -205,8 +213,13 @@ $(document).ready(function() {
 		{foreach $ref as $val}
           <li>
             <div class="img-caption-ar">
-                <img src="{$basedomain}public_assets/{if $val.cover ==''}noimage.png{else}{$val.cover}{/if}" class="img-responsive"  alt="Image">
-                <div class="caption-ar">
+				{if $val.cover}
+					<img src="{$basedomain}public_assets/{$val.cover}" alt="" class="img-responsive" width="160px" height="160px" >
+				<!--<img src="{$basedomain}public_assets/{if $val.cover ==''}noimage.png{else}{$val.cover}{/if}" class="img-responsive"  alt="Image" width="160px" height="160px" style="margin:5px 10px 0px 0px">-->
+                {else}
+					<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" >
+				{/if}
+				<div class="caption-ar">
                     <div class="caption-content">
                         <a href="{$basedomain}referensi/detail/?id={$val.id_ref}" class="animated fadeInDown"><i class="fa fa-search"></i>More info</a>
                         <h4 class="caption-title">{$val.judul}</h4>

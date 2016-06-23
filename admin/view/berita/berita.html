@@ -49,7 +49,12 @@
 			{foreach $data as $key => $val}
               <tr>
                 <td>{$key+1}</td>
-                <td>{$val.jenis}</td>
+                {if $val.jenis == 1}
+					{$ket = 'Kegiatan hukum'}
+				{else}
+					{$ket = 'Kajian hukum'}
+				{/if}	
+				<td>{$ket}</td>
                 <td>{$val.judul}</td>
                 <td>{$val.tanggal}</td>
                 <td>{if $val.publish == 1 } Publish {else} Non-Publish {/if}</td>

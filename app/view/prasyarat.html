@@ -33,19 +33,24 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div class="tab-pane active" id="peraturan">
-					{if $produk}
+					 {if $produk}
 					{foreach $produk as $value}
 					<div class="content-box box-default">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
+								{if $value.cover}
+									<img src="{$basedomain}public_assets/$value.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{else}
+									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{/if}
+							</div>
                             <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">{$value.judul}</h4>
+                                 <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
-                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum" target="blank" id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
                                  <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
 								<br>
+								<!--<embed width="191" height="207" name="plugin" src="{$basedomain|cat:'public_assets/'|cat:$value.file}" type="application/pdf">-->
                                 <span class="label label-primary">{$value.Tahun}</span> 
                                 <span class="label label-primary">{$value.jns_produk}</span>
                             </div>
@@ -62,24 +67,28 @@
                  
                   <div class="tab-pane" id="berita">
 					{if $berita}
-					 {foreach $berita as $values}
-					 <div class="content-box box-default">
-						<div class="row text-left">
-							<div class="col-md-12">
-								<h4 class="content-box-title">{$values.judul}</h4>
-								<p>{dateFormat($values.tanggal,'article-day')}</p>
-							</div>
-							<div class="col-md-4">
-								<img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
-							</div>
-							<div class="col-md-8 text-left">
-								<p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}home/details/?id={$values.id_berita}" class="berita-hukum" target="blank" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
-							   <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah diunduh {$values.hit} kali </label>
-							</div>
-						</div>
-					</div>
-					{/foreach}
-					{/if}
+				 {foreach $berita as $values}
+				 <div class="content-box box-default">
+                    <div class="row text-left">
+                        <div class="col-md-12">
+                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}"><h4 class="content-box-title">{$values.judul}</h4></a>
+                            <p>{dateFormat($values.tanggal,'article-day')}</p>
+                        </div>
+                        <div class="col-md-4">
+                            {if $values.file}
+								<img src="{$basedomain}public_assets/$values.file" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{else}
+								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{/if}
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
+                           <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah dibaca {$values.hit} kali </label>
+                        </div>
+                    </div>
+                </div>
+				{/foreach}
+                {/if}
                     <div class="content-box box-default">
                         <div class="row">
                             <a href="#" class="pull-center">Selengkapnya</a>
