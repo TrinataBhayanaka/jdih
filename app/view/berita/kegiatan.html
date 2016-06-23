@@ -48,8 +48,8 @@
                     </div>
                     
                 <p class="no-margin-top">Menampilkan 3 dari 263 hasil</p>
-            
-                <div class="content-box box-default">
+				<input type="text" id="page" name="page" value="{$pages}">
+                <!--<div class="content-box box-default">
                     <div class="row text-left">
                         <div class="col-md-12">
                             <a href="{$basedomain}detail_berita">
@@ -97,10 +97,11 @@
                             <h6>Telah dibaca 2500 kali</h6>
                         </div>
                     </div>
-                </div>
-                
-                <div class="content-box box-default">
+                </div>-->
+				<div id="results"></div>
+				 <div class="content-box box-default">
                         <div class="row">
+						<!--<div class="pagination"></div>
                         <ul class="pagination pagination-border">
                           <li class="disabled"><a href="#">&laquo;</a></li>
                           <li class="active"><a href="#">1</a></li>
@@ -109,9 +110,11 @@
                           <li><a href="#">4</a></li>
                           <li><a href="#">5</a></li>
                           <li><a href="#">&raquo;</a></li>
-                        </ul>
-                        </div>
-                </div>
+                        </ul>-->
+						<div id="results"></div>
+						<div id="page-selection" class="demo2 pagination"></div>
+						</div>
+				</div>
             </div>
                     
     
@@ -125,51 +128,26 @@
             </ul>
 
                   <div class="tab-pane active" id="peraturan">
-                     <div class="content-box box-default">
+                     {if $produk}
+					{foreach $produk as $value}
+					<div class="content-box box-default">
                         <div class="row">
                             <div class="col-md-4">
                                 <img src="assets/img/demo/book.png" alt="" class="img-responsive">
                             </div>
                             <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
+                                <h4 class="content-box-title">{$value.judul}</h4>
+                                <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum" target="blank" id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                 <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
+								<br>
+                                <span class="label label-primary">{$value.Tahun}</span> 
+                                <span class="label label-primary">{$value.jns_produk}</span>
                             </div>
                         </div>
                     </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
+					{/foreach}
+					{/if}
                     <div class="content-box box-default">
                         <div class="row">
                             <a href="#" class="pull-center">Selengkapnya</a>
@@ -180,3 +158,64 @@
         </div>
     </div>
 </section>
+{literal}
+<script>
+$(document).ready(function() {
+	 $('.demo2').bootpag({
+       total:  $('#page').val();,
+       page: 1,
+       maxVisible: 5
+    }).on('page', function(event, num){
+        //$(".content2").html("Page " + num); // or some ajax content loading...
+		
+    });
+	
+	//var page = $('#page').val();
+	//console.log(page);
+	$.post(basedomain+"kegiatan/ajax_select",function(data){
+		var data2 = data.length;
+		var text = "";
+		
+		for (var i = 0; i < data.length; i++) {
+				text+= " <div class='content-box box-default'><div class='row text-left'>";
+				text+= "  <div class='col-md-4'><img src='assets/img/demo/book.png' alt='' class='img-responsive'></div>";
+				text+= " <div class='col-md-8 text-left'><h4 class='content-box-title'>"+data[i].judul+"</h4>";
+				text+= " <p align='justify'>"+data[i].new_fomat_tgl+" <br><b>"+data[i].ref_deskripsi+"</b></p>";
+				text+= "  <span class='label label-primary'>"+data[i].Tahun+"</span>&nbsp;<span class='label label-primary'>"+data[i].jns_produk+"</span></div>";
+				text+= " </div></div>";
+		};
+		$("#results").html(text);
+	},"JSON");
+	
+	$('.produk-hukum,.berita-hukum').on('click', function(){
+		var tmp = $(this).attr('id');
+		var tmp_split = tmp.split("_");
+		var id = tmp_split[1]; 
+		var inf = tmp_split[0];
+		var type ;
+		var text ;
+		var param ;
+		
+		if (inf == 'produk'){
+			type = 1;
+			text = 'Telah diunduh ';
+			param = 'ref_produk_'+id;
+		}else if(inf == 'berita'){
+			type = 2;
+			text = 'Telah dibaca ';
+			param = 'ref_berita_'+id;
+		}
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
+							if(data.hit > 0){
+								$('#'+param).text(text+data.hit+' kali');
+							}else{
+								//nothing	
+							}
+			},"JSON");
+	});
+	
+	
+	
+});	
+</script>
+{/literal}

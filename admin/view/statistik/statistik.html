@@ -12,11 +12,29 @@
 
 <section class="content">
 	<div class="row">
-	
+		<div class="col-md-12">
+			<div class="box box-success">
+				<div class="box-header with-border">
+					<div class="col-xs-12">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<input type="text" name="tanggal" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required  id="start">
+							<span class="input-group-addon">to</span>
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<input type="text" name="tanggal" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required id="end">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-6">
 			<div class="box box-success">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Jumlah Produk Hukum per Februari 2016</h3>
+				  <h3 class="box-title">Jumlah Produk Hukum</h3>
 				  <div class="box-tools pull-right">
 				    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 				    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -80,13 +98,12 @@
 			<label>Jenis Produk Hukum</label>
 			<select class="form-control select2" style="width: 100%;">
 			  <option selected="selected">Pilih Produk Hukum</option>
-			  <option></option>
-			  <option></option>
-			  <option></option>
-			  
+			  {foreach $jns_produk as $val}
+				<option value="{$val.id_jenis}">{$val.nama}</option>
+			  {/foreach}
 			</select>
 		  </div><!-- /.form-group -->
-		   <div class="form-group">
+		   <!--<div class="form-group">
 			<label>Jenis Berita Hukum</label>
 			<select class="form-control select2" style="width: 100%;">
 			  <option selected="selected">Pilih Berita Hukum</option>
@@ -95,29 +112,29 @@
 			  <option></option>
 			  
 			</select>
-		  </div><!-- /.form-group -->
-		</div><!-- /.col -->
+		  </div>-->
+		   <div class="form-group">
+			<label>Status Akhir</label>
+			<select name="status_akhir" class="form-control select2" style="width: 100%;" required>
+			  <option value="" disabled selected>Pilih Status Akhir</option>
+			  <option value="Rancangan">Rancangan</option>
+			  <option value="Berlaku">Berlaku</option>
+			  <option value="Perubahan">Perubahan</option>
+			  <option value="Pencabutan">Pencabutan</option>
+			</select>
+		  </div>
+		</div>
 		<div class="col-md-6">
 		 <div class="form-group">
 			<label>Tahun</label>
-			<select class="form-control select2" style="width: 100%;">
+			<!--<select class="form-control select2" style="width: 100%;">
 			  <option selected="selected">Pilih Tahun</option>
 			  <option></option>
 			  <option></option>
 			  <option></option>
-			  
-			</select>
-		  </div><!-- /.form-group -->
-		  <div class="form-group">
-			<label>Status Akhir</label>
-			<select class="form-control select2" style="width: 100%;">
-			  <option selected="selected">Pilih Status</option>
-			  <option></option>
-			  <option></option>
-			  <option></option>
-			  
-			</select>
-		  </div><!-- /.form-group -->
+			</select>-->
+			  <input type="text" name="tahun" class="form-control" placeholder="" data-inputmask="'mask': '9999'" data-mask required>
+          </div><!-- /.form-group -->
 		</div><!-- /.col -->
 		
 		<div class="col-md-6">
@@ -159,47 +176,146 @@
 {literal}
 <script>
 	$(document).ready(function() {
-		new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
-	})
-    $(function () {
-    	//DONUT CHART
-        var donut = new Morris.Donut({
-          element: 'sales-chart',
-          resize: true,
-          colors: ["#3c8dbc", "#f56954", "#00a65a"],
-          data: [
-            {label: "Download Sales", value: 12},
-            {label: "In-Store Sales", value: 30},
-            {label: "Mail-Order Sales", value: 20}
-          ],
-          hideHover: 'auto'
-        });
+		//untuk update data DONUT chart
+		window.Morris.Donut.prototype.setData = function(data, redraw) {
+			if (redraw == null) {
+				redraw = true;
+			}
+			this.data = data;
+			this.values = (function() {
+			var _i, _len, _ref, _results;
+			_ref = this.data;
+			_results = [];
+			for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+				row = _ref[_i];
+				_results.push(parseFloat(row.value));
+			}
+			return _results;
+			}).call(this);
+			this.dirty = true;
+			if (redraw) {
+				return this.redraw();
+			}
+		}
 		
-		$(function () {
-        $("#example1").DataTable();
+		//masking tahun
+		 $("[data-mask]").inputmask();
+		//BAR CHART
+		var bar;
+		$.post(basedomain+"statistik/chart",function(statistik){
+			var value = eval(statistik.key);
+			var yk 	  = eval(statistik.flag);
+			var lb 	  = eval(statistik.label);
+			
+			var Newdata = value,
+			 config =({
+			  //element: 'bar-chart',
+			  resize: true,
+			  data: Newdata,
+			  barColors: ['#00a65a', '#f56954'],
+			  xkey: 'y',
+			  ykeys: yk,
+			  labels: lb,
+			  hideHover: 'auto'
+			});
+			config.element = 'bar-chart';
+			bar = Morris.Bar(config)
+		},"JSON");
+		
+		//DONUT CHART
+		var donut ="";
+		$.post(basedomain+"home/chart_bar",function(bar){
+			var label_a = bar.data_1.jns_produk;
+			var label_b = bar.data_2.jns_produk;
+			var label_c = bar.data_3.jns_produk;
+			
+			var jml_a = bar.data_1.jml;
+			var jml_b = bar.data_2.jml;
+			var jml_c = bar.data_3.jml;
+		
+			donut = Morris.Donut({
+			element: 'sales-chart',
+			data: [
+				{label: label_a, value: jml_a},
+				{label: label_b, value: jml_b},
+				{label: label_c, value: jml_c}
+			],
+			 colors: ["#3c8dbc", "#f56954", "#00a65a"],
+			resize:true
+		  });
+		},"JSON");
+		
+		$('#start,#end').on('change', function(){
+			var start = $('#start').val();
+			var end = $('#end').val();
+				if(start != '' && end != ''){
+					$.post(basedomain+"statistik/chart_bar2",{start:start, end:end},function(statistik){
+					var value = eval(statistik.key);
+					var yk 	  = eval(statistik.flag);
+					var lb 	  = eval(statistik.label);
+					$('#bar-chart').empty();
+					var Newdata = value,
+					 config =({
+					  //element: 'bar-chart',
+					  resize: true,
+					  data: Newdata,
+					  barColors: ['#00a65a', '#f56954'],
+					  xkey: 'y',
+					  ykeys: yk,
+					  labels: lb,
+					  hideHover: 'auto'
+					});
+					config.element = 'bar-chart';
+					bar = Morris.Bar(config)
+				},"JSON");
+				
+				$.post(basedomain+"statistik/chart_donut_cdtn", {start:start, end:end},function(dat_donut){
+						var label_a;
+						var label_b;
+						var label_c;
+						var jml_a;
+						var jml_b;
+						var jml_c;
+						if(dat_donut.data_1){
+							label_a = dat_donut.data_1.jns_produk;
+							jml_a = dat_donut.data_1.jml;
+						}else{
+							label_a = '';
+							jml_a = '';
+						}
+						
+						if(dat_donut.data_2){
+							label_b = dat_donut.data_2.jns_produk;
+							jml_b = dat_donut.data_2.jml;
+						}else{
+							label_a = '';
+							jml_a = '';
+						}
+						
+						if(dat_donut.data_3){
+							label_c = dat_donut.data_3.jns_produk;
+							jml_c = dat_donut.data_3.jml;
+						}else{
+							label_a = '';
+							jml_a = '';
+						}
+						donut.setData([
+						{label: label_a, value: jml_a},
+						{label: label_b, value: jml_b},
+						{label: label_c, value: jml_c}
+				  ]);	
+				},"JSON");
+				
+			}
+			
+		});
+		
+		
+		new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
+	
+		 $("#example1").DataTable();
         new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
         $('#reservation').daterangepicker();
-    })
-
-        //BAR CHART
-        var bar = new Morris.Bar({
-          element: 'bar-chart',
-          resize: true,
-          data: [
-            {y: '2006', a: 100, b: 90},
-            {y: '2007', a: 75, b: 65},
-            {y: '2008', a: 50, b: 40},
-            {y: '2009', a: 75, b: 65},
-            {y: '2010', a: 50, b: 40},
-            {y: '2011', a: 75, b: 65},
-            {y: '2012', a: 100, b: 90}
-          ],
-          barColors: ['#00a65a', '#f56954'],
-          xkey: 'y',
-          ykeys: ['a', 'b'],
-          labels: ['CPU', 'DISK'],
-          hideHover: 'auto'
-        });
 
         $("#example1").DataTable();
     })

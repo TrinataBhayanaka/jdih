@@ -16,7 +16,7 @@
 		<div class="col-md-6">
 			<div class="box box-success">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Jumlah Produk Hukum per Februari 2016</h3>
+				  <h3 class="box-title">Jumlah Total Produk Hukum </h3>
 				  <div class="box-tools pull-right">
 				    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 				    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -115,8 +115,30 @@
 {literal}
 <script>
     $(function () {
-    	//DONUT CHART
-        var donut = new Morris.Donut({
+		//BAR CHART
+        var bar;
+		$.post(basedomain+"home/chart",function(statistik){
+			var value = eval(statistik.key);
+			var yk 	  = eval(statistik.flag);
+			var lb 	  = eval(statistik.label);
+			
+			var Newdata = value,
+			 config =({
+			  //element: 'bar-chart',
+			  resize: true,
+			  data: Newdata,
+			  barColors: ['#00a65a', '#f56954'],
+			  xkey: 'y',
+			  ykeys: yk,
+			  labels: lb,
+			  hideHover: 'auto'
+			});
+			config.element = 'bar-chart';
+			bar = Morris.Bar(config)
+		},"JSON");
+    	
+        //DONUT CHART
+        /*var donut = new Morris.Donut({
           element: 'sales-chart',
           resize: true,
           colors: ["#3c8dbc", "#f56954", "#00a65a"],
@@ -126,28 +148,30 @@
             {label: "Mail-Order Sales", value: 20}
           ],
           hideHover: 'auto'
-        });
-
-        //BAR CHART
-        var bar = new Morris.Bar({
-          element: 'bar-chart',
-          resize: true,
-          data: [
-            {y: '2006', a: 100, b: 90},
-            {y: '2007', a: 75, b: 65},
-            {y: '2008', a: 50, b: 40},
-            {y: '2009', a: 75, b: 65},
-            {y: '2010', a: 50, b: 40},
-            {y: '2011', a: 75, b: 65},
-            {y: '2012', a: 100, b: 90}
-          ],
-          barColors: ['#00a65a', '#f56954'],
-          xkey: 'y',
-          ykeys: ['a', 'b'],
-          labels: ['CPU', 'DISK'],
-          hideHover: 'auto'
-        });
-
+        });*/
+		//untuk update data chart
+		var donut ="";
+		$.post(basedomain+"home/chart_bar",function(bar){
+			var label_a = bar.data_1.jns_produk;
+			var label_b = bar.data_2.jns_produk;
+			var label_c = bar.data_3.jns_produk;
+			
+			var jml_a = bar.data_1.jml;
+			var jml_b = bar.data_2.jml;
+			var jml_c = bar.data_3.jml;
+		
+			donut = Morris.Donut({
+			element: 'sales-chart',
+			data: [
+				{label: label_a, value: jml_a},
+				{label: label_b, value: jml_b},
+				{label: label_c, value: jml_c}
+			],
+			 colors: ["#3c8dbc", "#f56954", "#00a65a"],
+			resize:true
+		  });
+		},"JSON");
+		
         $("#example1").DataTable();
 
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));

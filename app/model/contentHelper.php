@@ -91,5 +91,40 @@ class contentHelper extends Database {
         if ($fetch) return $fetch;
         return false;
     }
+	
+	function GetData($table,$loop=0,$where=false,$order=false,$limit=0)
+    {
+		if($where) $where = "WHERE ".$where;
+        if($order) $order = "ORDER BY ".$order;
+       
+		$sql = "SELECT * FROM {$table} {$where} {$order}";
+		// pr($sql);
+        $res = $this->fetch($sql,$loop);
+
+        return $res;
+    }
+	
+	function hit_count($id,$type,$date){
+		$initial_val = 1;
+		$sql = "insert into jdih_hit (parent_id,tipe,tanggal,jumlah) values ('{$id}','{$type}','{$date}','{$initial_val}')";
+		$exec = $this->query($sql);
+		
+		$sql2 = "select count(jumlah) as hit from jdih_hit WHERE parent_id = '{$id}' and tipe = '{$type}' ";
+		$res = $this->fetch($sql2);
+        return $res;
+	}
+	
+	function statistik($id,$type){
+		$sql2 = "select count(jumlah) as hit from jdih_hit WHERE parent_id = '{$id}' and tipe = '{$type}' ";
+		$res = $this->fetch($sql2);
+        return $res;
+	} 
+	
+	function ajax_count(){
+		$sql2 = "select count(id_berita) as hit from jdih_berita WHERE jenis = '1' and publish = '1' and n_status = '1'";
+		$res = $this->fetch($sql2);
+        return $res;
+	} 
+	
 }
 ?>

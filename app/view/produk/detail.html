@@ -110,7 +110,27 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div class="tab-pane active" id="peraturan">
-                     <div class="content-box box-default">
+					{if $produk}
+					{foreach $produk as $value}
+					<div class="content-box box-default">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="{$basedomain}assets/img/demo/book.png" alt="" class="img-responsive">
+                            </div>
+                            <div class="col-md-8 text-left">
+                                <h4 class="content-box-title">{$value.judul}</h4>
+                                <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum" target="blank" id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                 <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
+								<br>
+                                <span class="label label-primary">{$value.Tahun}</span> 
+                                <span class="label label-primary">{$value.jns_produk}</span>
+                            </div>
+                        </div>
+                    </div>
+					{/foreach}
+					{/if}
+                     <!--<div class="content-box box-default">
                         <div class="row">
                             <div class="col-md-4">
                                 <img src="assets/img/demo/book.png" alt="" class="img-responsive">
@@ -154,7 +174,7 @@
                                 <span class="label label-primary">Peraturan Pemerintah</span>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="content-box box-default">
                         <div class="row">
                             <a href="#" class="pull-center">Selengkapnya</a>

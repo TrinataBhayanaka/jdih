@@ -1,3 +1,13 @@
+{literal}
+<script>
+$(document).ready(function() {
+	$('.produk-hukum').on('click', function(){
+		var tmp = $(this).attr('id');
+		//console.log(tmp);
+	});
+});
+</script>
+{/literal}
 <!-- REVOLUTION SLIDER -->
     <div class="slider fullwidthbanner-container roundedcorners">
         <!--
@@ -297,111 +307,58 @@
        <div class="row" style="margin-top:20px">
             <div class="col-md-6">
                 <h2 class="no-margin-top">Peraturan Hukum Terbaru</h2>
-                     <div class="content-box box-default">
+					{if $produk}
+					{foreach $produk as $value}
+					<div class="content-box box-default">
                         <div class="row">
                             <div class="col-md-4">
                                 <img src="assets/img/demo/book.png" alt="" class="img-responsive">
                             </div>
                             <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
+                                 <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
+                                <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum" target="blank" id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                 <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
+								<br>
+								<!--<embed width="191" height="207" name="plugin" src="{$basedomain|cat:'public_assets/'|cat:$value.file}" type="application/pdf">-->
+                                <span class="label label-primary">{$value.Tahun}</span> 
+                                <span class="label label-primary">{$value.jns_produk}</span>
                             </div>
                         </div>
                     </div>
+					{/foreach}
+					{/if}
                     <div class="content-box box-default">
                         <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <a href="#" class="pull-center">Index</a>
+                               <a href="{$basedomain}home/list_produk/" class="pull-center">Index</a>
                         </div>
                     </div>
                 
             </div>
             <div class="col-md-6">
                 <h2 class="no-margin-top">Berita Hukum</h2>
-                 <div class="content-box box-default">
+                 {if $berita}
+				 {foreach $berita as $values}
+				 <div class="content-box box-default">
                     <div class="row text-left">
                         <div class="col-md-12">
-                            <h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
-                            <p>Selasa, 19/01/2016 09:34 WIB </p>
+                            <h4 class="content-box-title">{$values.judul}</h4>
+                            <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
                             <img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
                         </div>
                         <div class="col-md-8 text-left">
-                            <p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
-                            <h6>Telah dibaca 2500 kali</h6>
+                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}home/details/?id={$values.id_berita}" class="berita-hukum" target="blank" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
+                           <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah diunduh {$values.hit} kali </label>
                         </div>
                     </div>
                 </div>
-                
-                 <div class="content-box box-default">
-                    <div class="row text-left">
-                        <div class="col-md-12">
-                            <h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
-                            <p>Selasa, 19/01/2016 09:34 WIB </p>
-                        </div>
-                        <div class="col-md-4">
-                            <img src="assets/img/demo/w2.jpg" alt="" class="img-responsive">
-                        </div>
-                        <div class="col-md-8 text-left">
-                            <p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
-                            <h6>Telah dibaca 2500 kali</h6>
-                        </div>
-                    </div>
-                </div>
-                
-                 <div class="content-box box-default">
-                    <div class="row text-left">
-                        <div class="col-md-12">
-                            <h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
-                            <p>Selasa, 19/01/2016 09:34 WIB </p>
-                        </div>
-                        <div class="col-md-4">
-                            <img src="assets/img/demo/w2.jpg" alt="" class="img-responsive">
-                        </div>
-                        <div class="col-md-8 text-left">
-                            <p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
-                            <h6>Telah dibaca 2500 kali</h6>
-                        </div>
-                    </div>
-                </div>
-                
+				{/foreach}
+                {/if}
                 <div class="content-box box-default">
                     <div class="row">
-                        <a href="#" class="pull-center">Index</a>
+                        <a href="{$basedomain}home/list_berita/" class="pull-center">Index</a>
                     </div>
                 </div>
                 
@@ -562,3 +519,36 @@
    </section>
 
 </div>
+{literal}
+<script>
+$(document).ready(function() {
+	$('.produk-hukum,.berita-hukum').on('click', function(){
+		var tmp = $(this).attr('id');
+		var tmp_split = tmp.split("_");
+		var id = tmp_split[1]; 
+		var inf = tmp_split[0];
+		var type ;
+		var text ;
+		var param ;
+		
+		if (inf == 'produk'){
+			type = 1;
+			text = 'Telah diunduh ';
+			param = 'ref_produk_'+id;
+		}else if(inf == 'berita'){
+			type = 2;
+			text = 'Telah dibaca ';
+			param = 'ref_berita_'+id;
+		}
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
+							if(data.hit > 0){
+								$('#'+param).text(text+data.hit+' kali');
+							}else{
+								//nothing	
+							}
+			},"JSON");
+	});
+	
+});	
+</script>
+{/literal}
