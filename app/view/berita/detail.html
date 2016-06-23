@@ -22,7 +22,7 @@
                 <p>{dateFormat($content.0.tanggal,'article-day')}</p>
 				<center>
 					{if $content.0.file}
-						<img src="{$basedomain}public_assets/$content.0.file" alt="" class="img-responsive" width="448" height="336px">
+						<img src="{$basedomain}public_assets/{$content.0.file}" alt="" class="img-responsive" width="448" height="336px">
 					{else}
 						<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="448" height="336px">
 					{/if}
@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-md-4">
 								{if $value.cover}
-									<img src="{$basedomain}public_assets/$value.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+									<img src="{$basedomain}public_assets/{$value.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{else}
 									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{/if}
@@ -67,7 +67,7 @@
 					{/if}
                     <div class="content-box box-default">
                         <div class="row">
-                            <a href="#" class="pull-center">Selengkapnya</a>
+                            <a href="{$basedomain}produk" class="pull-center">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="col-md-4">
                             {if $values.file}
-								<img src="{$basedomain}public_assets/$values.file" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								<img src="{$basedomain}public_assets/{$values.file}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{else}
 								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{/if}
@@ -99,7 +99,7 @@
                     
                     <div class="content-box box-default">
                         <div class="row">
-                            <a href="#" class="pull-center">Selengkapnya</a>
+                             <a href="{$basedomain}kegiatan" class="pull-center">Selengkapnya</a>
                         </div>
                     </div>
 
