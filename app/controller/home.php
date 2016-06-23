@@ -24,6 +24,7 @@ class home extends Controller {
 	}
 	
 	function index(){
+<<<<<<< HEAD
 		global $basedomain;
 		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 4');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
@@ -78,8 +79,12 @@ class home extends Controller {
 	
 	function details(){
 	
-	}
-
+		$ref = $this->contentHelper->fetchData('jdih_referensi',1,'n_status = 1','id_ref DESC',8);
+		
+		$this->view->assign('ref',$ref);
+		return $this->loadView('home');
+    }
+	
 	function ajax_count(){
 	 // pr($_POST);
 	 $id =$_POST['id']; 

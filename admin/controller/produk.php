@@ -70,6 +70,12 @@ class produk extends Controller {
 			$data['file_name'] = $upload['real_name'];
 		}
 
+		$uploadCover = uploadFile('cover','file');
+
+		if($uploadCover['status'] = 1){
+			$data['cover'] = "file/".$uploadCover['full_name'];
+		}
+
 		$data['deskripsi'] = htmlentities(htmlspecialchars($_POST['deskripsi'], ENT_QUOTES));
 		$data['tanggal'] = changeFormatDate($_POST['tanggal'],'d/m/Y','Y-m-d');
 		$data['n_status'] = 1;

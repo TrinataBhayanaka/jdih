@@ -17,7 +17,7 @@ class loginHelper extends Database {
 		// pr($data);		
 		
 
-		$sql = "SELECT * FROM ck_admin_member WHERE (username = '{$username}' OR email = '{$username}') AND type IN (1,3) LIMIT 1";
+		$sql = "SELECT * FROM ck_admin_member WHERE (username = '{$username}' OR email = '{$username}') AND type IN (1,2) LIMIT 1";
 		
 		// pr($sql);exit;
 		$res = $this->fetch($sql,0,0);

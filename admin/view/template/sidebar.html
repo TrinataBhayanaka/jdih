@@ -52,11 +52,13 @@
             <span>Statistik</span>
           </a>
         </li>
+        {if $admin.type eq 1}
         <li class="{if $page.page eq 'pengaturan'}active{/if}">
           <a href="{$basedomain}pengaturan">
             <i class="fa fa-users"></i> <span>Pengaturan Admin</span>
           </a>
         </li>
+        {/if}
       </ul>
     </section>
     <!-- /.sidebar -->

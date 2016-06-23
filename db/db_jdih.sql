@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2016 at 07:32 PM
+-- Generation Time: Jun 02, 2016 at 10:30 AM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `jdih_produk` (
 --
 
 INSERT INTO `jdih_produk` (`id_produk`, `tanggal`, `id_jenis`, `judul`, `nomor`, `tahun`, `tentang`, `deskripsi`, `file`, `file_name`, `status_akhir`, `posisi`, `publish`, `create_date`, `n_status`) VALUES
-(1, '2016-04-27', 1, 'Judul produk hukum', 'nomor produk hukum', 2016, 'Tentang produk hukum', '&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus hic dolor eaque quidem animi ullam quod veritatis magnam laborum, omnis quia placeat, aperiam voluptatibus, et! Praesentium cum iure quae voluptate ut? Praesentium id accusamus a fuga, quas quae non iusto, aspernatur saepe! Esse ratione eum suscipit, voluptatum omnis placeat vel.&amp;lt;/p&amp;gt;\r\n', 'file/490c1b5aebdc7d532f811dfc6bf8fb36.pdf', 'Alur JDIH BSN.pdf', 'Rancangan', 1, 1, '2016-04-12 06:33:08', 1),
+(1, '2016-04-27', 1, 'Judul produk hukum', 'nomor produk hukum', 2016, 'Tentang produk hukum', '&amp;lt;p&amp;gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus hic dolor eaque quidem animi ullam quod veritatis magnam laborum, omnis quia placeat, aperiam voluptatibus, et! Praesentium cum iure quae voluptate ut? Praesentium id accusamus a fuga, quas quae non iusto, aspernatur saepe! Esse ratione eum suscipit, voluptatum omnis placeat vel.&amp;lt;/p&amp;gt;\r\n', 'file/490c1b5aebdc7d532f811dfc6bf8fb36.pdf', 'Alur JDIH BSN.pdf', 'Rancangan', 1, 1, '2016-04-21 12:47:47', 1),
 (2, '2016-04-11', 3, 'Tax Airport [update]', 'nomor produk hukum [update]', 2016, 'Tentang produk hukum [update]', '&amp;lt;p&amp;gt;Asdasd asdasdas update&amp;lt;/p&amp;gt;\r\n\r\n&amp;lt;p&amp;gt;&amp;amp;nbsp;&amp;lt;/p&amp;gt;\r\n', 'file/950c07628f242b6ed08e9f9f7337c50a.pdf', 'Alur JDIH BSN.pdf', 'Perubahan', 1, 2, '2016-04-18 04:51:05', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

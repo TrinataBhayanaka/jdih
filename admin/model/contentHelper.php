@@ -29,6 +29,7 @@ class contentHelper extends Database {
 
     function updateData($data,$table,$cond)
     {
+
        $this->update($data,$table,$cond);
 
        return true; 
