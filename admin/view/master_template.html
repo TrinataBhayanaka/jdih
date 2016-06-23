@@ -1,3 +1,8 @@
+{if $page.page == 'modal'}
+{include file="template/meta.html"}
+{$content}
+{include file= "template/jsplugin.html"}
+{else}
 {if $page.function != 'ajax_ref'}
 {include file="template/meta.html"}
 
@@ -31,4 +36,5 @@
 </body>
 </html>	
 {else} {include file="template/meta.html"} {$content} {include file= "template/jsplugin.html"}
+{/if}
 {/if}

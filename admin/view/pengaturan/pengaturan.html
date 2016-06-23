@@ -56,17 +56,25 @@
 							  </tr>
 							</thead>
 							<tbody>
+							{foreach $user as $key => $val}
 							  <tr>
-								<td>1</td>
-								<td>Lala</td>
-								<td>Lala</td>
-								<td>xxx@gmail.com</td>
-								<td>13-02-2015</td>
+								<td>{$key+1}</td>
+								<td>{$val.name}</td>
+								<td>{$val.username}</td>
+								<td>{$val.email}</td>
+								<td>{dateFormat($val.register_date,'article')}</td>
 								<td class="text-center">
-								  <button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
-								  <button class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></button>
+								{if $admin.id eq $val.id}
+								  <a data-toggle="modal" href="{$basedomain}modal/admin/?id={$val.id}" data-target="#modaltest">
+								  	<button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
+								  </a>
+								{/if}
+								  <a href="{$basedomain}pengaturan/dis_admin/?id={$val.id}" onclick="return confirm('Yakin data di hapus?')">  
+								  	<button class="btn btn-xs btn-danger"><i class="fa fa-user-times"></i></button>
+								  </a>
 								</td>
 							  </tr>
+							  {/foreach}
 							</tbody>
 							<tfoot>
 								<th>No</th>
@@ -88,47 +96,49 @@
 						</div><!-- /.box-header -->
 						<div class="box-body">
 							
-							<form class="form-horizontal">
+							<form class="form-horizontal" method="post" action="{$basedomain}pengaturan/konten">
 							  <div class="box-body">
 								<div class="form-group">
 								  <label for="inputEmail3" class="col-sm-2 control-label">Pilih Konten</label>
 								  <div class="col-sm-8">
-									<select class="form-control" style="width: 100%;">
-									  <option selected="selected">Pilih Konten Statis</option>
-									  <option>Prasyarat</option>
-									  <option>Tentang JDIH BSN</option>
+									<select class="form-control" style="width: 100%;" name="type" id="type" onchange="return showKonten();">
+									  <option selected="selected" disabled>Pilih Konten Statis</option>
+									  <option value="1">Prasyarat</option>
+									  <option value="2">Tentang JDIH BSN</option>
 									</select>
 								  </div>
 								</div>
-								<div class="form-group">
-								  <label for="inputPassword3" class="col-sm-2 control-label">Judul</label>
-								  <div class="col-sm-8">
-									<input type="password" class="form-control" id="inputPassword3" placeholder="Silakan Isi Judul Konten">
-								  </div>
-								</div>
-								
-								
-								 <div class="form-group">
-									 <label for="inputPassword3" class="col-sm-2 control-label">Isi Konten Statis</label>
-								 <div class="box-body pad col-sm-8">
-									  <form>
-										<textarea id="editor1" name="editor1" rows="10" cols="80">
-											This is my textarea to be replaced with CKEditor.
-										</textarea>
-									  </form>
-								 </div>
-								</div>
-							 
+
+									<div class="form-group toshow" style="display:none">
+									  <label for="inputPassword3" class="col-sm-2 control-label">Judul</label>
+									  <div class="col-sm-8">
+										<input type="text" name="title" class="form-control" id="title" placeholder="Silakan Isi Judul Konten">
+									  </div>
+									</div>
+									
+									
+									 <div class="form-group toshow" style="display:none">
+										 <label for="inputPassword3" class="col-sm-2 control-label">Isi Konten Statis</label>
+									 <div class="box-body pad col-sm-8">
+
+											<textarea id="editor1" name="content" rows="10" cols="80">
+												
+											</textarea>
+
+									 </div>
+									</div>
+						   		
 								
 							  </div><!-- /.box-body -->
 							  
-							<div class="pull-right">
-							 <button class="btn btn-sm btn-social btn-default">
-								  <i class="fa fa-close"></i> Cancel
-								</button>
-							   <button class="btn btn-sm btn-social btn-primary">
-								  <i class="fa fa-save"></i> Save
-								</button>
+							<div class="pull-left toshow" style="display:none">
+								
+								 <button type="reset" class="btn btn-sm btn-social btn-default">
+									  <i class="fa fa-close"></i> Cancel
+									</button>
+								   <button type="submit" class="btn btn-sm btn-social btn-primary">
+									  <i class="fa fa-save"></i> Save
+									</button>
 							</div>
 													 
 							</form>
@@ -171,16 +181,19 @@
 							  </tr>
 							</thead>
 							<tbody>
+							  {foreach $jenis as $val}
 							  <tr>
-								<td>Undang-undang Dasar Tahun 1945 dan Amandemen</td>
-								<!-- <td><button class="btn btn-xs btn-social btn-primary">
-									  <i class="fa fa-search"></i> View Sub Jenis
-									</button></td> -->
+								<td>{$val.nama}</td>
 								<td class="text-center">
-								  <button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
-								  <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+								  <a data-toggle="modal" href="{$basedomain}modal/jenis_produk/?id={$val.id_jenis}" data-target="#modaltest">
+								  	<button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></button>&nbsp;
+								  </a>
+								  <a href="{$basedomain}pengaturan/del_jenis/?id={$val.id_jenis}" onclick="return confirm('Yakin dihapus?');">
+								  	<button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+								  </a>
 								</td>
 							  </tr>
+							  {/foreach}
 							</tbody>
 							
 							<tfoot>
@@ -201,68 +214,87 @@
 
 </section>
 
+<!-- Modal -->
+<div class="modal fade" id="modaltest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Modalss title</h4>
+
+            </div>
+            <div class="modal-body"><div class="te"></div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <div  class="example-modal">
-<div class="modal" id="data-modal">
+<div class="modal fade" id="data-modal">
   <div class="modal-dialog">
 	<div class="modal-content">
 	 
 	  <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h4 class="modal-title">Edit Administrator</h4>
+		<h4 class="modal-title">Tambah Administrator</h4>
 	  </div>
 		
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="POST" action="{$basedomain}pengaturan/add_admin">
 		  <div class="box-body">
 			
 			<div class="form-group">
 			  <label for="inputPassword3" class="col-sm-3 control-label">Nama Administrator</label>
 			  <div class="col-sm-8">
-				<input type="password" class="form-control" id="inputPassword3" placeholder="">
+				<input type="text" class="form-control" name="name" placeholder="">
 			  </div>
 			</div>
 			
 			<div class="form-group">
 			  <label for="inputPassword3" class="col-sm-3 control-label">Alamat Email</label>
 			  <div class="col-sm-8">
-				<input type="password" class="form-control" id="inputPassword3" placeholder="">
+				<input type="text" class="form-control" name="email" placeholder="">
 			  </div>
 			</div>
 			
 			<div class="form-group">
 			  <label for="inputPassword3" class="col-sm-3 control-label">Username</label>
 			  <div class="col-sm-8">
-				<input type="password" class="form-control" id="inputPassword3" placeholder="">
+				<input type="text" class="form-control" name="username" placeholder="">
 			  </div>
 			</div>
 			
 			<div class="form-group">
 			  <label for="inputPassword3" class="col-sm-3 control-label">Password Login</label>
 			  <div class="col-sm-8">
-				<input type="password" class="form-control" id="inputPassword3" placeholder="Password harus diisi dengan 6-8 digit alphanumeric">
+				<input type="password" class="form-control" name="password" placeholder="Password harus diisi dengan 6-8 digit alphanumeric">
 			  </div>
 			</div>	
 			
 			<div class="form-group">
 			  <label for="inputPassword3" class="col-sm-3 control-label">Hak Akses</label>
 			  <div class="col-sm-8">
-				<select class="form-control">
-					<option selected="selected">Pilih Hak Akses</option>
-					<option>Super Administrator</option>
-					<option>Administrator</option>
+				<select class="form-control" name="type">
+					<option selected="selected" disabled>Pilih Hak Akses</option>
+					<option value="1">Super Administrator</option>
+					<option value="2">Administrator</option>
 				</select>
 			  </div>
 			</div>
 			
 		  </div><!-- /.box-body -->
 		  
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
+			<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+		  </div>
 								 
 		</form>
-			
-	  <div class="modal-footer">
-		<button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
-		<button type="button" class="btn btn-sm btn-primary">Submit</button>
-	  </div>
 	
 	</div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -279,24 +311,23 @@
 		<h4 class="modal-title">Tambah Jenis Produk Hukum</h4>
 	  </div>
 		
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="post" action="{$basedomain}pengaturan/add_produk">
 		  <div class="box-body">
 			
 			<div class="form-group">
 			  <label for="inputPassword3" class="col-sm-4 control-label">Jenis Produk Hukum</label>
 			  <div class="col-sm-7">
-				<input type="password" class="form-control" id="inputPassword3" placeholder="">
+				<input type="text" class="form-control" name="nama" placeholder="">
 			  </div>
 			</div>
 			
 		  </div><!-- /.box-body -->
-		  					 
+
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
+			<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+		  </div>			 
 		</form>
-			
-	  <div class="modal-footer">
-		<button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
-		<button type="button" class="btn btn-sm btn-primary">Submit</button>
-	  </div>
 	
 	</div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -321,5 +352,17 @@
         //bootstrap WYSIHTML5 - text editor
         $(".textarea").wysihtml5();
       });
+
+	 function showKonten() {
+	 	var tipe = $("#type").val();
+	 	
+	 	$.post(basedomain+'pengaturan/ajaxgetkonten', {type:tipe}, function(data){
+    
+		    $("#title").val(data['title']);
+		    CKEDITOR.instances["editor1"].setData(data['content']);
+
+		},"JSON")
+	 	$(".toshow").show(500);
+	 }
 </script>
 {/literal}
