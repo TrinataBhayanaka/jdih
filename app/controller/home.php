@@ -24,7 +24,6 @@ class home extends Controller {
 	}
 	
 	function index(){
-<<<<<<< HEAD
 		global $basedomain;
 		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 4');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
@@ -55,7 +54,7 @@ class home extends Controller {
 				$tmp2[$keys]['hit'] = $hit_count_2['hit'];
 			}
 		}
-		pr($tmp);
+		// pr($tmp);
 		// pr($tmp2);
 		$this->view->assign('produk',$tmp);
 		$this->view->assign('berita',$tmp2);
