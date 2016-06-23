@@ -25,8 +25,26 @@ class produk extends Controller {
 	
 	function index(){
 		
-		//start sidebar
 		global $basedomain;
+
+		$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1','tanggal',3);
+		foreach ($produk as $key => $value) {
+			$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
+			$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
+		
+			$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
+			$produk[$key]['jenis'] = $jenis['nama'];
+		}
+
+		$totalProduk = $this->contentHelper->countData('jdih_produk','n_status = 1');
+
+		$this->view->assign('produk',$produk);
+		$this->view->assign('totalProduk',$totalProduk);
+
+
+
+
+		//start sidebar
 		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
@@ -40,6 +58,8 @@ class produk extends Controller {
 		//berita
 		$param_berita = 'berita';
 		$count_berita = 'ref_berita';
+
+
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		//end sidebar
@@ -99,6 +119,29 @@ class produk extends Controller {
 		//end sidebar
 		
 		return $this->loadView('produk/detail');
+    }
+
+    function ajaxProduk()
+    {
+    	$num = $_GET['site'];
+    	$item_perpage = 3;
+    	$position = ($num-1) * $item_perpage;
+
+    	$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1','tanggal',"{$position},{$item_perpage}");
+
+    	foreach ($produk as $key => $value) {
+    		$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
+			$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
+		
+			$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
+			$produk[$key]['jenis'] = $jenis['nama'];
+    	}
+
+    	$this->view->assign('produk',$produk);
+
+    	$html = $this->loadView('modal/produk');
+    	echo $html;
+    	exit;
     }
 
 }

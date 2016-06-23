@@ -131,6 +131,15 @@ class produk extends Controller {
 			}
 		}
 
+		if($_FILES['cover']['error'] == 0){
+			deleteFile($data['cover']);
+			$uploadCover = uploadFile('cover','file');
+
+			if($uploadCover['status'] = 1){
+				$data['cover'] = "file/".$uploadCover['full_name'];
+			}
+		}
+
 		$data['deskripsi'] = htmlentities(htmlspecialchars($_POST['deskripsi'], ENT_QUOTES));
 		$data['tanggal'] = changeFormatDate($_POST['tanggal'],'d/m/Y','Y-m-d');
 

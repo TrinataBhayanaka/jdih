@@ -4,8 +4,8 @@
         <div class="header-full-title">
       <!-- <img src="assets/img/color/blue/logobsn.png" width="25%"> -->
             <!-- <h4 class="animated fadeInRight" style="color:#DA251E;margin-left:20px"></span></h4> -->
-            <p class="animated fadeInRight" style="text-align:left;margin-left:80px"><span style="color:#DA251E"><b>Jaringan Dokumentasi dan Informasi Hukum</b></span><br>
-      <span style="color:#000">Badan Standardisasi Nasional <br> National Standardization Agency of Indonesia</span></p>
+            <p class="animated fadeInRight" style="text-align:left;margin-left:80px"><span style="color:#DA251E">Jaringan Dokumentasi dan Informasi Hukum</span><br>
+      <span style="color:#666666">Badan Standardisasi Nasional <br> National Standardization Agency of Indonesia</span></p>
     </div>
   
         <nav class="top-nav">
@@ -56,33 +56,40 @@
                 <div class="form-group">
                 <label for="select" class="col-sm-4 control-label">Tanggal</label>
                   <div class="col-sm-8">
-                    <div class="input-group">
-					  <div class="input-group-addon">
-						<i class="fa fa-calendar"></i>
-					  </div>
-					  <input type="text" class="form-control pull-right" id="date">
-					</div><!-- /.input group -->
+                    <select class="form-control" id="select">
+                    <option>Tanggal Terbaru</option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    
+                    </select>
                   </div>
                 </div>
                 
                 <div class="form-group">
                 <label for="select" class="col-sm-4 control-label">Tahun</label>
                   <div class="col-sm-8">
-                   <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                    <select class="form-control" id="select">
+                    <option>Pilih Tahun</option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    
+                    </select>
                   </div>
                 </div>
             
                 <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Tentang</label>
                 <div class="col-sm-8">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
                 </div>
                 </div>
                 
                 <div class="form-group">
                 <label for="inputPassword3" class="col-sm-4 control-label">Nomor</label>
                 <div class="col-sm-8">
-                  <input type="password" class="form-control" id="inputPassword3" placeholder="">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
                 </div>
                 </div>
                 
@@ -151,17 +158,3 @@
         </nav>
     </div> <!-- container -->
 </header> <!-- header-full -->
-
-{literal}
-<script>
-    /*$(function () {
-        
-		$('#date').datepicker({
-			dateFormat: 'dd/mm/yyyy',
-			autoclose: true,
-			todayBtn: 'linked',
-			todayHighlight:true
-		});
-    })*/
-</script>
-{/literal}

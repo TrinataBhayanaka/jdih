@@ -79,5 +79,14 @@ class contentHelper extends Database {
 		$res = $this->fetch($sql2);
         return $res;
 	} 
+
+	function countData($table,$condition=false)
+	{
+		if($where) $where = "WHERE ".$where;
+        $sql = "SELECT COUNT(*) as total FROM {$table} {$where}";
+		$res = $this->fetch($sql,0);
+
+        return $res;
+	}
 }
 ?>
