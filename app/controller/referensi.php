@@ -1,6 +1,6 @@
 <?php
 
-class home extends Controller {
+class referensi extends Controller {
 	
 	var $models = FALSE;
 	var $view;
@@ -25,10 +25,15 @@ class home extends Controller {
 	
 	function index(){
 		
-		$ref = $this->contentHelper->fetchData('jdih_referensi',1,'n_status = 1','id_ref DESC',8);
+		return $this->loadView('home');
+    }
+	
+	function detail(){
+		$id = $_GET['id'];
+		$ref = $this->contentHelper->fetchData('jdih_referensi',0,'n_status = 1 and id_ref='.$id,'id_ref DESC');
 		
 		$this->view->assign('ref',$ref);
-		return $this->loadView('home');
+		return $this->loadView('referensi/detail_referensi');
     }
 	
 

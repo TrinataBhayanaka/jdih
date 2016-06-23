@@ -1,0 +1,197 @@
+<header class="main-header">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Referensi Buku</a></li>
+			 <li><a href="#">Detail </a></li>
+        </ol>
+    </div>
+</header>
+
+
+<section class="margin-bottom">
+   <div class="container">
+   
+	<div class="row">
+		<div class="col-md-12">
+		 <h2 class="no-margin-top">Referensi Buku</h2>
+		</div>
+	</div>
+		 
+			<div class="col-md-7" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
+			
+				<h4>{$ref.judul}</h4>
+				<p>{dateFormat($ref.tanggal,'article-day')}</p>
+		
+						<center><img src="{$basedomain}public_assets/{if $ref.cover ==''}noimage.png{else}{$ref.cover}{/if}" style="width:35%" class="img-responsive imageborder" alt="Image"></center>
+				
+				
+				<div class="row" style="margin-top:10px">
+		 
+						<div class="col-md-12" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
+						
+							<div class="panel-body">
+								<form class="form-horizontal" role="form">
+								  
+								  
+									 <div class="form-group">
+										<label for="select" class="col-sm-3 control-label" style="padding-top:0px">Judul</label>
+											<div class="col-sm-9">
+												<p>{$ref.judul}</p>
+											</div>
+									  </div>
+									  
+									 <div class="form-group">
+										<label for="select" class="col-sm-3 control-label" style="padding-top:0px">Pengarang</label>
+											<div class="col-sm-9">
+												<p>{$ref.pengarang}</p>
+											</div>
+									  </div>
+									  
+									   <div class="form-group">
+										<label for="select" class="col-sm-3 control-label" style="padding-top:0px">Kode Panggil</label>
+											<div class="col-sm-9">
+												<p>{$ref.kode_panggil}</p>
+											</div>
+									  </div>
+									  
+									  <div class="form-group">
+										<label for="select" class="col-sm-3 control-label" style="padding-top:0px">Resensi</label>
+											<div class="col-sm-9">
+												<p>{$ref.resensi}</p>
+											</div>
+									  </div>
+									 
+								</form>
+									
+							</div>
+						</div>
+					</div>
+			</div>
+				
+			<div class="col-md-5">
+				
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs nav-tabs-ar">
+				  <li class="active"><a href="#peraturan" data-toggle="tab">Peraturan Hukum Terbaru</a></li>
+				  <li><a href="#berita" data-toggle="tab">Berita Hukum</a></li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+				  <div class="tab-pane active" id="peraturan">
+					 <div class="content-box box-default">
+						<div class="row">
+							<div class="col-md-4">
+								<img src="assets/img/demo/book.png" alt="" class="img-responsive">
+							</div>
+							<div class="col-md-8 text-left">
+								<h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
+								<p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
+								<a href="#" class="btn btn-ar btn-success">Download</a>
+								<br>
+								<span class="label label-primary">Tahun 2012</span> 
+								<span class="label label-primary">Peraturan Pemerintah</span>
+							</div>
+						</div>
+					</div>
+					<div class="content-box box-default">
+						<div class="row">
+							<div class="col-md-4">
+								<img src="assets/img/demo/book.png" alt="" class="img-responsive">
+							</div>
+							<div class="col-md-8 text-left">
+								<h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
+								<p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
+								<a href="#" class="btn btn-ar btn-success">Download</a>
+								<br>
+								<span class="label label-primary">Tahun 2012</span> 
+								<span class="label label-primary">Peraturan Pemerintah</span>
+							</div>
+						</div>
+					</div>
+					<div class="content-box box-default">
+						<div class="row">
+							<div class="col-md-4">
+								<img src="assets/img/demo/book.png" alt="" class="img-responsive">
+							</div>
+							<div class="col-md-8 text-left">
+								<h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
+								<p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
+								<a href="#" class="btn btn-ar btn-success">Download</a>
+								<br>
+								<span class="label label-primary">Tahun 2012</span> 
+								<span class="label label-primary">Peraturan Pemerintah</span>
+							</div>
+						</div>
+					</div>
+					<div class="content-box box-default">
+						<div class="row">
+							<a href="#" class="pull-center">Selengkapnya</a>
+						</div>
+					</div>
+				</div>
+				  
+				  <div class="tab-pane" id="berita">
+					 <div class="content-box box-default">
+						<div class="row text-left">
+							<div class="col-md-12">
+								<h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
+								<p>Selasa, 19/01/2016 09:34 WIB </p>
+							</div>
+							<div class="col-md-4">
+								<img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
+							</div>
+							<div class="col-md-8 text-left">
+								<p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
+								<h6>Telah dibaca 2500 kali</h6>
+							</div>
+						</div>
+					</div>
+					
+					 <div class="content-box box-default">
+						<div class="row text-left">
+							<div class="col-md-12">
+								<h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
+								<p>Selasa, 19/01/2016 09:34 WIB </p>
+							</div>
+							<div class="col-md-4">
+								<img src="assets/img/demo/w2.jpg" alt="" class="img-responsive">
+							</div>
+							<div class="col-md-8 text-left">
+								<p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
+								<h6>Telah dibaca 2500 kali</h6>
+							</div>
+						</div>
+					</div>
+					
+					 <div class="content-box box-default">
+						<div class="row text-left">
+							<div class="col-md-12">
+								<h4 class="content-box-title">Infografis: Alur Proses Sertifikasi SNI Pada Produk</h4>
+								<p>Selasa, 19/01/2016 09:34 WIB </p>
+							</div>
+							<div class="col-md-4">
+								<img src="assets/img/demo/w2.jpg" alt="" class="img-responsive">
+							</div>
+							<div class="col-md-8 text-left">
+								<p>Berikut Informasi Proses Sertifikasi SNI yang disajikan dalam infografis... <a href="#">Read More</a></p> 
+								<h6>Telah dibaca 2500 kali</h6>
+							</div>
+						</div>
+					</div>
+					
+					<div class="content-box box-default">
+						<div class="row">
+							<a href="#" class="pull-center">Selengkapnya</a>
+						</div>
+					</div>
+
+				  </div>
+				</div>
+			</div>
+		
+	</div>
+</section>
+
+
