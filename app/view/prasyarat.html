@@ -47,7 +47,7 @@
                             <div class="col-md-8 text-left">
                                  <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
-                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}" target="blank">Download</a>
                                  <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
 								<br>
 								<!--<embed width="191" height="207" name="plugin" src="{$basedomain|cat:'public_assets/'|cat:$value.file}" type="application/pdf">-->
@@ -72,7 +72,7 @@
 				 <div class="content-box box-default">
                     <div class="row text-left">
                         <div class="col-md-12">
-                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}"><h4 class="content-box-title">{$values.judul}</h4></a>
+                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank"><h4 class="content-box-title">{$values.judul}</h4></a>
                             <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
@@ -83,7 +83,7 @@
 							{/if}
                         </div>
                         <div class="col-md-8 text-left">
-                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
+                            <p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank">Read More</a></p> 
                            <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah dibaca {$values.hit} kali </label>
                         </div>
                     </div>

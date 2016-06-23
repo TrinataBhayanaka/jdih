@@ -49,7 +49,7 @@
                             <div class="col-md-8 text-left">
                                  <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
-                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}" target="blank">Download</a>
                                  <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
 								<br>
 								<!--<embed width="191" height="207" name="plugin" src="{$basedomain|cat:'public_assets/'|cat:$value.file}" type="application/pdf">-->
