@@ -80,7 +80,7 @@ class contentHelper extends Database {
         return $res;
 	} 
 
-	function countData($table,$condition=false)
+	function countData($table,$where=false)
 	{
 		if($where) $where = "WHERE ".$where;
         $sql = "SELECT COUNT(*) as total FROM {$table} {$where}";

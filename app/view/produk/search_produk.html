@@ -171,7 +171,7 @@
       total: Math.ceil($("#total").val()/3)
   }).on("page", function(event, num){
     $.ajax({
-      url: basedomain+"produk/ajaxProduk/?site="+num,
+      url: basedomain+"produk/ajaxSearchProduk/?site="+num,
       
     }).done(function(data) {
       $("#content").html( data );
