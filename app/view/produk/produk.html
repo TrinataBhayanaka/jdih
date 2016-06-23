@@ -16,9 +16,8 @@
 		 <h2 class="no-margin-top">Produk Hukum</h2>
 		</div>
 	</div>
-	
+
         <div class="row">
-         
             <div class="col-md-7 text-justify" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
             
                 <h3>Peraturan Hukum</h3>
@@ -29,14 +28,11 @@
                           
                              <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label">Tanggal</label>
-                                    <div class="col-sm-8">
-                                      <select class="form-control" id="select">
-                                        <option>Tanggal Terbaru</option>
-                                        <option></option>
-                                        <option></option>
-                                        <option></option>
-                                        
-                                      </select>
+                                    <div class="col-sm-4">
+                                      <div class="input-group">
+                                          <input type="text" class="form-control datepicker" name="tanggal">
+                                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                      </div>
                                     </div>
                               </div>
                               
@@ -87,67 +83,34 @@
                     
                     <hr>
                     
-                    <p class="no-margin-top">Menampilkan 3 dari 263 hasil</p>
+                    <p class="no-margin-top">Menampilkan 3 dari {$totalProduk.total} hasil</p>
+                    <input type="hidden" id="total" value="{$totalProduk.total}">
+
+                    <div id="content">
+
+                    {foreach $produk as $val}
                      <div class="content-box box-default">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
+                                <img src="{$basedomain}public_assets/{if $val.cover eq ''}noimage.png{else}{$val.cover}{/if}" alt="" class="img-responsive">
                             </div>
                             <div class="col-md-8 text-left">
                                 <a href="{$basedomain}detail">
-                                    <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
+                                    <h4 class="content-box-title">{$val.judul}</h4>
                                 </a>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
+                                <p>{$val.tanggal}<br> <b>{$val.deskripsi}</b></p>
                                 <a href="#" class="btn btn-ar btn-success">Download</a>
                                 <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
+                                <span class="label label-primary">Tahun {$val.tahun}</span> 
+                                <span class="label label-primary">{$val.jenis}</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img src="assets/img/demo/book.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="col-md-8 text-left">
-                                <h4 class="content-box-title">Peraturan Pemerintah Republik Indonesia Nomor 82 Tahun 2012</h4>
-                                <p>Selasa, 19/01/2016 09:34 WIB <br> <b>tentang Penyelenggaraan Sistem dan Transaksi Elektronik</b></p>
-                                <a href="#" class="btn btn-ar btn-success">Download</a>
-                                <br>
-                                <span class="label label-primary">Tahun 2012</span> 
-                                <span class="label label-primary">Peraturan Pemerintah</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content-box box-default">
-                        <div class="row">
-                        <ul class="pagination pagination-border">
-                          <li class="disabled"><a href="#">&laquo;</a></li>
-                          <li class="active"><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
-                          <li><a href="#">&raquo;</a></li>
-                        </ul>
-                        </div>
-                    </div>
+                     </div>
+                    {/foreach}
+
+                    </div>  
+                    <div id="page-selection">Pagination goes here</div>
+
                     
             </div>
         
@@ -160,24 +123,24 @@
             </ul>
                   <div class="tab-pane" id="berita">
                     {if $berita}
-					 {foreach $berita as $values}
-					 <div class="content-box box-default">
-						<div class="row text-left">
-							<div class="col-md-12">
-								<h4 class="content-box-title">{$values.judul}</h4>
-								<p>{dateFormat($values.tanggal,'article-day')}</p>
-							</div>
-							<div class="col-md-4">
-								<img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
-							</div>
-							<div class="col-md-8 text-left">
-								<p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}home/details/?id={$values.id_berita}" class="berita-hukum" target="blank" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
-							   <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah diunduh {$values.hit} kali </label>
-							</div>
-						</div>
-					</div>
-					{/foreach}
-					{/if}
+          					 {foreach $berita as $values}
+          					 <div class="content-box box-default">
+          						<div class="row text-left">
+          							<div class="col-md-12">
+          								<h4 class="content-box-title">{$values.judul}</h4>
+          								<p>{dateFormat($values.tanggal,'article-day')}</p>
+          							</div>
+          							<div class="col-md-4">
+          								<img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
+          							</div>
+          							<div class="col-md-8 text-left">
+          								<p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}home/details/?id={$values.id_berita}" class="berita-hukum" target="blank" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
+          							   <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah diunduh {$values.hit} kali </label>
+          							</div>
+          						</div>
+          					</div>
+          					{/foreach}
+          					{/if}
                     <div class="content-box box-default">
                         <div class="row">
                             <a href="#" class="pull-center">Selengkapnya</a>
@@ -190,3 +153,19 @@
         </div>
     </div>
 </section>
+
+{literal}
+<script type="text/javascript">
+  // init bootpag
+  $('#page-selection').bootpag({
+      total: Math.ceil($("#total").val()/3)
+  }).on("page", function(event, num){
+    $.ajax({
+      url: basedomain+"produk/ajaxProduk/?site="+num,
+      
+    }).done(function(data) {
+      $("#content").html( data );
+    });
+  });
+</script>
+{/literal}

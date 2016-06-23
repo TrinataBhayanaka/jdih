@@ -49,6 +49,10 @@ class Controller extends Application{
 			// $this->view->assign('menu',$this->menuDinamis());
 		}
 
+		if ($this->configkey=='default'){
+			$this->view->assign('menu',$this->getMenu());
+		}
+
 		
 		if (file_exists($filePath)){
 			
@@ -371,6 +375,17 @@ class Controller extends Application{
 		$onlineUser=$online[0]['total'];
 
 		return $onlineUser;
+	}
+
+	function getMenu()
+	{
+		$this->loadModel('contentHelper');
+
+		$getHelper = new contentHelper;
+		
+		$menu = $getHelper->fetchData('jdih_jenis',1,"n_status = 1");
+
+		return $menu;
 	}
 }
 

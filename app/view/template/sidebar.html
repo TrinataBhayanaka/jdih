@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="{if $page.page eq 'home'}active{/if}">
-                    <a href="{$basedomain}">Home</a>
+                    <a href="{$basedomain}">Homes</a>
                 </li>
                 <li class="{if $page.page eq 'prasyarat'}active{/if}">
                     <a href="{$basedomain}prasyarat">Prasyarat</a>
@@ -26,8 +26,12 @@
                     <a href="{$basedomain}about">Tentang JDIH BSN</a>
                     
                 </li>
+
+                <li class="{if $page.page eq 'home'}active{/if}">
+                    <a href="{$basedomain}produk">Produk</a>
+                </li>
 				
-				<li class="dropdown yamm-fw {if $page.page eq 'produk' || $page.page eq 'detail'}active{/if}">
+				<!-- <li class="dropdown yamm-fw {if $page.page eq 'produk' || $page.page eq 'detail'}active{/if}">
 					<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Produk Hukum</a>
                      <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
 						<li>
@@ -35,32 +39,28 @@
 								<div class="row">
 									<div class="col-lg-3 col-md-6 col-sm-6 col-megamenu">
 										<div class="megamenu-block">
-											<h4 class="megamenu-block-title"><i class="fa fa-list"></i>Undang-Undang</h4>
 											<ul>
-												<li><a href="{$basedomain}produk">Undang-undang Dasar Tahun 1945 </a></li>
-												<li><a href="{$basedomain}produk/detail">Undang-undang</a></li>
-												
-											</ul>
-										</div>
-										<div class="megamenu-block">
-											<h4 class="megamenu-block-title"><i class="fa fa-list"></i> Peraturan</h4>
-											<ul>
-												<li><a href="blog_full.html">Perpu</a></li>
-												<li><a href="blog_masonry.html">Peraturan Pemerintah (PP)</a></li>
-												<li><a href="blog2.html">Peraturan Presiden (Perpres)</a></li>
+											{for $foo = 0 to 4}
+												<li><a href="{$basedomain}produk">{$menu.$foo.nama} </a></li>
+											{/for}
 											</ul>
 										</div>
 									</div>
 									<div class="col-lg-3 col-md-6 col-sm-6">
 										<div class="megamenu-block">
-											<h4 class="megamenu-block-title"><i class="fa fa-hand-o-up"></i> Keputusan</h4>
 											<ul>
-												<li><a href="single.html">Keputusan Presiden (Keppres)</a></li>
-												<li><a href="single_full.html">Instruksi Presiden (Inpres)</a></li>
-												<li><a href="blog2.html">Pemberlakukan Wajib SNI</a></li>
-												<li><a href="single.html">Peraturan Kepala BSN</a></li>
-												<li><a href="single_full.html">Keputusan Kepala BSN</a></li>
-												<li><a href="single_full.html">Surat Edaran Kepala BSN</a></li>
+												{for $foo = 5 to 9}
+												<li><a href="{$basedomain}produk">{$menu.$foo.nama} </a></li>
+											{/for}
+											</ul>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-6 col-sm-6">
+										<div class="megamenu-block">
+											<ul>
+												{for $foo = 10 to 14}
+												<li><a href="{$basedomain}produk">{$menu.$foo.nama} </a></li>
+											{/for}
 											</ul>
 										</div>
 									</div>
@@ -68,7 +68,7 @@
 							</div>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				
                 <li class="dropdown {if $page.page eq 'kegiatan' || $page.page eq 'kajian'}active{/if}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Berita Hukum</a>
