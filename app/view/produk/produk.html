@@ -142,8 +142,12 @@
 										<p>{dateFormat($values.tanggal,'article-day')}</p>
           							</div>
           							<div class="col-md-4">
-          								<img src="assets/img/demo/w3.jpg" alt="" class="img-responsive">
-          							</div>
+									{if $values.cover}
+										<img src="{$basedomain}public_assets/{$values.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+									{else}
+										<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+									{/if}
+									</div>
           							<div class="col-md-8 text-left">
           								<p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}home/details/?id={$values.id_berita}" class="berita-hukum" target="blank" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p> 
           							   <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah diunduh {$values.hit} kali </label>
