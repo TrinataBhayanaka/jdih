@@ -1,28 +1,80 @@
 <header class="main-header">
-    <div class="container ">
+    <div class="container">
         <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Prasyarat</a></li>
+            <li><a href="#">Kajian Hukum</a></li>
         </ol>
     </div>
 </header>
+
 
 <section class="margin-bottom">
    <div class="container">
    
 	<div class="row">
 		<div class="col-md-12">
-		 <h2 class="no-margin-top">Prasyarat</h2>
+		 <h2 class="no-margin-top">Kajian Hukum</h2>
 		</div>
 	</div>
+	
         <div class="row">
          
-            <div class="col-md-7 text-justify" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
+            <div class="col-md-7" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
             
-                <h2 class="right-line">{$data.title}</h2>
-                {$data.content}
+                <h3>Kajian Hukum</h3>
+                      <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="POST" action="{$basedomain}kegiatan/kajian"  >
+						<p>Urutan Berdasarkan pada:</p>
+							  <div class="form-group">
+                                <label for="select" class="col-sm-4 control-label">Tanggal</label>
+                                    <div class="col-sm-4">
+                                      <div class="input-group">
+                                          <input type="text" class="form-control datepicker" name="tanggal">
+                                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+										  
+                                      </div>
+                                    </div>
+								<button type="submit" class="btn btn-ar btn-primary">Tampilkan</button>
+							  </div>
+                        </form>
+                            
+                    </div>
+				 <hr>
+                    
+                    <p class="no-margin-top">Menampilkan 3 dari {$totalProduk.total} hasil</p>
+                    <input type="hidden" id="total" value="{$totalProduk.total}">
+                    <input type="hidden" id="param" value="{$param}">	
+				<div id="content">	
+				{if $content}
+				 {foreach $content as $val}
+				 <div class="content-box box-default">
+                    <div class="row text-left">
+                        <div class="col-md-12">
+                            <a href="{$basedomain}kegiatan/details/?id={$val.id_berita}" class="berita-hukum2" target="blank"><h4 class="content-box-title">{$val.judul}</h4></a>
+                            <p>{dateFormat($val.tanggal,'article-day')}</p>
+                        </div>
+                        <div class="col-md-4">
+                            {if $val.file}
+								<img src="{$basedomain}public_assets/{$val.file}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{else}
+								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{/if}
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <p align="justify"><b>{$val.judul}<b/> <a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum"  target="blank"></a></p> 
+                        </div>
+                    </div>
+                </div>
+				{/foreach}
+                {/if}
+			  </div>
+               <div class="content-box box-default">
+					<div class="row">
+						<div id="page-selection"></div>
+					</div>
+				</div>	
             </div>
-            <div class="col-md-5">
+              <div class="col-md-5">
                 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-tabs-ar">
@@ -60,7 +112,6 @@
 					{/if}
                     <div class="content-box box-default">
                         <div class="row">
-
                             <a href="{$basedomain}produk" class="pull-center">Selengkapnya</a>
                         </div>
                     </div>
@@ -92,19 +143,29 @@
                 {/if}
                     <div class="content-box box-default">
                         <div class="row">
-							<a href="{$basedomain}kegiatan" class="pull-center">Selengkapnya</a>
+                             <a href="{$basedomain}kegiatan" class="pull-center">Selengkapnya</a>
                         </div>
                     </div>
 
                   </div>
                 </div>
             </div>
-        
+               
     </div>
 </section>
 {literal}
 <script>
 $(document).ready(function() {
+	$('#page-selection').bootpag({
+		  total: Math.ceil($("#total").val()/3)
+	  }).on("page", function(event, num){
+		$.ajax({
+		  url: basedomain+"kegiatan/ajaxKajianHukum/?site="+num+"&condt="+$('#param').val(),
+		  
+		}).done(function(data) {
+		  $("#content").html( data );
+		});
+	  });
 	$('.produk-hukum,.berita-hukum').on('click', function(){
 		var tmp = $(this).attr('id');
 		var tmp_split = tmp.split("_");
@@ -131,6 +192,10 @@ $(document).ready(function() {
 							}
 			},"JSON");
 	});
+	
+	
+	
+	
 	
 });	
 </script>

@@ -5,12 +5,13 @@
             <img src="{$basedomain}public_assets/{if $val.cover eq ''}noimage.png{else}{$val.cover}{/if}" alt="" class="img-responsive">
         </div>
         <div class="col-md-8 text-left">
-            <a href="{$basedomain}detail">
+           <a href="{$basedomain}produk/detail/?id={$val.id_produk}">
                 <h4 class="content-box-title">{$val.judul}</h4>
-            </a>
+			</a>
             <p>{$val.tanggal}<br> <b>{$val.deskripsi}</b></p>
-            <a href="#" class="btn btn-ar btn-success">Download</a>
-            <br>
+            <a href="{$basedomain|cat:'public_assets/'|cat:$val.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$val.id_produk}" target="blank" >Download</a>
+			 <label id="{$count_produk|cat:'_'|cat:$val.id_produk}">Telah diunduh {$val.hit} kali </label>
+			<br>
             <span class="label label-primary">Tahun {$val.tahun}</span> 
             <span class="label label-primary">{$val.jenis}</span>
         </div>

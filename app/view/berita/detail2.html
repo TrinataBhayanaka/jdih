@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-4">
 								{if $value.cover}
-									<img src="{$basedomain}public_assets/$value.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+									<img src="{$basedomain}public_assets/{$value.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{else}
 									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{/if}
@@ -49,7 +49,7 @@
                             <div class="col-md-8 text-left">
                                  <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{$value.ref_deskripsi}</b></p>
-                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                <a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$value.id_produk}" target="blank">Download</a>
                                  <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
 								<br>
 								<!--<embed width="191" height="207" name="plugin" src="{$basedomain|cat:'public_assets/'|cat:$value.file}" type="application/pdf">-->
@@ -62,7 +62,7 @@
 					{/if}
                     <div class="content-box box-default">
                         <div class="row">
-                            <a href="#" class="pull-center">Selengkapnya</a>
+                            <a href="{$basedomain}produk" class="pull-center">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-4">
                             {if $values.file}
-								<img src="{$basedomain}public_assets/$values.file" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								<img src="{$basedomain}public_assets/{$values.file}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{else}
 								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{/if}
@@ -93,7 +93,7 @@
                 {/if}
                     <div class="content-box box-default">
                         <div class="row">
-                            <a href="#" class="pull-center">Selengkapnya</a>
+                           <a href="{$basedomain}kegiatan" class="pull-center">Selengkapnya</a>
                         </div>
                     </div>
 

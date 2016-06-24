@@ -1,0 +1,23 @@
+{if $content}
+ {foreach $content as $val}
+ <div class="content-box box-default">
+	<div class="row text-left">
+		<div class="col-md-12">
+			<a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum2" id="{$param_berita2|cat:'_'|cat:$val.id_berita}" target="blank"><h4 class="content-box-title">{$val.judul}</h4></a>
+			<p>{dateFormat($val.tanggal,'article-day')}</p>
+		</div>
+		<div class="col-md-4">
+			{if $val.file}
+				<img src="{$basedomain}public_assets/$val.file" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+			{else}
+				<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+			{/if}
+		</div>
+		<div class="col-md-8 text-left">
+			<p align="justify"><b>{$val.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum" id="{$param_berita2|cat:'_'|cat:$val.id_berita}" target="blank">Read More</a></p> 
+		   <label id="{$count_berita2|cat:'_'|cat:$val.id_berita}">Telah dibaca {$val.hit} kali </label>
+		</div>
+	</div>
+</div>
+{/foreach}
+{/if}

@@ -24,7 +24,6 @@ class produk extends Controller {
 	}
 	
 	function index(){
-		
 		global $basedomain;
 
 		$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1 AND publish = 1','tanggal',3);
@@ -34,19 +33,17 @@ class produk extends Controller {
 		
 			$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
 			$produk[$key]['jenis'] = $jenis['nama'];
+			$hit_count = $this->contentHelper->statistik($value['id_produk'],1);
+			$produk[$key]['hit'] = $hit_count['hit'];
 		}
-
 		$totalProduk = $this->contentHelper->countData('jdih_produk','n_status = 1');
 		$getTahun = $this->model->getAllTahun();
 		$jenis = $this->contentHelper->fetchData('jdih_jenis',1,"n_status = 1");
-
+		
 		$this->view->assign('produk',$produk);
 		$this->view->assign('totalProduk',$totalProduk);
 		$this->view->assign('tahun',$getTahun);
 		$this->view->assign('jenis',$jenis);
-
-
-
 
 		//start sidebar
 		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
@@ -60,10 +57,12 @@ class produk extends Controller {
 		$this->view->assign('berita',$tmp2);
 		//param ajax
 		//berita
+		$param_produk = 'produk';
+		$count_produk = 'ref_produk';
+		$this->view->assign('param_produk',$param_produk);
+		$this->view->assign('count_produk',$count_produk);
 		$param_berita = 'berita';
 		$count_berita = 'ref_berita';
-
-
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		//end sidebar
@@ -149,6 +148,7 @@ class produk extends Controller {
 				$tmp3[$keys]['hit'] = $hit_count2['hit'];
 			}
 		}
+		// pr($tmp3);
 		$this->view->assign('content',$tmp3);
 		$param_produk2 = 'produk2';
 		$count_produk2 = 'ref_produk2';
@@ -208,10 +208,21 @@ class produk extends Controller {
 		
 			$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
 			$produk[$key]['jenis'] = $jenis['nama'];
+			$hit_count = $this->contentHelper->statistik($value['id_produk'],1);
+			$produk[$key]['hit'] = $hit_count['hit'];
     	}
-
+		// pr($produk);
     	$this->view->assign('produk',$produk);
-
+		//param ajax
+		//berita
+		$param_produk = 'produk';
+		$count_produk = 'ref_produk';
+		$this->view->assign('param_produk',$param_produk);
+		$this->view->assign('count_produk',$count_produk);
+		$param_berita = 'berita';
+		$count_berita = 'ref_berita';
+		$this->view->assign('param_berita',$param_berita);
+		$this->view->assign('count_berita',$count_berita);
     	$html = $this->loadView('modal/produk');
     	echo $html;
     	exit;
@@ -238,6 +249,8 @@ class produk extends Controller {
 		
 			$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
 			$produk[$key]['jenis'] = $jenis['nama'];
+			$hit_count = $this->contentHelper->statistik($value['id_produk'],1);
+			$produk[$key]['hit'] = $hit_count['hit'];
 		}
 
 		$totalProduk = $this->contentHelper->countData('jdih_produk',"n_status = 1 AND publish = 1 AND {$set}");
@@ -265,9 +278,13 @@ class produk extends Controller {
 		$this->view->assign('berita',$tmp2);
 		//param ajax
 		//berita
+		$param_produk = 'produk';
+		$count_produk = 'ref_produk';
+		$this->view->assign('param_produk',$param_produk);
+		$this->view->assign('count_produk',$count_produk);
+		
 		$param_berita = 'berita';
 		$count_berita = 'ref_berita';
-
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		//end sidebar
