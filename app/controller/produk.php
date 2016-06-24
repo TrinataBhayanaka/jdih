@@ -123,7 +123,7 @@ class produk extends Controller {
 		
 		//content
 		$id = $_GET['id'];
-		$where = "n_status = 1 and publish = 1 and posisi =1 and id_produk = {$id}";
+		$where = "n_status = 1 and publish = 1 and id_produk = {$id}";
 		$produk2 = $this->contentHelper->GetData('jdih_produk',1,$where,'id_produk ');
 		// pr($produk2);
 		// exit;
