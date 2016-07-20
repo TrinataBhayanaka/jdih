@@ -138,36 +138,21 @@
 		},"JSON");
     	
         //DONUT CHART
-        /*var donut = new Morris.Donut({
-          element: 'sales-chart',
-          resize: true,
-          colors: ["#3c8dbc", "#f56954", "#00a65a"],
-          data: [
-            {label: "Download Sales", value: 12},
-            {label: "In-Store Sales", value: 30},
-            {label: "Mail-Order Sales", value: 20}
-          ],
-          hideHover: 'auto'
-        });*/
-		//untuk update data chart
-		var donut ="";
+       var donut ="";
 		$.post(basedomain+"home/chart_bar",function(bar){
-			var label_a = bar.data_1.jns_produk;
-			var label_b = bar.data_2.jns_produk;
-			var label_c = bar.data_3.jns_produk;
-			
-			var jml_a = bar.data_1.jml;
-			var jml_b = bar.data_2.jml;
-			var jml_c = bar.data_3.jml;
-		
+			var label_value;
+			if(bar.data){
+				label_value = eval(bar.data);
+			}else{
+				var temp = "[{label : '-', value : 0}]";
+				label_value = eval(temp);
+			}
 			donut = Morris.Donut({
 			element: 'sales-chart',
-			data: [
-				{label: label_a, value: jml_a},
-				{label: label_b, value: jml_b},
-				{label: label_c, value: jml_c}
-			],
-			 colors: ["#3c8dbc", "#f56954", "#00a65a"],
+			data:
+				label_value,
+			 //colors: ["#3c8dbc", "#f56954", "#00a65a"],
+			 colors: ["#ec7063","#af7ac5","#5dade2","#48c9b0","#f4d03f"],
 			resize:true
 		  });
 		},"JSON");
