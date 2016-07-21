@@ -65,6 +65,12 @@ class berita extends Controller {
 			$data['file'] = "berita/".$upload['full_name'];
 			$data['file_name'] = $upload['real_name'];
 		}
+		
+		$upload_cover = uploadFile('cover','berita');
+		
+		if($upload_cover['status'] == 1){
+			$data['cover'] = "berita/".$upload_cover['full_name'];	
+		}
 
 		$data['ringkasan'] = htmlentities(htmlspecialchars($_POST['ringkasan'], ENT_QUOTES));
 		$data['isi'] = htmlentities(htmlspecialchars($_POST['isi'], ENT_QUOTES));
@@ -103,7 +109,7 @@ class berita extends Controller {
 		$data = $_POST;
 		
 		if($_FILES['myfile']['error'] == 0){
-				deleteFile($data['berita']);
+				deleteFile($data['file']);
 				$upload = uploadFile('myfile','berita');
 
 				if($upload['status'] = 1){
@@ -111,6 +117,15 @@ class berita extends Controller {
 					$data['file_name'] = $upload['real_name'];
 				}
 			}
+			
+		if($_FILES['cover']['error'] == 0){
+			deleteFile($data['cover']);
+			$uploadCover = uploadFile('cover','berita');
+
+			if($uploadCover['status'] = 1){
+				$data['cover'] = "berita/".$uploadCover['full_name'];
+			}
+		}
 		
 			$data['ringkasan'] = htmlentities(htmlspecialchars($_POST['ringkasan'], ENT_QUOTES));
 			$data['isi'] = htmlentities(htmlspecialchars($_POST['isi'], ENT_QUOTES));

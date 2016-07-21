@@ -83,6 +83,15 @@ class referensi extends Controller {
 		return $this->loadView('referensi/detail_referensi');
     }
 	
+	function referensi_buku()
+	{
+		
+		$ref = $this->contentHelper->fetchData('jdih_referensi',1,'n_status = 1');
+		$this->view->assign('ref',$ref);
+		//db($ref);
+		return $this->loadView('referensi/referensi_buku');
+	}
+	
 
 
 }

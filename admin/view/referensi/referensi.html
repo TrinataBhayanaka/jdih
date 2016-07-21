@@ -50,7 +50,6 @@
               <tr>
                 <th>No</th>
                 <th>Judul Referensi Buku</th>
-                <th>Tanggal</th>
                 <th>Tgl Publish</th>
 				{if $admin.type eq 1}
                 <th>Publish/Non-Publish</th>
@@ -64,7 +63,6 @@
                 <td>{$key+1}</td>
                 <td>{$val.judul}</td>
                 <td>{$val.tanggal}</td>
-                <td>{$val.create_date}</td>
 				{if $admin.type eq 1}
                 <td class="text-center"><input class="js-switch" type="checkbox" {if $val.publish eq 1}checked{/if} onchange="return changePublish({$val.id_ref},{$val.publish});"></td>
                 {/if}
@@ -80,8 +78,7 @@
             <tfoot>
                 <th>No</th>
                 <th>Judul Referensi Buku</th>
-                <th>Tanggal</th>
-                <th>Tgl Publish</th>
+                <th>Tanggal Publish</th>
                  {if $admin.type eq 1}
                 <th>Publish/Non-Publish</th>
                 {/if}
@@ -115,13 +112,13 @@
 			</div>
 			 -->
 			<div class="form-group">
-			  <label for="inputPassword3" class="col-sm-3 control-label">Tanggal Upload <sup class="text-danger">*</sup></label>
+			  <label for="inputPassword3" class="col-sm-3 control-label">Tanggal Publish <sup class="text-danger">*</sup></label>
 			  <div class="col-sm-8">
 				<div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" name="tanggal" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required id="upload_date">
+                  <input type="text" class="form-control pull-right datepicker" name="tanggal" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
                 </div><!-- /.input group -->
 			  </div>
 			</div>
@@ -245,12 +242,7 @@
         })
         $('#reservation').daterangepicker();
 		$("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-		$('#upload_date').datepicker({
-			dateFormat: 'dd/mm/yyyy',
-			autoclose: true,
-			todayBtn: 'linked',
-			todayHighlight:true
-		}); 
+		$("[data-mask]").inputmask();
 		
     })
 
