@@ -2,16 +2,25 @@
  <div class="content-box box-default">
     <div class="row">
         <div class="col-md-4">
-            <img src="{$basedomain}public_assets/{if $val.cover eq ''}noimage.png{else}{$val.cover}{/if}" alt="" class="img-responsive">
+			{$cover = "/"|explode:$val.cover}
+			{if $cover[1]}
+				<img src="{$basedomain}public_assets/$val.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+			{else}
+				<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+			{/if}
+            <!--<img src="{$basedomain}public_assets/{if $val.cover eq ''}noimage.png{else}{$val.cover}{/if}" alt="" class="img-responsive">-->
         </div>
         <div class="col-md-8 text-left">
            <a href="{$basedomain}produk/detail/?id={$val.id_produk}">
-                <h4 class="content-box-title">{$val.judul}</h4>
+                <h4 class="content-box-title"><b>{$val.judul}</b></h4>
 			</a>
-            <p>{$val.tanggal}<br> <b>{$val.deskripsi}</b></p>
-            <a href="{$basedomain|cat:'public_assets/'|cat:$val.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$val.id_produk}" target="blank" >Download</a>
-			 <label id="{$count_produk|cat:'_'|cat:$val.id_produk}">Telah diunduh {$val.hit} kali </label>
-			<br>
+            <p align="justify">{$val.tanggal}<br> <b>{limit_words($val.deskripsi,15)} ...</b> </p>
+			{$file = "/"|explode:$val.file}
+			{if $file[1]}
+				<a href="{$basedomain|cat:'public_assets/'|cat:$val.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$val.id_produk}" target="blank" >Download</a>
+				 <label id="{$count_produk|cat:'_'|cat:$val.id_produk}">Telah diunduh {$val.hit} kali </label>
+				<br>
+			{/if}	
             <span class="label label-primary">Tahun {$val.tahun}</span> 
             <span class="label label-primary">{$val.jenis}</span>
         </div>

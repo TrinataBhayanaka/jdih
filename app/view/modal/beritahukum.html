@@ -3,7 +3,7 @@
  <div class="content-box box-default">
 	<div class="row text-left">
 		<div class="col-md-12">
-			<a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum2" id="{$param_berita2|cat:'_'|cat:$val.id_berita}" target="blank"><h4 class="content-box-title">{$val.judul}</h4></a>
+			<a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum2" id="{$param_berita2|cat:'_'|cat:$val.id_berita}" ><h4 class="content-box-title"><b>{$val.judul}</b></h4></a>
 			<p>{dateFormat($val.tanggal,'article-day')}</p>
 		</div>
 		<div class="col-md-4">
@@ -14,7 +14,8 @@
 			{/if}
 		</div>
 		<div class="col-md-8 text-left">
-			<p align="justify"><b>{$val.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum" id="{$param_berita2|cat:'_'|cat:$val.id_berita}" target="blank">Read More</a></p> 
+			<!--<p align="justify"><b>{$val.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum" id="{$param_berita2|cat:'_'|cat:$val.id_berita}" target="blank">Read More</a></p>--> 
+			<p align="justify"><b>{limit_words($val.ringkasan,15)} ...<b/> </p>
 		   <label id="{$count_berita2|cat:'_'|cat:$val.id_berita}">Telah dibaca {$val.hit} kali </label>
 		</div>
 	</div>
