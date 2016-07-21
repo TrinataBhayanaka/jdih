@@ -1,0 +1,123 @@
+<header class="main-header">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Referensi Buku</a></li>
+        </ol>
+    </div>
+</header>
+
+
+  <div class="container">
+
+	<div class="row" style="margin-bottom:10px">
+		 
+			<div class="col-md-12" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
+			
+				<h3>Referensi Buku</h3>
+				<div class="panel-body">
+					<form class="form-horizontal" role="form">
+					  
+					  
+						 <div class="form-group">
+							<label for="select" class="col-sm-2 control-label">Judul</label>
+								<div class="col-sm-6">
+									<input type="email" class="form-control" id="inputEmail3" placeholder="">
+								</div>
+						  </div>
+						  
+						 <div class="form-group">
+							<label for="select" class="col-sm-2 control-label">Pengarang</label>
+								<div class="col-sm-6">
+									<input type="email" class="form-control" id="inputEmail3" placeholder="">
+								</div>
+						  </div>
+						  
+						   <div class="form-group">
+							<label for="select" class="col-sm-2 control-label"></label>
+								<div class="col-sm-6">
+									<button type="button" class="btn btn-ar btn-primary" data-dismiss="modal">Tampilkan</button>
+								</div>
+						  </div>
+						 
+					</form>
+						
+				</div>
+			</div>
+	</div>
+    
+<section class="margin-bottom">
+	   <div class="row">
+	    <ul class="bxslider">
+		{foreach $ref as $val}
+			<li>
+			<div class="col-md-3">
+					<div class="img-caption-ar">
+						{if $val.cover}
+							<img src="{$basedomain}public_assets/{$val.cover}" alt="" class="img-responsive" width="160px" height="160px" >
+						{else}
+							<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" >
+						{/if}
+						<div class="caption-ar">
+							<div class="caption-content">
+								<a href="{$basedomain}referensi/detail/?id={$val.id_ref}" class="animated fadeInDown"><i class="fa fa-search"></i>More info</a>
+								<h4 class="caption-title">{$val.judul}</h4>
+							</div>
+						</div>
+					</div>
+			</div>
+			</li>
+		{/foreach}	
+			
+		</ul>
+		</div>
+		
+			<div class="content-box box-default" style="background-color: #FFF; border: none #FFF">
+				<div class="row">
+				<ul class="pagination pagination-border">
+				  <li class="disabled"><a href="#">&laquo;</a></li>
+				  <li class="active"><a href="#">1</a></li>
+				  <li><a href="#">2</a></li>
+				  <li><a href="#">3</a></li>
+				  <li><a href="#">4</a></li>
+				  <li><a href="#">5</a></li>
+				  <li><a href="#">&raquo;</a></li>
+				</ul>
+				</div>
+			</div>
+</section>
+</div>
+
+{literal}
+<script>
+$(document).ready(function() {
+	$('.produk-hukum,.berita-hukum').on('click', function(){
+		var tmp = $(this).attr('id');
+		var tmp_split = tmp.split("_");
+		var id = tmp_split[1]; 
+		var inf = tmp_split[0];
+		var type ;
+		var text ;
+		var param ;
+		
+		if (inf == 'produk'){
+			type = 1;
+			text = 'Telah diunduh ';
+			param = 'ref_produk_'+id;
+		}else if(inf == 'berita'){
+			type = 2;
+			text = 'Telah dibaca ';
+			param = 'ref_berita_'+id;
+		}
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
+							if(data.hit > 0){
+								$('#'+param).text(text+data.hit+' kali');
+							}else{
+								//nothing	
+							}
+			},"JSON");
+	});
+});	
+</script>
+{/literal}
+

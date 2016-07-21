@@ -62,6 +62,7 @@ class referensi extends Controller {
 		}
 		
 		$upload_cover = uploadFile('cover','ref');
+		
 		if($upload_cover['status'] == 1){
 			$data['cover'] = "ref/".$upload_cover['full_name'];	
 		}
@@ -84,12 +85,21 @@ class referensi extends Controller {
 		$data = $_POST;
 		
 		if($_FILES['myfile']['error'] == 0){
-			deleteFile($data['ref']);
+			deleteFile($data['file']);
 			$upload = uploadFile('myfile','ref');
 
 			if($upload['status'] == 1){
 				$data['file'] = "ref/".$upload['full_name'];
 				$data['file_name'] = $upload['real_name'];
+			}
+		}
+		
+		if($_FILES['cover']['error'] == 0){
+			deleteFile($data['cover']);
+			$uploadCover = uploadFile('cover','ref');
+
+			if($uploadCover['status'] = 1){
+				$data['cover'] = "ref/".$uploadCover['full_name'];
 			}
 		}
 
