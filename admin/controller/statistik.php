@@ -29,6 +29,8 @@ class statistik extends Controller {
 	
 	public function index(){
 		$jns_produk = $this->contentHelper->fetchData('jdih_jenis',1,'n_status = 1','id_jenis asc');
+		$default = "UUD NRI Tahun 1945";
+		$this->view->assign('default',$default);
 		$this->view->assign('jns_produk',$jns_produk);
 		return $this->loadView('statistik/statistik');
 
@@ -181,6 +183,139 @@ class statistik extends Controller {
 		
 	}	
 	
+	//donut chart default
+	public function chart_donut(){
+		// pr($_POST);
+		$id_jenis = $_POST['idj']; 
+		$select = $this->contentHelper->donut_chart_cdtn_def($id_jenis);
+		/*result expected
+			 [
+            {label: 'Download Sales', value: '12'},
+            {label: 'In-Store Sales', value: '30'},
+            {label: 'Mail-Order Sales', value: '20'}
+          ]*/
+		//custome json
+		if($select){
+			$sign_first ="{";
+			$sign_last ="}";
+			$newSignStart="[";
+			$newSignEnd="]";
+			$sign = "'";
+			foreach ($select as $val){
+				$param = $sign_first."label : ".$sign.$val[judul].$sign.", value : ".$val[jml].$sign_last; 
+				$data[] = $param;
+			} 
+			$key   = implode(',',$data);
+			$key_fix = $newSignStart.$key.$newSignEnd;
+		}
+		$newformat = array('data'=>$key_fix);
+		print json_encode($newformat);
+		exit;
+	}
+	
+	//report 
+	public function report(){
+		//param
+		//tgl awal 
+		$tmp_tgl_start =$_GET['start'];
+		$ex_1 = explode('/',$tmp_tgl_start);
+		$tgl_start_fix = $ex_1['2'].'-'.$ex_1['1'].'-'.$ex_1['0']; 
+		
+		//tgl akhir
+		$tmp_tgl_end =$_GET['end'];
+		$ex_2 = explode('/',$tmp_tgl_end);
+		$tgl_end_fix = $ex_2['2'].'-'.$ex_2['1'].'-'.$ex_2['0']; 
+		
+		if($tmp_tgl_start != '' && $tmp_tgl_end !=''){
+			$ket = "<h4>Tanggal {$tmp_tgl_start} s/d {$tmp_tgl_end} </h4>";
+		}
+		//flag 1: pdf, 2 : xls
+		$flag = $_GET['flag'];
+		
+		$param_sql ="n_status = 1";
+		if($tmp_tgl_start){
+			$param_sql_dt.= " AND tanggal >= '{$tgl_start_fix}'";
+		}
+		if($tmp_tgl_end){
+			$param_sql_dt.= " AND tanggal <= '{$tgl_end_fix}'";
+		}
+		$where = $param_sql;
+		$select = $this->contentHelper->fetchData('jdih_jenis',1,$where,'id_jenis asc');
+		// pr($select);
+		foreach($select as $key=>$val){
+			$data[] = $val;
+			$count = $this->contentHelper->hit_count($val['id_jenis'],$param_sql_dt);
+			$data[$key]['jml'] = $count['jml'];
+		}
+		// pr($data);
+		//$this->view->assign('data',$data);
+		//$html = $this->loadView('statistik/print');
+		if($flag == 1){
+			//write report pdf
+			$this->reportHelper =$this->loadModel('reportHelper');
+			$html = "<div style=\"width: ; text-align: center;\">
+						<h4>List Produk Hukum : </h4>
+						{$ket}
+						 <table style=\"border-collapse: collapse; margin-left: auto; margin-right: auto; width: 100%;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
+							<thead>
+								<tr class=\"\" >
+									<td align=\"center\">No</td>
+									<td align=\"center\">Produk Hukum</td>
+									<td align=\"center\">Jumlah</td>
+								</tr>
+								</thead>
+								<tbody>";
+								$no = 1;
+									foreach ($data as $value){
+										$html.="<tr>
+											<td align=\"center\">{$no}</td>
+											<td align=\"\">{$value['nama']}</td>
+											<td align=\"center\">{$value['jml']}</td>	
+										</tr>";
+										$no++;
+									}
+								$html.="
+								</tbody>
+							</table>
+						</div>";
+			// echo $html;
+			// exit;
+			$generate = $this->reportHelper->loadMpdf($html, 'list');
+		}else{
+				//write report xls
+				$waktu=date("d-m-y_h:i:s");
+				$filename ="list_$waktu.xls";
+				header('Content-type: application/ms-excel');
+				header('Content-Disposition: attachment; filename='.$filename);
+				$html = "<div style=\"width: ; text-align: center;\">
+						<h4>List Produk Hukum : </h4>
+						{$ket}
+						 <table style=\"border-collapse: collapse; margin-left: auto; margin-right: auto; width: 100%;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
+							<thead>
+								<tr class=\"\" >
+									<td align=\"center\">No</td>
+									<td align=\"center\">Produk Hukum</td>
+									<td align=\"center\">Jumlah</td>
+								</tr>
+								</thead>
+								<tbody>";
+								$no = 1;
+									foreach ($data as $value){
+										$html.="<tr>
+											<td align=\"center\">{$no}</td>
+											<td align=\"\">{$value['nama']}</td>
+											<td align=\"center\">{$value['jml']}</td>	
+										</tr>";
+										$no++;
+									}
+								$html.="
+								</tbody>
+							</table>
+						</div>";
+				echo $html;
+				exit;
+		}	
+	}
 }
 
 ?>

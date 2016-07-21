@@ -73,7 +73,12 @@ class home extends Controller {
 		
 		//create dinamic label
 		$sign="'";
-		$select = $this->contentHelper->fetchData('jdih_jenis',1,'n_status = 1','id_jenis asc');
+		$where = "n_status = 1 and nama not like 'Surat Edaran Kepala BSN%'
+							   and nama not like 'Perpu%'
+							   and nama not like 'Rancangan%'
+                               and nama not like 'Instruksi Presiden (Inpres)%'";
+		// $select = $this->contentHelper->fetchData('jdih_jenis',1,'n_status = 1','id_jenis asc');
+		$select = $this->contentHelper->fetchData('jdih_jenis',1,$where,'id_jenis asc');
 		// pr($select);
 		foreach($select as $val){
 			$count = $this->contentHelper->hit($val['id_jenis']);
@@ -118,15 +123,33 @@ class home extends Controller {
 	//bar chart
 	public function chart_bar(){
 		$select = $this->contentHelper->bar_chart();
-		//pr($select);
-		$data_1 = $select[0];
-		$data_2 = $select[1];
-		$data_3 = $select[2];
-		//pr($data_1);
-		$newformat = array('data_1'=>$data_1,'data_2'=>$data_2,'data_3'=>$data_3);
+		// pr($select);
+		/*result expected
+			 [
+            {label: 'Download Sales', value: '12'},
+            {label: 'In-Store Sales', value: '30'},
+            {label: 'Mail-Order Sales', value: '20'}
+          ]*/
+		//custome json
+		if($select){
+			$sign_first ="{";
+			$sign_last ="}";
+			$newSignStart="[";
+			$newSignEnd="]";
+			$sign = "'";
+			foreach ($select as $val){
+				$param = $sign_first."label : ".$sign.$val[jns_produk].$sign.", value : ".$val[jml].$sign_last; 
+				$data[] = $param;
+			} 
+			$key   = implode(',',$data);
+			$key_fix = $newSignStart.$key.$newSignEnd;
+		}
+		$newformat = array('data'=>$key_fix);
 		print json_encode($newformat);
 		exit;
 	}
+	
+	
 	
 	
 }

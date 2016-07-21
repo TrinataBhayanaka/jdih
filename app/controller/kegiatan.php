@@ -225,7 +225,7 @@ class kegiatan extends Controller {
 		$this->view->assign('count_berita',$count_berita);
 		//end sidebar
 		$id = $_GET['id'];
-		$where = "n_status = 1 and publish = 1 and posisi =1 and id_berita = {$id}";
+		$where = "n_status = 1 and publish = 1 and id_berita = {$id}";
 		$berita = $this->contentHelper->GetData('jdih_berita',1,$where,'id_berita asc');
 		if($berita){
 			foreach ($berita as $keys=> $value){

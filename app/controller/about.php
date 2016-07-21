@@ -31,7 +31,7 @@ class about extends Controller {
 		$this->view->assign('data', $data);
 
 		//start sidebar
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 3');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 ','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -52,7 +52,7 @@ class about extends Controller {
 				$tmp[$key]['hit'] = $hit_count['hit'];
 			}
 		}
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 ','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;

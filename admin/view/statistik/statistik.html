@@ -12,10 +12,13 @@
 
 <section class="content">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<div class="box box-success">
 				<div class="box-header with-border">
 					<div class="col-xs-12">
+						<div class="input-group">
+							<label>Range Tanggal </label>
+						</div>
 						<div class="input-group">
 							<div class="input-group-addon">
 								<i class="fa fa-calendar"></i>
@@ -26,6 +29,31 @@
 								<i class="fa fa-calendar"></i>
 							</div>
 							<input type="text" name="tanggal" class="form-control datepicker" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required id="end">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="box box-success">
+				<div class="box-header with-border">
+					<div class="col-xs-12">
+						<div class="input-group">
+							<label>Jenis Produk Hukum</label>			
+						</div>
+						<div class="input-group">
+							<select class="form-control select" style="width: 100%;" id ="idj">
+									<!--<option selected="selected">Pilih Produk Hukum</option>-->
+										{foreach $jns_produk as $val}
+										{if $default == $val.nama}
+											{$sel = "selected"}
+										{else }
+											{$sel = ""}
+										{/if}
+									<option value="{$val.id_jenis}" {$sel}>{$val.nama}</option>
+										
+										{/foreach}
+							</select>
 						</div>
 					</div>
 				</div>
@@ -76,24 +104,8 @@
 	
 	
 	<div class="box-body">
-	
-	<div class="row">
-
-		<!-- <div class="col-xs-5">
-		  <div class="form-group">
-			<label>Pencarian:</label>
-			<div class="input-group">
-			  <div class="input-group-addon">
-				<i class="fa fa-calendar"></i>
-			  </div>
-			  <input type="text" class="form-control pull-right" id="reservation">
-			</div>
-		  </div>
-		</div> -->
-	  </div>
-	
 	  <div class="row">
-		<div class="col-md-6">
+		<!--<div class="col-md-6">
 		  <div class="form-group">
 			<label>Jenis Produk Hukum</label>
 			<select class="form-control select2" style="width: 100%;">
@@ -102,17 +114,7 @@
 				<option value="{$val.id_jenis}">{$val.nama}</option>
 			  {/foreach}
 			</select>
-		  </div><!-- /.form-group -->
-		   <!--<div class="form-group">
-			<label>Jenis Berita Hukum</label>
-			<select class="form-control select2" style="width: 100%;">
-			  <option selected="selected">Pilih Berita Hukum</option>
-			  <option></option>
-			  <option></option>
-			  <option></option>
-			  
-			</select>
-		  </div>-->
+		  </div>
 		   <div class="form-group">
 			<label>Status Akhir</label>
 			<select name="status_akhir" class="form-control select2" style="width: 100%;" required>
@@ -127,15 +129,9 @@
 		<div class="col-md-6">
 		 <div class="form-group">
 			<label>Tahun</label>
-			<!--<select class="form-control select2" style="width: 100%;">
-			  <option selected="selected">Pilih Tahun</option>
-			  <option></option>
-			  <option></option>
-			  <option></option>
-			</select>-->
-			  <input type="text" name="tahun" class="form-control" placeholder="" data-inputmask="'mask': '9999'" data-mask required>
-          </div><!-- /.form-group -->
-		</div><!-- /.col -->
+				<input type="text" name="tahun" class="form-control" placeholder="" data-inputmask="'mask': '9999'" data-mask required>
+          </div>
+		</div>
 		
 		<div class="col-md-6">
 		 <div class="form-group">
@@ -144,19 +140,19 @@
 			  <option selected="selected">Publish</option>
 			  <option>Non-Publish</option>
 			</select>
-		  </div><!-- /.form-group -->
-		</div><!-- /.col -->
+		  </div>
+		</div>-->
 		 
-	  </div><!-- /.row -->
+	  </div>
 	  
 	  <div class="pull-right">
-		   <button class="btn btn-sm btn-social btn-primary">
-			  <i class="fa fa-search"></i> View Report
+		   <button class="btn btn-sm btn-social btn-danger rpt" value="1" name="type" id ="flag_1">
+			  <i class="fa fa-file-pdf-o"></i> Download pdf
 			</button>
-          <button class="btn btn-sm btn-social btn-info">
-			  <i class="fa fa-upload"></i> Export Report
+          <button class="btn btn-sm btn-social btn-success rpt" value="2" name="type" id ="flag_2">
+			  <i class="fa fa-file-excel-o"></i> Download xls
 			</button>
-	  </div>
+		</div>
 	  
 	  <!--  <div>
 		  <ul class="pagination pagination-sm no-margin pull-center">
@@ -200,7 +196,8 @@
 		
 		//masking tahun
 		 $("[data-mask]").inputmask();
-		//BAR CHART
+		
+		//bar chart default
 		var bar;
 		$.post(basedomain+"statistik/chart",function(statistik){
 			var value = eval(statistik.key);
@@ -222,29 +219,50 @@
 			bar = Morris.Bar(config)
 		},"JSON");
 		
-		//DONUT CHART
+		//donut chart default
 		var donut ="";
-		$.post(basedomain+"home/chart_bar",function(bar){
-			var label_a = bar.data_1.jns_produk;
-			var label_b = bar.data_2.jns_produk;
-			var label_c = bar.data_3.jns_produk;
-			
-			var jml_a = bar.data_1.jml;
-			var jml_b = bar.data_2.jml;
-			var jml_c = bar.data_3.jml;
-		
+		var idj = $('#idj').val();
+		//console.log(idj);
+		$.post(basedomain+"statistik/chart_donut",{idj:idj},function(bar){
+		//$.post(basedomain+"statistik/chart_donut",function(bar){
+			//var label_value = eval(bar.data);
+			var label_value;
+			if(bar.data){
+				label_value = eval(bar.data);
+			}else{
+				var temp = "[{label : '-', value : 0}]";
+				label_value = eval(temp);
+			}
 			donut = Morris.Donut({
 			element: 'sales-chart',
-			data: [
-				{label: label_a, value: jml_a},
-				{label: label_b, value: jml_b},
-				{label: label_c, value: jml_c}
-			],
-			 colors: ["#3c8dbc", "#f56954", "#00a65a"],
+			data: 
+			//custome
+			label_value,
+			 colors: ["#ec7063","#af7ac5","#5dade2","#48c9b0","#f4d03f"],
 			resize:true
 		  });
 		},"JSON");
 		
+		//donut chart custome
+		$('#idj').on('change', function(){
+			var idj = $('#idj').val();
+				if(idj != ''){
+				$.post(basedomain+"statistik/chart_donut", {idj:idj},function(bar){
+					var label_value;
+					if(bar.data){
+						label_value = eval(bar.data);
+					}else{
+						var temp = "[{label : '-', value : 0}]";
+						label_value = eval(temp);
+					}
+					donut.setData(label_value);		
+				},"JSON");
+				
+			}
+			
+		});
+		
+		//bar chart custome
 		$('#start,#end').on('change', function(){
 			var start = $('#start').val();
 			var end = $('#end').val();
@@ -268,49 +286,19 @@
 					config.element = 'bar-chart';
 					bar = Morris.Bar(config)
 				},"JSON");
-				
-				$.post(basedomain+"statistik/chart_donut_cdtn", {start:start, end:end},function(dat_donut){
-						var label_a;
-						var label_b;
-						var label_c;
-						var jml_a;
-						var jml_b;
-						var jml_c;
-						if(dat_donut.data_1){
-							label_a = dat_donut.data_1.jns_produk;
-							jml_a = dat_donut.data_1.jml;
-						}else{
-							label_a = '';
-							jml_a = '';
-						}
-						
-						if(dat_donut.data_2){
-							label_b = dat_donut.data_2.jns_produk;
-							jml_b = dat_donut.data_2.jml;
-						}else{
-							label_a = '';
-							jml_a = '';
-						}
-						
-						if(dat_donut.data_3){
-							label_c = dat_donut.data_3.jns_produk;
-							jml_c = dat_donut.data_3.jml;
-						}else{
-							label_a = '';
-							jml_a = '';
-						}
-						donut.setData([
-						{label: label_a, value: jml_a},
-						{label: label_b, value: jml_b},
-						{label: label_c, value: jml_c}
-				  ]);	
-				},"JSON");
-				
 			}
-			
 		});
 		
-		
+		$('.rpt').on('click', function(){
+			var start = $('#start').val();
+			var end = $('#end').val();
+			var tmp = $(this).attr('id');
+			var val_split = tmp.split("_");
+			var flag = val_split[1];
+			window.location.href=basedomain+"statistik/report/?start="+start+"&end="+end+"&flag="+flag;
+
+		});	
+	
 		new Switchery(document.getElementById('demo-sw-checked'),{size: 'small'});
 	
 		 $("#example1").DataTable();
