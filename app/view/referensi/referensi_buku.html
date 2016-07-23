@@ -16,27 +16,27 @@
 			
 				<h3>Referensi Buku</h3>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form">
+					<form class="form-horizontal" role="form" method="POST" action="{$basedomain}referensi/filter">
 					  
 					  
 						 <div class="form-group">
 							<label for="select" class="col-sm-2 control-label">Judul</label>
 								<div class="col-sm-6">
-									<input type="email" class="form-control" id="inputEmail3" placeholder="">
+									<input type="text" class="form-control" name="judul" id="inputEmail3" placeholder="">
 								</div>
 						  </div>
 						  
 						 <div class="form-group">
 							<label for="select" class="col-sm-2 control-label">Pengarang</label>
 								<div class="col-sm-6">
-									<input type="email" class="form-control" id="inputEmail3" placeholder="">
+									<input type="text" class="form-control" name="pengarang" id="inputEmail3" placeholder="">
 								</div>
 						  </div>
 						  
 						   <div class="form-group">
 							<label for="select" class="col-sm-2 control-label"></label>
 								<div class="col-sm-6">
-									<button type="button" class="btn btn-ar btn-primary" data-dismiss="modal">Tampilkan</button>
+									<button type="submit" class="btn btn-ar btn-primary" data-dismiss="modal">Tampilkan</button>
 								</div>
 						  </div>
 						 
@@ -47,8 +47,9 @@
 	</div>
     
 <section class="margin-bottom">
-	   <div class="row">
+	   <div class="row" id="content">
 	    <ul class="bxslider">
+		{if !empty($ref)}
 		{foreach $ref as $val}
 			<li>
 			<div class="col-md-3">
@@ -67,30 +68,42 @@
 					</div>
 			</div>
 			</li>
-		{/foreach}	
+		{/foreach}
+		{else}
+			<center>{pr('Data tidak ditemukan')}</center>
+		{/if}
 			
 		</ul>
 		</div>
 		
-			<div class="content-box box-default" style="background-color: #FFF; border: none #FFF">
-				<div class="row">
-				<ul class="pagination pagination-border">
-				  <li class="disabled"><a href="#">&laquo;</a></li>
-				  <li class="active"><a href="#">1</a></li>
-				  <li><a href="#">2</a></li>
-				  <li><a href="#">3</a></li>
-				  <li><a href="#">4</a></li>
-				  <li><a href="#">5</a></li>
-				  <li><a href="#">&raquo;</a></li>
-				</ul>
-				</div>
+			<div class="content-box">
+			  <div class="row">  
+				<div id="page-selection"></div>
+			  </div>
 			</div>
+			<input type="hidden" id="total" value="{$totalRef.total}">
+			<input type="hidden" id="judul" value="{$fil_ref.judul}">
+			<input type="hidden" id="pengarang" value="{$fil_ref.pengarang}">
+			
+			
 </section>
 </div>
 
 {literal}
 <script>
 $(document).ready(function() {
+	
+	$('#page-selection').bootpag({
+		  total: Math.ceil($("#total").val()/4)
+	  }).on("page", function(event, num){
+		$.ajax({
+		  url: basedomain+"referensi/ajaxref/?site="+num+"&jdl="+$("#judul").val()+"&author="+$("#pengarang").val(),
+		 
+		}).done(function(data) {
+		  $("#content").html( data );
+		});
+	  });
+
 	$('.produk-hukum,.berita-hukum').on('click', function(){
 		var tmp = $(this).attr('id');
 		var tmp_split = tmp.split("_");

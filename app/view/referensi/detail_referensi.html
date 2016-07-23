@@ -1,9 +1,9 @@
 <header class="main-header">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Referensi Buku</a></li>
-			 <li><a href="#">Detail </a></li>
+            <li><a href="{$basedomain}home">Home</a></li>
+            <li><a href="{$basedomain}referensi/referensi_buku">Referensi Buku</a></li>
+			 <li><a href="{$basedomain}referensi/detail_referensi">Detail </a></li>
         </ol>
     </div>
 </header>
@@ -61,6 +61,14 @@
 												<p>{$ref.resensi}</p>
 											</div>
 									  </div>
+									  
+									  <div class="form-group">
+										<label for="select" class="col-sm-3 control-label" style="padding-top:0px">Unduh File</label>
+											<div class="col-sm-9">
+												 <a href="{$basedomain}public_assets/{$ref.file}" class="btn btn-ar btn-success">Download</a>
+											</div>
+									  </div>
+									  
 									 
 								</form>
 									

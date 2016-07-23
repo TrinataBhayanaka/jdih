@@ -151,6 +151,7 @@ class produk extends Controller {
 		// pr($tmp3);
 		$this->view->assign('content',$tmp3);
 		$param_produk2 = 'produk2';
+		//db($param_produk2);
 		$count_produk2 = 'ref_produk2';
 		$this->view->assign('param_produk2',$param_produk2);
 		$this->view->assign('count_produk2',$count_produk2);
