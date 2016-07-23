@@ -26,7 +26,7 @@ class kegiatan extends Controller {
 	function index(){
 		//start sidebar
 		global $basedomain;
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 3');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 ','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -47,7 +47,7 @@ class kegiatan extends Controller {
 				$tmp[$key]['hit'] = $hit_count['hit'];
 			}
 		}
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 ','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;
@@ -76,17 +76,23 @@ class kegiatan extends Controller {
 		//end sidebar
 		//content
 		// pr($_POST);
-		if($_POST['tanggal']){
+		if($_POST['tanggal'] || $_POST['tanggal_2']){
 			$tmp_tgl_start =$_POST['tanggal'];
 			$ex_1 = explode('/',$tmp_tgl_start);
 			$tgl_start_fix = $ex_1['2'].'-'.$ex_1['1'].'-'.$ex_1['0']; 
 			
-			$ext = "and tanggal = '{$tgl_start_fix}'";
+			$tmp_tgl_end =$_POST['tanggal_2'];
+			$ex_2 = explode('/',$tmp_tgl_end);
+			$tgl_end_fix = $ex_2['2'].'-'.$ex_2['1'].'-'.$ex_2['0']; 
+			
+			$ext = "and tanggal >= '{$tgl_start_fix}' and tanggal <= '{$tgl_end_fix}'";
 			$param = $tgl_start_fix;
+			$param_2 = $tgl_end_fix;
 			$where = "n_status = 1 and publish = 1 and jenis = 1 {$ext}";
 			$where_ext = "n_status = 1 and publish = 1 and jenis = 1 {$ext}";
 		}else{
 			$param = '';
+			$param_2 = '';
 			$where = "n_status = 1 and publish = 1 and jenis = 1 ";
 			$where_ext = "n_status = 1 and publish = 1 and jenis = 1 ";
 		}
@@ -100,8 +106,12 @@ class kegiatan extends Controller {
 		}
 		
 		$this->view->assign('content',$tmp3);
+		//param filter
+		$this->view->assign('tmp_tgl_start',$tmp_tgl_start);
+		$this->view->assign('tmp_tgl_end',$tmp_tgl_end);
 		//param ajax
 		$this->view->assign('param',$param);
+		$this->view->assign('param_2',$param_2);
 		$param_berita2 = 'berita2';
 		$count_berita2 = 'ref_berita2';
 		$this->view->assign('param_berita2',$param_berita2);
@@ -120,8 +130,8 @@ class kegiatan extends Controller {
     	$num = $_GET['site'];
     	$item_perpage = 3;
     	$position = ($num-1) * $item_perpage;
-		if($_GET['condt']){
-			$ext = "and tanggal = '{$_GET['condt']}'";
+		if($_GET['condt'] || $_GET['condt_2']){
+			$ext = "and tanggal >= '{$_GET['condt']}' and tanggal <= '{$_GET['condt_2']}'";
 			$where = "n_status = 1 and publish = 1 and jenis = 1 {$ext}";
 		}else{
 			$where = "n_status = 1 and publish = 1 and jenis = 1";
@@ -148,7 +158,7 @@ class kegiatan extends Controller {
 
 	
 	function ajax_select(){
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 3');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -177,7 +187,7 @@ class kegiatan extends Controller {
 	function detail(){
 		//start sidebar
 		global $basedomain;
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 3');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -198,7 +208,7 @@ class kegiatan extends Controller {
 				$tmp[$key]['hit'] = $hit_count['hit'];
 			}
 		}
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 ','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;
@@ -244,7 +254,7 @@ class kegiatan extends Controller {
 	function kajian(){
 	//start sidebar
 		global $basedomain;
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 4');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -265,7 +275,7 @@ class kegiatan extends Controller {
 				$tmp[$key]['hit'] = $hit_count['hit'];
 			}
 		}
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 4');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;
@@ -365,7 +375,7 @@ class kegiatan extends Controller {
 	function details(){
 	//start sidebar
 		global $basedomain;
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 4');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 ','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -386,7 +396,7 @@ class kegiatan extends Controller {
 				$tmp[$key]['hit'] = $hit_count['hit'];
 			}
 		}
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 4');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 ','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;
@@ -414,7 +424,7 @@ class kegiatan extends Controller {
 		
 		$id =$_GET['id'];
 		$where = "n_status = 1 and publish = 1 and jenis = 2 and id_berita = '{$id}'";
-		$berita2 = $this->contentHelper->GetData('jdih_berita',1,$where,'id_berita desc LIMIT 5');
+		$berita2 = $this->contentHelper->GetData('jdih_berita',1,$where,'id_berita desc LIMIT 3');
 				if(berita2){
 					foreach ($berita2 as $keys2=> $value){
 						$tmp3[] = $value;

@@ -44,9 +44,9 @@ class produk extends Controller {
 		$this->view->assign('totalProduk',$totalProduk);
 		$this->view->assign('tahun',$getTahun);
 		$this->view->assign('jenis',$jenis);
-
+		
 		//start sidebar
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;
@@ -73,7 +73,7 @@ class produk extends Controller {
     function detail(){
 		//start sidebar
 		global $basedomain;
-		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 and posisi =1','id_produk desc LIMIT 3');
+		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
 			foreach ($produk as $key=> $values){
@@ -94,7 +94,7 @@ class produk extends Controller {
 				$tmp[$key]['hit'] = $hit_count['hit'];
 			}
 		}
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;
@@ -173,8 +173,13 @@ class produk extends Controller {
 		
 			$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
 			$produk[$key]['jenis'] = $jenis['nama'];
+			$hit_count = $this->contentHelper->statistik($value['id_produk'],1);
+			$produk[$key]['hit'] = $hit_count['hit'];
     	}
-
+		$param_produk = 'produk';
+		$count_produk = 'ref_produk';
+		$this->view->assign('param_produk',$param_produk);
+		$this->view->assign('count_produk',$count_produk);
     	$this->view->assign('produk',$produk);
 
     	$html = $this->loadView('modal/produk');
@@ -186,6 +191,7 @@ class produk extends Controller {
     {
     	$num = $_GET['site'];
     	$param['tanggal'] = $_GET['tgl'];
+    	$param['tanggal_2'] = $_GET['tgl2'];
     	$param['tahun'] = $_GET['thn'];
     	$param['id_jenis'] = $_GET['jns'];
     	$param['status_akhir'] = $_GET['sts'];
@@ -193,11 +199,19 @@ class produk extends Controller {
     	$searchParam = array_filter($param);
 
     	foreach ($searchParam as $key => $val) {
-            $tmpset[] = $key." = '{$val}'";
+            //$tmpset[] = $key." = '{$val}'";
+			if($key == 'tanggal'){
+				$sign = " >= ";
+			}elseif($key == 'tanggal_2'){
+				$sign = " <= ";
+			}else{
+				$sign = " = ";
+			}
+            $tmpset[] = $key.$sign."'{$val}'";
         }
 
         $set = implode(' AND ', $tmpset);
-        
+        $set = str_replace("tanggal_2","tanggal",$set);
     	$item_perpage = 3;
     	$position = ($num-1) * $item_perpage;
 
@@ -232,17 +246,67 @@ class produk extends Controller {
     function search()
     {
     	global $basedomain;
-
+		// start add by iman
+		$tgl = $_POST['tanggal'];
+		$tgl_2 = $_POST['tanggal_2'];
+		$tahun = $_POST['tahun'];
+		$id_jenis = $_POST['id_jenis'];
+		$status_akhir = $_POST['status_akhir'];
+		if($status_akhir == 'Rancangan'){
+			$I = "selected";
+			$II = "";
+			$III = "";
+			$IV = "";
+		}elseif($status_akhir == 'Berlaku'){
+			$I = "";
+			$II = "selected";
+			$III = "";
+			$IV = "";
+		}elseif($status_akhir == 'Perubahan'){
+			$I = "";
+			$II = "";
+			$III = "selected";
+			$IV = "";
+		}elseif($status_akhir == 'Pencabutan'){
+			$I = "";
+			$II = "";
+			$III = "";
+			$IV = "selected";
+		}
+		$dataselected[]=$I;
+		$dataselected[]=$II;
+		$dataselected[]=$III;
+		$dataselected[]=$IV;
+		$dataselected[]=$ket;
+		
+		$this->view->assign('filter_tgl',$tgl);
+		$this->view->assign('filter_tgl_2',$tgl_2);
+		$this->view->assign('filter_tahun',$tahun);
+		$this->view->assign('filter_id_jenis',$id_jenis);
+		$this->view->assign('filter_status_akhir',$status_akhir);
+		$this->view->assign('dataselected',$dataselected);
+		//end
+		
     	$searchParam = array_filter($_POST);
-    	if(isset($searchParam['tanggal'])){
+		if(isset($searchParam['tanggal'])){
     		$searchParam['tanggal'] = changeFormatDate($searchParam['tanggal'],'d/m/Y','Y-m-d');
     	}
-    	foreach ($searchParam as $key => $val) {
-            $tmpset[] = $key." = '{$val}'";
+		
+		if(isset($searchParam['tanggal_2'])){
+    		$searchParam['tanggal_2'] = changeFormatDate($searchParam['tanggal_2'],'d/m/Y','Y-m-d');
+    	}
+		foreach ($searchParam as $key => $val) {
+			if($key == 'tanggal'){
+				$sign = " >= ";
+			}elseif($key == 'tanggal_2'){
+				$sign = " <= ";
+			}else{
+				$sign = " = ";
+			}
+            $tmpset[] = $key.$sign."'{$val}'";
         }
-
-        $set = implode(' AND ', $tmpset);
-        
+		$set = implode(' AND ', $tmpset);
+		$set = str_replace("tanggal_2","tanggal",$set);
 		$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 AND {$set}",'tanggal',3);
 		foreach ($produk as $key => $value) {
 			$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
@@ -268,7 +332,7 @@ class produk extends Controller {
 
 
 		//start sidebar
-		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 and posisi =1','id_berita desc LIMIT 3');
+		$berita = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 ','id_berita desc LIMIT 3');
 		if($berita){
 			foreach ($berita as $keys=> $value){
 				$tmp2[] = $value;

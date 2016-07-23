@@ -218,8 +218,8 @@ $(document).ready(function() {
 								{/if}
 							</div>
                             <div class="col-md-8 text-left">
-                                 <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title">{$value.judul}</h4></a>
-                                <p align="justify">{$value.new_fomat_tgl} <br> <b>{limit_words($value.ref_deskripsi,15)} ...</b></p>
+                                 <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title"><b>{$value.judul}</b></h4></a>
+                                <p align="justify">{$value.new_fomat_tgl} <br> <b>{limit_words($value.ref_deskripsi,15)}</b> ...</p>
                                 {$file = "/"|explode:$value.file}
 								{if $file[1]}
 								<a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum" target="blank" id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
@@ -249,7 +249,7 @@ $(document).ready(function() {
                     <div class="row text-left">
                         <div class="col-md-12">
                             <!--<a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank"><h4 class="content-box-title">{$values.judul}</h4></a>-->
-                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}"><h4 class="content-box-title">{$values.judul}</h4></a>
+                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}"><h4 class="content-box-title"><b>{$values.judul}</b></h4></a>
                             <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
