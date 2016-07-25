@@ -1,0 +1,22 @@
+<ul class="bxslider">
+{foreach $ref as $val}
+	<li>
+	<div class="col-md-3">
+			<div class="img-caption-ar">
+				{if $val.cover}
+					<img src="{$basedomain}public_assets/{$val.cover}" alt="" class="img-responsive" width="160px" height="160px" >
+				{else}
+					<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" >
+				{/if}
+				<div class="caption-ar">
+					<div class="caption-content">
+						<a href="{$basedomain}referensi/detail/?id={$val.id_ref}" class="animated fadeInDown"><i class="fa fa-search"></i>More info</a>
+						<h4 class="caption-title">{$val.judul}</h4>
+					</div>
+				</div>
+			</div>
+	</div>
+	</li>
+{/foreach}	
+	
+</ul>

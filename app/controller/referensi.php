@@ -77,19 +77,83 @@ class referensi extends Controller {
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		
+		/* $file = $_GET['file'];
+		$file = $this->contentHelper->fetchData('jdih_referensi',0,'n_status = 1 and file='.$file); 
+		if (file_exists($file))
+		{
+		header('Content-Description: File Transfer');
+		header('Content-Type: application/octet-stream');
+		header('Content-Disposition: attachment; filename="'.basename($file).'"');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
+		header('Content-Length: ' . filesize($file));
+		readfile($file);
+		exit;
+		} */
+		
+		
 		$id = $_GET['id'];
 		$ref = $this->contentHelper->fetchData('jdih_referensi',0,'n_status = 1 and id_ref='.$id,'id_ref DESC');
 		$this->view->assign('ref',$ref);
 		return $this->loadView('referensi/detail_referensi');
+		
+		
+		
     }
 	
 	function referensi_buku()
 	{
+		$totalRef = $this->contentHelper->countData('jdih_referensi','n_status = 1 AND publish = 1');
+		$this->view->assign('totalRef',$totalRef);
 		
-		$ref = $this->contentHelper->fetchData('jdih_referensi',1,'n_status = 1');
+		$ref = $this->contentHelper->fetchData('jdih_referensi',1,'n_status = 1 AND publish = 1','tanggal','4');
 		$this->view->assign('ref',$ref);
 		//db($ref);
 		return $this->loadView('referensi/referensi_buku');
+	}
+	
+	function ajaxref()
+	{
+		$num = $_GET['site'];
+		
+		if(isset($_GET['jdl'])){
+			$kondisi = "AND judul like '%{$_GET['jdl']}%' AND pengarang like '%{$_GET['author']}%'";
+		} else $kondisi = "";
+    	$item_perpage = 4;
+    	$position = ($num-1) * $item_perpage;
+
+    	$referensi = $this->contentHelper->fetchData('jdih_referensi',1,"n_status = 1 AND publish = 1 {$kondisi}",'tanggal',"{$position},{$item_perpage}");
+		
+
+    	foreach ($produk as $key => $value) {
+    		//$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
+			$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
+    	}
+
+    	$this->view->assign('ref',$referensi);
+
+    	$html = $this->loadView('modal/referensi_buku');
+    	echo $html;
+    	exit;
+	}
+	
+	function filter()
+	{
+		$fil_ref=$_POST;
+	
+		$totalRef = $this->contentHelper->countData('jdih_referensi',"n_status = 1 AND publish = 1 AND judul like '%{$fil_ref['judul']}%' AND pengarang like '%{$fil_ref['pengarang']}%'");
+
+		$this->view->assign('totalRef',$totalRef);
+		
+		$ref = $this->contentHelper->fetchData('jdih_referensi',1,"n_status = 1 AND publish = 1 AND judul like '%{$fil_ref['judul']}%' AND pengarang like '%{$fil_ref['pengarang']}%'",'tanggal','4');
+		
+		
+		$this->view->assign('fil_ref', $fil_ref);
+		$this->view->assign('ref', $ref);
+		
+		return $this->loadView('referensi/referensi_buku');
+	
 	}
 	
 
