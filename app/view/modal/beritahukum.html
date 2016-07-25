@@ -7,8 +7,8 @@
 			<p>{dateFormat($val.tanggal,'article-day')}</p>
 		</div>
 		<div class="col-md-4">
-			{if $val.file}
-				<img src="{$basedomain}public_assets/$val.file" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+			{if $val.cover}
+				<img src="{$basedomain}public_assets/{$val.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 			{else}
 				<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 			{/if}

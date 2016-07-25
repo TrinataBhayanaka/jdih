@@ -41,15 +41,47 @@
 <script type="text/javascript" src="{$basedomain}assets/js/demo.revolution_slider.js"></script>
 
 <script type="text/javascript" src="{$basedomain}assets/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-
+<!-- InputMask -->
+    <script src="{$basedomain}assets/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="{$basedomain}assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="{$basedomain}assets/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("[data-mask]").inputmask();
 		$('.datepicker').datepicker({
             format: 'dd/mm/yyyy',
             autoclose: true,
             todayHighlight : true,
             todayBtn: 'linked'
         });
+		//filter modal
+		 $('#select_jenis').on('change', function(){
+			var jenis = $("#select_jenis").val();
+			if(jenis == 1){
+				$("#tahun").show(300);
+				$("#judul").show(300);
+				$("#nomor").show(300);
+				$("#status_akhir").show();
+			}else if(jenis == 2){
+				$("#tahun").hide(300);
+				$("#judul").show(300);
+				$("#nomor").hide(300);
+				$("#status_akhir").hide();
+			}else if(jenis == 3){
+				$("#tahun").hide(300);
+				$("#judul").show(300);
+				$("#nomor").hide(300);
+				$("#status_akhir").hide(300);
+			}else if(jenis == 4){
+				$("#tahun").hide(300);
+				$("#judul").show(300);
+				$("#nomor").hide(300);
+				$("#status_akhir").hide(300);
+			}
+
+		});	
+			
 	})
 </script>
 </body>

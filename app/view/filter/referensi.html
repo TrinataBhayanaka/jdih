@@ -1,0 +1,187 @@
+<header class="main-header">
+    <div class="container">
+
+        <ol class="breadcrumb">
+             <li><a href="{$basedomain}">Home</a></li>
+            <li><a href="{$basedomain}referensi/referensi_buku">{$ket}</a></li>
+        </ol>
+    </div>
+</header>
+
+<section class="margin-bottom">
+   <div class="container">
+   
+	<div class="row">
+		<div class="col-md-12">
+		 <h2 class="no-margin-top">{$ket}</h2>
+		</div>
+	</div>
+
+        <div class="row">
+            <div class="col-md-7 text-justify" style=" border: 1px solid #E5E5E5; box-sizing: border-box;">
+					<p class="no-margin-top">Menampilkan 3 dari {$totalProduk.total} hasil</p>
+                    <input type="hidden" id="total" value="{$totalProduk.total}">
+                    <input type="hidden" id="param_tgl" value="{$param.tanggal}">
+					<input type="hidden" id="param_tgl_2" value="{$param.tanggal_2}">
+					<input type="hidden" id="param_judul" value="{$param.judul}">
+                    
+					<div id="content">	
+					<!--Referensi Hukum-->
+					{if $data}
+					 {foreach $data as $val}
+					 <div class="content-box box-default">
+						<div class="row text-left">
+							<div class="col-md-12">
+								<a href="{$basedomain}referensi/detail/?id={$val.id_ref}" class="berita-hukum2"><h4 class="content-box-title"><b>{$val.judul}</b></h4></a>
+								<p>{dateFormat($val.tanggal,'article-day')}</p>
+							</div>
+							<div class="col-md-4">
+								{if $val.cover}
+									<img src="{$basedomain}public_assets/{$val.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{else}
+									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{/if}
+							</div>
+							<div class="col-md-8 text-left">
+								<p align="justify"><b>{$val.judul}<b/> <a href="{$basedomain}kegiatan/detail/?id={$val.id_berita}" class="berita-hukum" ></a></p> 
+							</div>
+						</div>
+					</div>
+					{/foreach}
+					{/if}
+				  </div>
+					
+                    <div class="content-box">
+                      <div class="row">  
+                        <div id="page-selection"></div>
+                      </div>
+                    </div>
+			</div>
+        
+       <div class="col-md-5">
+                
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-tabs-ar">
+                  <li class="active"><a href="#peraturan" data-toggle="tab">Peraturan Hukum Terbaru</a></li>
+                  <li><a href="#berita" data-toggle="tab">Berita Hukum</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div class="tab-pane active" id="peraturan">
+					 {if $produk}
+					{foreach $produk as $value}
+					<div class="content-box box-default">
+                         <div class="row">
+                            <div class="col-md-4">
+								{$cover = "/"|explode:$value.cover}
+								{if $cover[1]}
+									<img src="{$basedomain}public_assets/{$value.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{else}
+									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+								{/if}
+							</div>
+                            <div class="col-md-8 text-justify">
+                                 <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title"><b>{$value.judul}</b></h4></a>
+                                <p align="justify">{$value.new_fomat_tgl} <br> <b>{limit_words($value.ref_deskripsi,15)} ...</b> </p>
+                                {$file = "/"|explode:$value.file}
+								{if $file[1]}
+								<a href="{$basedomain|cat:'public_assets/'|cat:$value.file}" class="btn btn-ar btn-success produk-hukum" target="blank" id="{$param_produk|cat:'_'|cat:$value.id_produk}">Download</a>
+                                 <label id="{$count_produk|cat:'_'|cat:$value.id_produk}">Telah diunduh {$value.hit} kali </label>
+								<br>
+								{/if}
+								<!--<embed width="191" height="207" name="plugin" src="{$basedomain|cat:'public_assets/'|cat:$value.file}" type="application/pdf">-->
+                                <span class="label label-primary">{$value.Tahun}</span> 
+                                <span class="label label-primary">{$value.jns_produk}</span>
+                            </div>
+                        </div>
+                    </div>
+					{/foreach}
+					{/if}
+                    <div class="content-box box-default">
+                        <div class="row">
+
+                            <a href="{$basedomain}produk" class="pull-center">Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+                 
+                  <div class="tab-pane" id="berita">
+					{if $berita}
+				 {foreach $berita as $values}
+				 <div class="content-box box-default">
+                    <div class="row text-left">
+                        <div class="col-md-12">
+                            <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}"><h4 class="content-box-title" ><b>{$values.judul}</b></h4></a>
+                            <p>{dateFormat($values.tanggal,'article-day')}</p>
+                        </div>
+                        <div class="col-md-4">
+                            {if $values.cover}
+								<img src="{$basedomain}public_assets/{$values.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{else}
+								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+							{/if}
+                        </div>
+                        <div class="col-md-8 text-left">
+                            <!--<p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}kegiatan/detail/?id={$values.id_berita}" class="berita-hukum" id="{$param_berita|cat:'_'|cat:$values.id_berita}" target="blank">Read More</a></p>--> 
+                            <p align="justify"><b>{limit_words($values.ringkasan,15)} ...<b/> </p> 
+                           <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah dibaca {$values.hit} kali </label>
+                        </div>
+                    </div>
+                </div>
+				{/foreach}
+                {/if}
+                    <div class="content-box box-default">
+                        <div class="row">
+							<a href="{$basedomain}kegiatan" class="pull-center">Selengkapnya</a>
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+    </div>
+    </div>
+</section>
+
+{literal}
+<script type="text/javascript">
+  // init bootpag
+  $('#page-selection').bootpag({
+      total: Math.ceil($("#total").val()/3)
+  }).on("page", function(event, num){
+	$.ajax({
+		url: basedomain+"home/ajaxSearchRef/?site="+num+"&tgl="+$("#param_tgl").val()+"&tgl2="+$("#param_tgl_2").val()+"&jdl="+$("#param_judul").val(),
+    }).done(function(data) {
+      $("#content").html( data );
+    });
+  });
+  
+  $('.produk-hukum,.berita-hukum').on('click', function(){
+		var tmp = $(this).attr('id');
+		var tmp_split = tmp.split("_");
+		var id = tmp_split[1]; 
+		var inf = tmp_split[0];
+		var type ;
+		var text ;
+		var param ;
+		
+		if (inf == 'produk'){
+			type = 1;
+			text = 'Telah diunduh ';
+			param = 'ref_produk_'+id;
+		}else if(inf == 'berita'){
+			type = 2;
+			text = 'Telah dibaca ';
+			param = 'ref_berita_'+id;
+		}
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
+							if(data.hit > 0){
+								$('#'+param).text(text+data.hit+' kali');
+							}else{
+								//nothing	
+							}
+			},"JSON");
+	});
+</script>
+{/literal}

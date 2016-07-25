@@ -3,8 +3,8 @@
         <h1 class="page-title">{$content.0.jns_produk}</h1>
 
         <ol class="breadcrumb pull-right">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Produk Hukum</a></li>
+            <li><a href="{$basedomain}">Home</a></li>
+            <li><a href="{$basedomain}produk">Produk Hukum</a></li>
             <li><a href="#">{$content.0.jns_produk}</a></li>
             <li style="color:#000">{$content.0.judul}</li>
         </ol>
@@ -148,8 +148,8 @@
                             <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
-                            {if $values.file}
-								<img src="{$basedomain}public_assets/{$values.file}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+                            {if $values.cover}
+								<img src="{$basedomain}public_assets/{$values.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{else}
 								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{/if}

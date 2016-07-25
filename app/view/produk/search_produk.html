@@ -108,7 +108,7 @@
                                 <!--<img src="{$basedomain}public_assets/{if $val.cover eq ''}noimage.png{else}{$val.cover}{/if}" alt="" class="img-responsive">-->
 								{$cover = "/"|explode:$val.cover}
 								{if $cover[1]}
-									<img src="{$basedomain}public_assets/$val.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+									<img src="{$basedomain}public_assets/{$val.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{else}
 									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{/if}

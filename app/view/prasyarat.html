@@ -40,12 +40,12 @@
                             <div class="col-md-4">
 								{$cover = "/"|explode:$value.cover}
 								{if $cover[1]}
-									<img src="{$basedomain}public_assets/$value.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+									<img src="{$basedomain}public_assets/{$value.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{else}
 									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{/if}
 							</div>
-                            <div class="col-md-8 text-left">
+                            <div class="col-md-8 text-justify">
                                  <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title"><b>{$value.judul}</b></h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{limit_words($value.ref_deskripsi,15)} ...</b> </p>
                                 {$file = "/"|explode:$value.file}
@@ -80,8 +80,8 @@
                             <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
-                            {if $values.file}
-								<img src="{$basedomain}public_assets/{$values.file}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+                            {if $values.cover}
+								<img src="{$basedomain}public_assets/{$values.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{else}
 								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{/if}

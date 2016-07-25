@@ -4,7 +4,7 @@
         <div class="col-md-4">
 			{$cover = "/"|explode:$val.cover}
 			{if $cover[1]}
-				<img src="{$basedomain}public_assets/$val.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+				<img src="{$basedomain}public_assets/{$val.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 			{else}
 				<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 			{/if}

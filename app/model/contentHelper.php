@@ -19,6 +19,7 @@ class contentHelper extends Database {
         if($order) $order = "ORDER BY ".$order;
         if($limit) $limit = "LIMIT ".$limit;
         $sql = "SELECT * FROM {$table} {$where} {$order} {$limit}";
+		// echo $sql; 
 		$res = $this->fetch($sql,$loop);
 
         return $res;
@@ -87,6 +88,12 @@ class contentHelper extends Database {
 		$res = $this->fetch($sql,0);
 
         return $res;
+	}
+	
+	function insert($param){
+		$sql = "INSERT INTO jdih_kontak(nama, email, tlpn, pesan) VALUES ('".addslashes(html_entity_decode($param[nama]))."','{$param[email]}','{$param[tlpn]}','".addslashes(html_entity_decode($param[pesan]))."')";
+		$exe = $this->query($sql);           
+		return true;
 	}
 }
 ?>

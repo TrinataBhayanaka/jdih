@@ -285,6 +285,7 @@ class kegiatan extends Controller {
 		}
 		// pr($tmp);
 		// pr($tmp2);
+		
 		$this->view->assign('produk',$tmp);
 		$this->view->assign('berita',$tmp2);
 		
@@ -301,17 +302,23 @@ class kegiatan extends Controller {
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		
-		if($_POST['tanggal']){
+		if($_POST['tanggal'] || $_POST['tanggal_2']){
 			$tmp_tgl_start =$_POST['tanggal'];
 			$ex_1 = explode('/',$tmp_tgl_start);
 			$tgl_start_fix = $ex_1['2'].'-'.$ex_1['1'].'-'.$ex_1['0']; 
 			
-			$ext = "and tanggal = '{$tgl_start_fix}'";
+			$tmp_tgl_end =$_POST['tanggal_2'];
+			$ex_2 = explode('/',$tmp_tgl_end);
+			$tgl_end_fix = $ex_2['2'].'-'.$ex_2['1'].'-'.$ex_2['0']; 
+			
+			$ext = "and tanggal >= '{$tgl_start_fix}' and tanggal <= '{$tgl_end_fix}'";
 			$param = $tgl_start_fix;
+			$param_2 = $tgl_end_fix;
 			$where = "n_status = 1 and publish = 1 and jenis = 2 {$ext}";
 			$where_ext = "n_status = 1 and publish = 1 and jenis = 2 {$ext}";
 		}else{
 			$param = '';
+			$param_2 = '';
 			$where = "n_status = 1 and publish = 1 and jenis = 2 ";
 			$where_ext ="n_status = 1 and publish = 1 and jenis = 2";
 		}
@@ -326,6 +333,10 @@ class kegiatan extends Controller {
 		// pr($tmp3);
 		$this->view->assign('content',$tmp3);
 		$this->view->assign('param',$param);
+		$this->view->assign('param_2',$param_2);
+		//param filter
+		$this->view->assign('tmp_tgl_start',$tmp_tgl_start);
+		$this->view->assign('tmp_tgl_end',$tmp_tgl_end);
 		$totalProduk = $this->contentHelper->countData('jdih_berita',$where_ext);
 		$this->view->assign('totalProduk',$totalProduk);
 		return $this->loadView('berita/kajian2');
@@ -337,8 +348,9 @@ class kegiatan extends Controller {
     	$num = $_GET['site'];
     	$item_perpage = 3;
     	$position = ($num-1) * $item_perpage;
-		if($_GET['condt']){
-			$ext = "and tanggal = '{$_GET['condt']}'";
+		if($_GET['condt'] || $_GET['condt_2']){
+			//$ext = "and tanggal = '{$_GET['condt']}'";
+			$ext = "and tanggal >= '{$_GET['condt']}' and tanggal <= '{$_GET['condt_2']}'";
 			$where = "n_status = 1 and publish = 1 and jenis = 2 {$ext}";
 		}else{
 			$where = "n_status = 1 and publish = 1 and jenis = 2";
@@ -367,7 +379,7 @@ class kegiatan extends Controller {
 		$this->view->assign('param_berita',$param_berita);
 		$this->view->assign('count_berita',$count_berita);
 		
-    	$html = $this->loadView('modal/beritahukum');
+    	$html = $this->loadView('modal/kajianhukum');
     	echo $html;
     	exit;
     }

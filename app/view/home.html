@@ -40,15 +40,13 @@ $(document).ready(function() {
         -->
         <div class="fullwidthbanner" data-height="600" data-shadow="0" data-navigationStyle="preview1">
             <ul class="hide">
-
+				{if $produk}
+				{foreach $produk as $vals}
                 <!-- SLIDE  -->
-                <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Slide title 1" data-thumb="assets/images/demo/index-min.jpg">
-
-                    <img src="assets/img/1x1.png" data-lazyload="assets/img/demo/index-min.jpg" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
-
-                    <div class="overlay dark-1"><!-- dark overlay [1 to 9 opacity] --></div>
-
-                    <div class="tp-caption customin ltl tp-resizeme text_white"
+                <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Slide title 1" data-thumb="">
+					<img src="assets/img/1x1.png" data-lazyload="assets/img/demo/index-min.jpg" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+					<div class="overlay dark-1"><!-- dark overlay [1 to 9 opacity] --></div>
+					<!--<div class="tp-caption customin ltl tp-resizeme text_white"
                         data-x="center"
                         data-y="155"
                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
@@ -62,9 +60,9 @@ $(document).ready(function() {
                         data-endspeed="1000"
                         data-endeasing="Power4.easeIn" style="z-index: 10;">
                         <span class="weight-300">Another text here</span>
-                    </div>
+                    </div>-->
 
-                    <div class="tp-caption customin ltl tp-resizeme large_bold_white"
+                    <div class="tp-caption customin ltl tp-resizeme medium_light_white"
                         data-x="center"
                         data-y="205"
                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
@@ -77,7 +75,8 @@ $(document).ready(function() {
                         data-endelementdelay="0.1"
                         data-endspeed="1000"
                         data-endeasing="Power4.easeIn" style="z-index: 10;">
-                        Text Here
+						<!--Text Here-->
+                        {$vals.judul}
                     </div>
 
                     <div class="tp-caption customin ltl tp-resizeme small_light_white font-lato"
@@ -93,12 +92,14 @@ $(document).ready(function() {
                         data-endelementdelay="0.1"
                         data-endspeed="1000"
                         data-endeasing="Power4.easeIn" style="z-index: 10; width: 100%; max-width: 750px; white-space: normal; text-align:center; font-size:20px;">
-                        Fabulas definitiones ei pri per recteque hendrerit scriptorem in errem scribentur mel fastidii propriae philosophia cu mea.
-                    </div>
+                        <!--Fabulas definitiones ei pri per recteque hendrerit scriptorem in errem scribentur mel fastidii propriae philosophia cu mea.-->
+						 <p class="text-justify">{$vals.new_fomat_tgl}</p>
+						 <p class="text-justify"><b>{limit_words($vals.ref_deskripsi,15)}</b> ...</p>
+					</div>
 
                     <div class="tp-caption customin ltl tp-resizeme"
                         data-x="center"
-                        data-y="383"
+                        data-y="450"
                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
                         data-speed="800"
                         data-start="1550"
@@ -109,89 +110,14 @@ $(document).ready(function() {
                         data-endelementdelay="0.1"
                         data-endspeed="1000"
                         data-endeasing="Power4.easeIn" style="z-index: 10;">
-                        <a href="#purchase" class="btn btn-default btn-lg">
-                            <span>Other text here</span> 
+                        <a href="{$basedomain}produk" class="btn btn-default btn-lg">
+                            <span>Selengkapnya</span> 
                         </a>
                     </div>
-
-                </li>
-				
-				<li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Slide title 1" data-thumb="assets/images/demo/index-min.jpg">
-
-                    <img src="assets/img/1x1.png" data-lazyload="assets/img/demo/index-min.jpg" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
-
-                    <div class="overlay dark-1"><!-- dark overlay [1 to 9 opacity] --></div>
-
-                    <div class="tp-caption customin ltl tp-resizeme text_white"
-                        data-x="center"
-                        data-y="155"
-                        data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                        data-speed="800"
-                        data-start="1000"
-                        data-easing="easeOutQuad"
-                        data-splitin="none"
-                        data-splitout="none"
-                        data-elementdelay="0.01"
-                        data-endelementdelay="0.1"
-                        data-endspeed="1000"
-                        data-endeasing="Power4.easeIn" style="z-index: 10;">
-                        <span class="weight-300">Another text here</span>
-                    </div>
-
-                    <div class="tp-caption customin ltl tp-resizeme large_bold_white"
-                        data-x="center"
-                        data-y="205"
-                        data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                        data-speed="800"
-                        data-start="1200"
-                        data-easing="easeOutQuad"
-                        data-splitin="none"
-                        data-splitout="none"
-                        data-elementdelay="0.01"
-                        data-endelementdelay="0.1"
-                        data-endspeed="1000"
-                        data-endeasing="Power4.easeIn" style="z-index: 10;">
-                        Text Here
-                    </div>
-
-                    <div class="tp-caption customin ltl tp-resizeme small_light_white font-lato"
-                        data-x="center"
-                        data-y="295"
-                        data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                        data-speed="800"
-                        data-start="1400"
-                        data-easing="easeOutQuad"
-                        data-splitin="none"
-                        data-splitout="none"
-                        data-elementdelay="0.01"
-                        data-endelementdelay="0.1"
-                        data-endspeed="1000"
-                        data-endeasing="Power4.easeIn" style="z-index: 10; width: 100%; max-width: 750px; white-space: normal; text-align:center; font-size:20px;">
-                        Fabulas definitiones ei pri per recteque hendrerit scriptorem in errem scribentur mel fastidii propriae philosophia cu mea.
-                    </div>
-
-                    <div class="tp-caption customin ltl tp-resizeme"
-                        data-x="center"
-                        data-y="383"
-                        data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                        data-speed="800"
-                        data-start="1550"
-                        data-easing="easeOutQuad"
-                        data-splitin="none"
-                        data-splitout="none"
-                        data-elementdelay="0.01"
-                        data-endelementdelay="0.1"
-                        data-endspeed="1000"
-                        data-endeasing="Power4.easeIn" style="z-index: 10;">
-                        <a href="#purchase" class="btn btn-default btn-lg">
-                            <span>Other text here</span> 
-                        </a>
-                    </div>
-
-                </li>
-
-                
-            </ul>
+				</li>
+				{/foreach}
+				{/if}
+			</ul>
 
             <div class="tp-bannertimer"><!-- progress bar --></div>
         </div>
@@ -217,7 +143,7 @@ $(document).ready(function() {
 									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{/if}
 							</div>
-                            <div class="col-md-8 text-left">
+                            <div class="col-md-8 text-justify">
                                  <a href="{$basedomain}produk/detail/?id={$value.id_produk}"><h4 class="content-box-title"><b>{$value.judul}</b></h4></a>
                                 <p align="justify">{$value.new_fomat_tgl} <br> <b>{limit_words($value.ref_deskripsi,15)}</b> ...</p>
                                 {$file = "/"|explode:$value.file}
@@ -253,8 +179,8 @@ $(document).ready(function() {
                             <p>{dateFormat($values.tanggal,'article-day')}</p>
                         </div>
                         <div class="col-md-4">
-                            {if $values.file}
-								<img src="{$basedomain}public_assets/{$values.file}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+                            {if $values.cover}
+								<img src="{$basedomain}public_assets/{$values.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{else}
 								<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 							{/if}
