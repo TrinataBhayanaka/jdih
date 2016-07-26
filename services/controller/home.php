@@ -25,21 +25,29 @@ class home extends Controller {
 
 	}
 	
-	public function list(){
-		//
-		$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1 AND publish = 1','tanggal',1);
-		foreach ($produk as $key => $value) {
-			$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
-			$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
-		
-			$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
-			$produk[$key]['jenis'] = $jenis['nama'];
-			$hit_count = $this->contentHelper->statistik($value['id_produk'],1);
-			$produk[$key]['hit'] = $hit_count['hit'];
-		}
+	public function listData(){
+		//param limit 1,x
+		//The SQL query below says "return only 10 records, start on record 0 (OFFSET 0)":
+		//$sql = "SELECT * FROM Orders LIMIT 0, 10";
+		$limit = $_GET['limit'];
+		$offset = $_GET['offset'];
+		if($limit != '' && $offset != ''){
+			$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1 AND publish = 1','id_produk',"{$limit},{$offset}");
+			foreach ($produk as $key => $value) {
+				$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
+				$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
+			
+				$jenis = $this->contentHelper->fetchData('jdih_jenis',0,"n_status = 1 AND id_jenis = {$value['id_jenis']}");
+				$produk[$key]['jenis'] = $jenis['nama'];
+				$hit_count = $this->contentHelper->statistik($value['id_produk'],1);
+				$produk[$key]['hit'] = $hit_count['hit'];
+			}
+		// pr($produk);
 		// print_r(json_encode($produk));
 		print json_encode($produk);
 		exit;
+		}
+		
 
 	}
 	

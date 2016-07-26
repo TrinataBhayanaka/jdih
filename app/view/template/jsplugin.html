@@ -45,7 +45,7 @@
     <script src="{$basedomain}assets/plugins/input-mask/jquery.inputmask.js"></script>
     <script src="{$basedomain}assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
     <script src="{$basedomain}assets/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-	
+{literal}	
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("[data-mask]").inputmask();
@@ -79,11 +79,30 @@
 				$("#nomor").hide(300);
 				$("#status_akhir").hide(300);
 			}
-
+		});
+			
+		$('.berita-hukum3').on('click', function(){
+		var tmp = $(this).attr('id');
+		var tmp_split = tmp.split("_");
+		var id = tmp_split[1]; 
+		var inf = tmp_split[0];
+		
+		var type = 2;
+		var text = 'Telah dibaca ';
+		var param = 'ref_berita3_'+id;
+		
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
+							if(data.hit > 0){
+								$('#'+param).text(text+data.hit+' kali');
+							}else{
+								//nothing	
+							}
+			},"JSON");
 		});	
 			
 	})
 </script>
+{/literal}	
 </body>
 
 </html>

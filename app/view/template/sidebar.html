@@ -27,8 +27,16 @@
                     
                 </li>
 
-                <li class="{if $page.page eq 'produk'}active{/if}">
-                    <a href="{$basedomain}produk">Produk</a>
+                <li class="dropdown {if $page.page eq 'produk'}active{/if}">
+                    <!--<a href="{$basedomain}produk">Produk</a>-->
+					 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Produk</a>
+                     <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                        {if $menu}
+						{foreach $menu as $val}
+							<li><a href="{$basedomain}produk/index/?id={$val.id_jenis}">{$val.nama}</a></li>
+						{/foreach}
+						{/if}
+                    </ul>
 
                 </li>
 				

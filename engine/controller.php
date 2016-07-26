@@ -384,9 +384,10 @@ class Controller extends Application{
 		$getHelper = new contentHelper;
 		
 		$menu = $getHelper->fetchData('jdih_jenis',1,"n_status = 1");
-
+		// pr($menu);
 		return $menu;
 	}
+	
 }
 
 ?>

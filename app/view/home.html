@@ -40,29 +40,27 @@ $(document).ready(function() {
         -->
         <div class="fullwidthbanner" data-height="600" data-shadow="0" data-navigationStyle="preview1">
             <ul class="hide">
-				{if $produk}
-				{foreach $produk as $vals}
+				{if $merge}
+				{foreach $merge as $vals}
                 <!-- SLIDE  -->
                 <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Slide title 1" data-thumb="">
-					<img src="assets/img/1x1.png" data-lazyload="assets/img/demo/index-min.jpg" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+					<!--<img src="assets/img/1x1.png" data-lazyload="assets/img/demo/index-min.jpg" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />-->
+					{if $vals.id_produk}
+						{$cover = "/"|explode:$vals.cover}
+						{if $cover[1]}
+							<img src="{$basedomain}public_assets/{$vals.cover}" data-lazyload="{$basedomain}public_assets/{$vals.cover}" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+						{else}
+							<img src="assets/img/demo/index-min.jpg" data-lazyload="assets/img/demo/index-min.jpg" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+						{/if}
+					{else}
+						 {if $vals.cover}
+							<img src="{$basedomain}public_assets/{$vals.cover}" data-lazyload="{$basedomain}public_assets/{$vals.cover}" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+						{else}
+							<img src="assets/img/demo/index-min.jpg" data-lazyload="assets/img/demo/index-min.jpg" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+						{/if}
+					{/if}
 					<div class="overlay dark-1"><!-- dark overlay [1 to 9 opacity] --></div>
-					<!--<div class="tp-caption customin ltl tp-resizeme text_white"
-                        data-x="center"
-                        data-y="155"
-                        data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                        data-speed="800"
-                        data-start="1000"
-                        data-easing="easeOutQuad"
-                        data-splitin="none"
-                        data-splitout="none"
-                        data-elementdelay="0.01"
-                        data-endelementdelay="0.1"
-                        data-endspeed="1000"
-                        data-endeasing="Power4.easeIn" style="z-index: 10;">
-                        <span class="weight-300">Another text here</span>
-                    </div>-->
-
-                    <div class="tp-caption customin ltl tp-resizeme medium_light_white"
+					<div class="tp-caption customin ltl tp-resizeme medium_light_white"
                         data-x="center"
                         data-y="205"
                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
@@ -94,7 +92,11 @@ $(document).ready(function() {
                         data-endeasing="Power4.easeIn" style="z-index: 10; width: 100%; max-width: 750px; white-space: normal; text-align:center; font-size:20px;">
                         <!--Fabulas definitiones ei pri per recteque hendrerit scriptorem in errem scribentur mel fastidii propriae philosophia cu mea.-->
 						 <p class="text-justify">{$vals.new_fomat_tgl}</p>
-						 <p class="text-justify"><b>{limit_words($vals.ref_deskripsi,15)}</b> ...</p>
+						 {if $vals.ref_deskripsi}
+							<p class="text-justify"><b>{limit_words($vals.ref_deskripsi,15)}</b> ...</p>
+						 {else}
+							<p class="text-justify"><b>{limit_words($vals.ringkasan,15)}</b> ...</p>
+						 {/if}
 					</div>
 
                     <div class="tp-caption customin ltl tp-resizeme"
@@ -110,9 +112,15 @@ $(document).ready(function() {
                         data-endelementdelay="0.1"
                         data-endspeed="1000"
                         data-endeasing="Power4.easeIn" style="z-index: 10;">
-                        <a href="{$basedomain}produk" class="btn btn-default btn-lg">
+						{if $vals.id_produk}
+                        <a href="{$basedomain}produk/detail/?id={$vals.id_produk}" class="btn btn-default btn-lg">
                             <span>Selengkapnya</span> 
                         </a>
+						{else}
+						<a href="{$basedomain}kegiatan/detail/?id={$vals.id_berita}" class="btn btn-default btn-lg berita-hukum3" id="{$param_berita3|cat:'_'|cat:$vals.id_berita}">
+						    <span>Selengkapnya</span> 
+                        </a>
+						{/if}
                     </div>
 				</li>
 				{/foreach}
@@ -138,7 +146,7 @@ $(document).ready(function() {
                             <div class="col-md-4">
 								{$cover = "/"|explode:$value.cover}
 								{if $cover[1]}
-									<img src="{$basedomain}public_assets/$value.cover" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
+									<img src="{$basedomain}public_assets/{$value.cover}" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{else}
 									<img src="{$basedomain}public_assets/noimage.png" alt="" class="img-responsive" width="160px" height="160px" style="margin:5px 10px 0px 0px">
 								{/if}
@@ -227,7 +235,7 @@ $(document).ready(function() {
 				{/if}
 				<div class="caption-ar">
                     <div class="caption-content">
-                        <a href="{$basedomain}referensi/detail/?id={$val.id_ref}" class="animated fadeInDown"><i class="fa fa-search"></i>More info</a>
+                        <a href="{$basedomain}referensi/detail/?id={$val.id_ref}" class="animated fadeInDown"><i class="fa fa-search"></i>Selengkapnya</a>
                         <h4 class="caption-title">{$val.judul}</h4>
                     </div>
                 </div>

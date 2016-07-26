@@ -25,8 +25,12 @@ class produk extends Controller {
 	
 	function index(){
 		global $basedomain;
-
-		$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1 AND publish = 1','tanggal',3);
+		if($_GET['id']){
+			$where = "AND id_jenis = '{$_GET[id]}'";
+		}
+		$this->view->assign('param_jenis',$_GET['id']);
+		
+		$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 {$where}",'tanggal',3);
 		foreach ($produk as $key => $value) {
 			$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
 			$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
@@ -36,7 +40,7 @@ class produk extends Controller {
 			$hit_count = $this->contentHelper->statistik($value['id_produk'],1);
 			$produk[$key]['hit'] = $hit_count['hit'];
 		}
-		$totalProduk = $this->contentHelper->countData('jdih_produk','n_status = 1');
+		$totalProduk = $this->contentHelper->countData('jdih_produk',"n_status = 1 AND publish = 1 {$where}");
 		$getTahun = $this->model->getAllTahun();
 		$jenis = $this->contentHelper->fetchData('jdih_jenis',1,"n_status = 1");
 		
@@ -162,10 +166,12 @@ class produk extends Controller {
     function ajaxProduk()
     {
     	$num = $_GET['site'];
+    	$jenis = $_GET['jenis'];
+		
     	$item_perpage = 3;
     	$position = ($num-1) * $item_perpage;
 
-    	$produk = $this->contentHelper->fetchData('jdih_produk',1,'n_status = 1 AND publish = 1','tanggal',"{$position},{$item_perpage}");
+    	$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 AND id_jenis = {$jenis}",'tanggal',"{$position},{$item_perpage}");
 
     	foreach ($produk as $key => $value) {
     		$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));

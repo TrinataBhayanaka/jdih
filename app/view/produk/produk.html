@@ -2,9 +2,16 @@
     <div class="container">
 
         <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Produk Hukum</a></li>
-        </ol>
+            <li><a href="{$basedomain}">Home</a></li>
+            <li><a href="{$basedomain}produk">Produk Hukum</a></li>
+			{if $jenis}
+				{foreach $jenis as $jns}
+				{if $jns.id_jenis == $param_jenis}	
+					<li><a href="{$basedomain}produk/index/?id={$jns.id_jenis }">{$jns.nama}</a></li>
+				{/if}
+				{/foreach}
+			{/if}
+		</ol>
     </div>
 </header>
 
@@ -86,6 +93,7 @@
                     
                     <p class="no-margin-top">Menampilkan 3 dari {$totalProduk.total} hasil</p>
                     <input type="hidden" id="total" value="{$totalProduk.total}">
+                    <input type="hidden" id="jenis" value="{$param_jenis}">
 
                     <div id="content">
                     {if !empty($produk)}  
@@ -109,7 +117,7 @@
                                 {$file = "/"|explode:$val.file}
 								{if $file[1]}
 								<a href="{$basedomain|cat:'public_assets/'|cat:$val.file}" class="btn btn-ar btn-success produk-hukum"  id="{$param_produk|cat:'_'|cat:$val.id_produk}" target="blank" >Download</a>
-                                 <label id="{$count_produk|cat:'_'|cat:$val.id_produk}">Telah diunduh {$val.hit} kali </label>
+                                 <label id="{$count_produk|cat:'_'|cat:$val.id_produk}">Telah dibaca {$val.hit} kali </label>
 								<br>
 								{/if}
                                 <span class="label label-primary">Tahun {$val.tahun}</span> 
@@ -162,7 +170,7 @@
           							<div class="col-md-8 text-left">
           								<!--<p align="justify"><b>{$values.ringkasan}<b/> <a href="{$basedomain}home/details/?id={$values.id_berita}" class="berita-hukum" target="blank" id="{$param_berita|cat:'_'|cat:$values.id_berita}">Read More</a></p>-->
 										<p align="justify"><b>{limit_words($values.ringkasan,15)} ...<b/> </p> 
-          							   <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah diunduh {$values.hit} kali </label>
+          							   <label id="{$count_berita|cat:'_'|cat:$values.id_berita}">Telah dibaca {$values.hit} kali </label>
           							</div>
           						</div>
           					</div>
@@ -188,7 +196,9 @@
       total: Math.ceil($("#total").val()/3)
   }).on("page", function(event, num){
     $.ajax({
-      url: basedomain+"produk/ajaxProduk/?site="+num,
+      <!--url: basedomain+"produk/ajaxProduk/?site="+num,-->
+      url: basedomain+"produk/ajaxProduk/?site="+num+"&jenis="+$("#jenis").val()
+	  
       
     }).done(function(data) {
       $("#content").html( data );

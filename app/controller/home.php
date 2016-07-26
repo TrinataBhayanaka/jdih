@@ -25,6 +25,45 @@ class home extends Controller {
 	
 	function index(){
 		global $basedomain;
+		//slider
+		//jgn lupa tambah parameter posisi = 1
+		$produk_slide = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1','id_produk desc LIMIT 3');
+		$jns_produk_slide = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
+		if($produk_slide){
+			foreach ($produk_slide as $keys=> $vals){
+				$tmp_slide_produk[] = $vals;
+				foreach ($jns_produk_slide as $val){
+					if($vals['id_jenis'] == $val['id_jenis']){
+						$ket_jns_produk = $val['nama'];
+					}
+				}
+				$tmp_slide_produk[$keys]['jns_produk'] = $ket_jns_produk;
+				$new_format_tgl = dateFormat($vals['tanggal'],'article-day');
+				$tmp_slide_produk[$keys]['new_fomat_tgl'] = $new_format_tgl;
+				$tmp_slide_produk[$keys]['ref_deskripsi'] = html_entity_decode(htmlspecialchars_decode($vals['deskripsi'], ENT_NOQUOTES));
+			}
+		}
+		//jgn lupa tambah parameter posisi = 1
+		$berita_slide = $this->contentHelper->GetData('jdih_berita',1,'n_status = 1 and publish = 1 and jenis = 1 ','id_berita desc LIMIT 3');
+		if($berita_slide){
+			foreach ($berita_slide as $ky=> $valb){
+				$tmp_slide_berita[] = $valb;
+				$new_format_tgl = dateFormat($valb['tanggal'],'article-day');
+				$tmp_slide_berita[$ky]['new_fomat_tgl'] = $new_format_tgl;
+			}
+		}
+		//merge array
+		$merge = array_merge($tmp_slide_produk,$tmp_slide_berita);
+		// pr($merge);
+		$this->view->assign('merge',$merge);
+		//param ajax slider
+		$param_berita2 = 'berita3';
+		$count_berita2 = 'ref_berita3';
+		$this->view->assign('param_berita3',$param_berita2);
+		$this->view->assign('count_berita3',$count_berita2);
+		
+		// exit;
+		
 		$produk = $this->contentHelper->GetData('jdih_produk',1,'n_status = 1 and publish = 1 ','id_produk desc LIMIT 3');
 		$jns_produk = $this->contentHelper->GetData('jdih_jenis',1,'n_status =1','id_jenis');
 		if($produk){
@@ -56,6 +95,7 @@ class home extends Controller {
 		}
 		// pr($tmp);
 		// pr($tmp2);
+		
 		$this->view->assign('produk',$tmp);
 		$this->view->assign('berita',$tmp2);
 		

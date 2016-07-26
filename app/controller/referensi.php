@@ -151,6 +151,7 @@ class referensi extends Controller {
 		
 		$this->view->assign('fil_ref', $fil_ref);
 		$this->view->assign('ref', $ref);
+		$this->view->assign('param', $_POST);
 		
 		return $this->loadView('referensi/referensi_buku');
 	

@@ -7,7 +7,7 @@ class contentHelper extends Database {
         if($order) $order = "ORDER BY ".$order;
         if($limit) $limit = "LIMIT ".$limit;
         $sql = "SELECT * FROM {$table} {$where} {$order} {$limit}";
-		//echo $sql; 
+		// echo $sql; 
 		$res = $this->fetch($sql,$loop);
 
         return $res;
