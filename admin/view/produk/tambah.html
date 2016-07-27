@@ -45,11 +45,20 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Jenis Produk Hukum <sup class="text-danger">*</sup></label>
               <div class="col-xs-5">
-                <select class="form-control" style="width: 100%;" name="id_jenis" required>
+                <select class="form-control" style="width: 100%;" name="id_jenis" required onchange="return jenisProduk(this)">
                   <option value="" disabled selected>- Pilih produk Hukum -</option>
                   {foreach $jenis as $val}
                   <option value="{$val.id_jenis}">{$val.nama}</option>
                   {/foreach}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" id="extra" style="display:none">
+              <label for="inputEmail3" class="col-xs-2 control-label">Jenis <sup class="text-danger">*</sup></label>
+              <div class="col-xs-5">
+                <select class="form-control" style="width: 100%;" name="extra" id="extra-opt">
+                  <option value="" disabled selected>- Pilih -</option>
                 </select>
               </div>
             </div>
@@ -180,6 +189,46 @@
 
 {literal}
 <script>
+    function jenisProduk(item)
+    {
+      $("#extra-opt").empty();
+      select = document.getElementById('extra-opt');
+      if ($(item).val() == '10') {
+        var opt = document.createElement('option');
+        opt.value = "Standar Nasional Indonesia";
+        opt.innerHTML = "Standar Nasional Indonesia";
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Komite Teknis";
+        opt.innerHTML = "Komite Teknis";
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Lainnya";
+        opt.innerHTML = "Lainnya";
+        select.appendChild(opt);
+        $('#extra').show(500);
+      } else if ($(item).val() == 8) {
+        var opt = document.createElement('option');
+        opt.value = "Penetapan SNI";
+        opt.innerHTML = "Penetapan SNI";
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Penetapan Revisi";
+        opt.innerHTML = "Penetapan Revisi";
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Abolisi";
+        opt.innerHTML = "Abolisi";
+        select.appendChild(opt);
+        $('#extra').show(500);
+      } else {
+        $("#extra").hide(500);
+        var opt = document.createElement('option');
+        opt.value = '';
+        select.appendChild(opt);
+      }
+    }
+
     $(function () {
         $("#example1").DataTable();
         //Datemask dd/mm/yyyy

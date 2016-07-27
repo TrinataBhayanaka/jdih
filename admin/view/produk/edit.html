@@ -45,7 +45,7 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Jenis Produk Hukum <sup class="text-danger">*</sup></label>
               <div class="col-xs-5">
-                <select class="form-control" style="width: 100%;" name="id_jenis" required>
+                <select class="form-control" style="width: 100%;" name="id_jenis" required onchange="return jenisProduk(this)">
                   <option value="" disabled selected>- Pilih produk Hukum -</option>
                   {foreach $jenis as $val}
                   <option value="{$val.id_jenis}" {if $val.id_jenis eq $data.id_jenis}selected{/if}>{$val.nama}</option>
@@ -53,6 +53,20 @@
                 </select>
               </div>
             </div>
+
+            <div class="form-group" id="extra" {if empty($data.extra)}style="display:none"{/if}>
+              <label for="inputEmail3" class="col-xs-2 control-label">Jenis <sup class="text-danger">*</sup></label>
+              <div class="col-xs-5">
+                <select class="form-control" style="width: 100%;" name="extra" id="extra-opt">
+                  <option value="" disabled selected>- Pilih -</option>
+                </select>
+              </div>
+            </div>
+
+            {if !empty($data.extra)}
+            <input type="hidden" id="id_jenis-old" value="{$data.id_jenis}">
+            <input type="hidden" id="extra-old" value="{$data.extra}">
+            {/if}
 
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Judul <sup class="text-danger">*</sup></label>
@@ -180,7 +194,54 @@
 
 {literal}
 <script>
+    function jenisProduk(item)
+    {
+      $("#extra-opt").empty();
+      select = document.getElementById('extra-opt');
+      if ($(item).val() == '10') {
+        var opt = document.createElement('option');
+        opt.value = "Standar Nasional Indonesia";
+        opt.innerHTML = "Standar Nasional Indonesia";
+        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Komite Teknis";
+        opt.innerHTML = "Komite Teknis";
+        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Lainnya";
+        opt.innerHTML = "Lainnya";
+        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
+        select.appendChild(opt);
+        $('#extra').show(500);
+      } else if ($(item).val() == 8) {
+        var opt = document.createElement('option');
+        opt.value = "Penetapan SNI";
+        opt.innerHTML = "Penetapan SNI";
+        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Penetapan Revisi";
+        opt.innerHTML = "Penetapan Revisi";
+        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
+        select.appendChild(opt);
+        var opt = document.createElement('option');
+        opt.value = "Abolisi";
+        opt.innerHTML = "Abolisi";
+        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
+        select.appendChild(opt);
+        $('#extra').show(500);
+      } else {
+        $("#extra").hide(500);
+        var opt = document.createElement('option');
+        opt.value = '';
+        select.appendChild(opt);
+      }
+    }
+
     $(function () {
+        jenisProduk('#id_jenis-old');
         $("#example1").DataTable();
         //Datemask dd/mm/yyyy
         $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
