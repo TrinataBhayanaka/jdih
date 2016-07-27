@@ -1,1 +1,180 @@
-halaman html services
+<section class="content-header">
+  <h1>
+   Penjelasan Parameter URL Services 
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Parameter URL</li>
+  </ol>
+</section>
+
+
+<section class="content">
+	<div class="row">
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Menampilkan Daftar Produk Hukum</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table class="table table-bordered" width="100%">
+                    <tr>
+                      <th class="text-center" style="width: 5%" >No</th>
+                      <th style="width: 10%">Parameter</th>
+                      <th style="width: 20%">Keterangan</th>
+                      <th style="width: 25%">Contoh</th>
+                      <th style="width: 30%">URL</th>
+                    </tr>
+                    <tr>
+                      <td class="text-center">1.</td>
+                      <td>page</td>
+                      <td>Menampilkan list data (maksimal 50 record)</td>
+                      <td>page=1 (menampilkan record ke 1 - 50)<br/>
+						  page=2 (menampilkan record ke 51 - 100)<br/>
+						  dst
+					  </td>
+                      <td>http://localhost/jdih/services/home/listData/?page=1</td>
+                    </tr>
+					</table>
+                </div><!-- /.box-body -->
+              </div>
+		</div>
+
+	</div>
+	
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Menampilkan Daftar Produk Hukum Berdasarkan filter</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table class="table table-bordered" width="100%">
+                    <tr>
+                      <th class="text-center" style="width: 5%">No</th>
+                      <th style="width: 10%">Parameter</th>
+                      <th style="width: 20%">Keterangan</th>
+                      <th style="width: 25%">Contoh</th>
+                      <th style="width: 30%">URL</th>
+                    </tr>
+                    
+					<tr>
+                      <td class="text-center">1.</td>
+                      <td>page</td>
+                      <td class="text-align">Menampilkan list data (maksimal 50 record)</td>
+                      <td class="text-align">page=1 <br/>(menampilkan record ke 1 - 50)
+						  page=2 <br/>(menampilkan record ke 51 - 100)<br/>
+						  dst
+					  </td>
+                      <td>http://localhost/jdih/services/home/listData/?page=1</td>
+					</tr>
+					
+					<tr>
+                      <td class="text-center">2.</td>
+                      <td>first_date</td>
+                      <td class="text-align">Menampilkan data berdasarkan tanggal (format : yyyy-mm-dd)</td>
+                      <td class="text-align">first_date=2016-07-27 <br/>(menampilkan data dengan tanggal >=2016-07-27)<br/></td>
+                      <td>http://localhost/jdih/services/home/searchData/?page=1&first_date=2016-07-27</td>
+					</tr>
+					
+					<tr>
+                      <td class="text-center">3.</td>
+                      <td>last_date</td>
+                      <td class="text-align">Menampilkan data berdasarkan tanggal (format : yyyy-mm-dd)</td>
+                      <td class="text-align">first_date=2016-07-27 <br/>(menampilkan data dengan tanggal <=2016-07-27)<br/></td>
+                      <td>http://localhost/jdih/services/home/searchData/?page=1&last_date=2016-07-27</td>
+					</tr>
+					
+					<tr>
+                      <td class="text-center">4.</td>
+                      <td>produk</td>
+                      <td class="text-align">Menampilkan data berdasarkan jenis produk hukum<br/>*)referensi jenis produk hukum</td>
+                      <td class="text-align">produk=1 <br/>(menampilkan data dengan jenis produk hukum UUD Tahun 1945)
+					  <br/></td>
+                      <td>http://localhost/jdih/services/home/searchData/?page=1&produk=1</td>
+					</tr>
+					
+					<tr>
+                      <td class="text-center">5.</td>
+                      <td>status</td>
+                      <td class="text-align">Menampilkan data berdasarkan status jenis produk hukum (Rancangan,Berlaku,Perubahan,Pencabutan)</td>
+                      <td  class="text-align">status=Rancangan <br/>(menampilkan data jenis produk hukum dengan status rancangan)<br/></td>
+                      <td>http://localhost/jdih/services/home/searchData/?page=1&status=Rancangan</td>
+					</tr>
+					
+					</table>
+                </div><!-- /.box-body -->
+              </div>
+		</div>
+
+	</div>
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Referensi Jenis Produk Hukum</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table class="table table-bordered" width="100%">
+                    <tr>
+                      <th class="text-center" style="width: 10%">id</th>
+                      <th >Jenis Produk Hukum</th>
+                     </tr>
+                    <tr>
+                      <td class="text-center">1</td>
+                      <td>UUD Tahun 1945</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">2</td>
+                      <td>Undang-undang</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">3</td>
+                      <td>Perpu</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">4</td>
+                      <td>Peraturan Pemerintah (PP)</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">5</td>
+                      <td>Peraturan Presiden (perpres)</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">6</td>
+                      <td>Keputusan Presiden (Keppres)</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">7</td>
+                      <td>Instruksi Presiden (Inpres)</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">8</td>
+                      <td>Pemberlakuan Wajib SNI</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">9</td>
+                      <td>Peraturan Kepala BSN</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">10</td>
+                      <td>Keputusan Kepala BSN</td>
+                    </tr>
+					<tr>
+                      <td class="text-center">11</td>
+                      <td>Surat Edaran Kepala BSN</td>
+                    </tr>
+					</table>
+                </div><!-- /.box-body -->
+              </div>
+		</div>
+
+	</div>
+	
+</section>

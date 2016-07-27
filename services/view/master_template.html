@@ -1,31 +1,20 @@
+{include file="template/meta.html"}
+<body class="hold-transition skin-blue-light sidebar-mini">
 
-{include file="meta.html"}
-<body>
-	<!-- RUNNING GLOBAL VAR -->
 	<script>
 		var basedomain = "{$basedomain}";
+		var app_domain = "{$app_domain}";
 	</script>
-	
-	<!-- HEADER -->
-    <div id="header">
-		{if $admin}
-		{include file="menu.html"}
-		{/if}
+	<div class="wrapper">
+			{include file= "template/header.html"} 
+			{include file= "template/sidebar.html"}
+			<div class="content-wrapper">
+
+				{$content}
+
+			</div>
+			{include file= "template/footer.html"}
 	</div>
-	
-	
-	<!-- CONTENT -->
-	<div id="body" class="home">
-		{$content}
-		
-	</div>
-	
-	
-	<!-- FOOTER -->
-    <footer id="footer">
-		
-		{include file="footer.html"}
-	</footer>
-	
-</body> 
-</html>
+	{include file= "template/jsplugin.html"}	
+</body>
+</html>	

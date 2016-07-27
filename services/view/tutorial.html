@@ -1,0 +1,183 @@
+<section class="content-header">
+  <h1>
+    Mengolah Data Service
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="{$basedomain}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Mengolah Data</li>
+  </ol>
+</section>
+
+
+<section class="content">
+
+ <div class="row">
+            <div class="col-md-12">
+              <!-- Custom Tabs -->
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#tab_1" data-toggle="tab">Get Data</a></li>
+                  <li><a href="#tab_2" data-toggle="tab">Fetc Data</a></li>
+                  <li><a href="#tab_3" data-toggle="tab">View Data</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab_1">
+
+					  <div class="box">
+						<div class="box-header">
+						  <h3 class="box-title">Get data via URL</h3>
+						</div><!-- /.box-header -->
+						<div class="box-body">
+							<pre style="font-weight: 600;" class="text-left">&lt;?php <br/>$url='http://localhost/jdih/services/home/listData/?page=1';<br/>$resultJsonEncode=file_get_contents($url);<br/>?&gt;</pre>
+						</div><!-- /.box-body -->
+					  </div><!-- /.box -->
+				</div>
+                  <div class="tab-pane" id="tab_2">
+					 <div class="box">
+						<div class="box-header">
+						  <h3 class="box-title">Fetc Data dengan json_decode</h3>
+						</div><!-- /.box-header -->
+						<div class="box-body">
+							<pre style="font-weight: 600;" class="text-left">&lt;?php <br/>$url='http://localhost/jdih/services/home/listData/?page=1';<br/>$resultJson=file_get_contents($url);<br/>$resultJsonDecode=json_decode($resultJson);<br/>?&gt;</pre>
+						</div><!-- /.box-body -->
+					  </div><!-- /.box -->  
+					</div><!-- /.tab-pane -->
+				  
+                  <div class="tab-pane" id="tab_3">
+					 <div class="box">
+						<div class="box-header">
+						  <h3 class="box-title">view Data dengan foreach</h3>
+						</div><!-- /.box-header -->
+						<div class="box-body">
+							<pre style="font-weight: 600;" class="text-left">&lt;?php <br/>$url='http://localhost/jdih/services/home/listData/?page=1';<br/>$resultJson=file_get_contents($url);<br/>$resultJsonDecode=json_decode($resultJson);<br/>foreach ($resultJsonDecode as $key => $val){}?&gt;</pre>
+						</div><!-- /.box-body -->
+					  </div><!-- /.box -->  
+					</div><!-- /.tab-pane -->
+				   
+                  </div><!-- /.tab-pane -->
+                </div><!-- /.tab-content -->
+              </div><!-- nav-tabs-custom -->
+            </div><!-- /.col -->
+</div><!-- row -->
+
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="modaltest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h4 class="modal-title">Modalss title</h4>
+
+            </div>
+            <div class="modal-body"><div class="te"></div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div  class="example-modal">
+<div class="modal fade" id="data-modal">
+  <div class="modal-dialog">
+	<div class="modal-content">
+	 
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Tambah Administrator</h4>
+	  </div>
+		
+		<form class="form-horizontal" method="POST" action="{$basedomain}pengaturan/add_admin">
+		  <div class="box-body">
+			
+			<div class="form-group">
+			  <label for="inputPassword3" class="col-sm-3 control-label">Nama Administrator</label>
+			  <div class="col-sm-8">
+				<input type="text" class="form-control" name="name" placeholder="">
+			  </div>
+			</div>
+			
+			<div class="form-group">
+			  <label for="inputPassword3" class="col-sm-3 control-label">Alamat Email</label>
+			  <div class="col-sm-8">
+				<input type="text" class="form-control" name="email" placeholder="">
+			  </div>
+			</div>
+			
+			<div class="form-group">
+			  <label for="inputPassword3" class="col-sm-3 control-label">Username</label>
+			  <div class="col-sm-8">
+				<input type="text" class="form-control" name="username" placeholder="">
+			  </div>
+			</div>
+			
+			<div class="form-group">
+			  <label for="inputPassword3" class="col-sm-3 control-label">Password Login</label>
+			  <div class="col-sm-8">
+				<input type="password" class="form-control" name="password" placeholder="Password harus diisi dengan 6-8 digit alphanumeric">
+			  </div>
+			</div>	
+			
+			<div class="form-group">
+			  <label for="inputPassword3" class="col-sm-3 control-label">Hak Akses</label>
+			  <div class="col-sm-8">
+				<select class="form-control" name="type">
+					<option selected="selected" disabled>Pilih Hak Akses</option>
+					<option value="1">Super Administrator</option>
+					<option value="2">Administrator</option>
+				</select>
+			  </div>
+			</div>
+			
+		  </div><!-- /.box-body -->
+		  
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
+			<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+		  </div>
+								 
+		</form>
+	
+	</div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div><!-- /.example-modal -->
+
+<div  class="example-modal">
+<div class="modal fade" id="produk-modal">
+  <div class="modal-dialog">
+	<div class="modal-content">
+	 
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Tambah Jenis Produk Hukum</h4>
+	  </div>
+		
+		<form class="form-horizontal" method="post" action="{$basedomain}pengaturan/add_produk">
+		  <div class="box-body">
+			
+			<div class="form-group">
+			  <label for="inputPassword3" class="col-sm-4 control-label">Jenis Produk Hukum</label>
+			  <div class="col-sm-7">
+				<input type="text" class="form-control" name="nama" placeholder="">
+			  </div>
+			</div>
+			
+		  </div><!-- /.box-body -->
+
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
+			<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+		  </div>			 
+		</form>
+	
+	</div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div><!-- /.example-modal -->
