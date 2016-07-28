@@ -59,13 +59,37 @@
                               <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label">Jenis Produk Hukum</label>
                                     <div class="col-sm-8">
-                                      <select class="form-control" name="id_jenis">
+                                      <select class="form-control" name="id_jenis" onchange="return jenisProduk(this)">
                                         <option disabled selected>Pilih Produk Hukum</option>
                                         {foreach $jenis as $val}
                                         <option value="{$val.id_jenis}">{$val.nama}</option>
                                         {/foreach}
                                       </select>
                                     </div>
+                              </div>
+
+                              <div class="form-group" id="subjenis-div" style="display:none">
+                                <label for="inputEmail3" class="col-sm-4 control-label">Sub Jenis</label>
+                                <div class="col-sm-8">
+                                  <select class="form-control" style="width: 100%;" name="subjenis" id="subjenis" onchange="return subSubProduk(this)">
+                                    <option value="" selected disabled>- Pilih -</option>                
+                                    <option value="Standar Nasional Indonesia">Standar Nasional Indonesia</option>
+                                    <option value="Komite Teknis">Komite Teknis</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="form-group" id="subsub-div" style="display:none">
+                                <label for="inputEmail3" class="col-sm-4 control-label"></label>
+                                <div class="col-sm-8">
+                                  <select class="form-control" style="width: 100%;" name="subsub" id="subsub">
+                                    <option value="" selected disabled>- Pilih -</option>   
+                                    <option value="Penetapan SNI">Penetapan SNI</option>
+                                    <option value="Penetapan Revisi">Penetapan Revisi</option>
+                                    <option value="Abolisi">Abolisi</option>
+                                  </select>
+                                </div>
                               </div>
                               
                             <div class="form-group">
@@ -191,6 +215,29 @@
 
 {literal}
 <script type="text/javascript">
+  function jenisProduk(item)
+    {
+      select = document.getElementById('subjenis');
+      if ($(item).val() == '10') {
+        $('#subjenis-div').show(500);
+      } else {
+        $("#subjenis-div").hide(500);
+        $("#subsub-div").hide(500);
+        $("#subjenis").val('');
+        $("#subsub").val('');
+      }
+    }
+
+    function subSubProduk(item)
+    {
+      select = document.getElementById('subsub');
+      if ($(item).val() == 'Standar Nasional Indonesia') {
+        $('#subsub-div').show(500);
+      } else {
+        $("#subsub-div").hide(500);
+        $("#subsub").val('');
+      }
+    }
   // init bootpag
   $('#page-selection').bootpag({
       total: Math.ceil($("#total").val()/3)

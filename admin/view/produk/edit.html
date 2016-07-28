@@ -54,19 +54,29 @@
               </div>
             </div>
 
-            <div class="form-group" id="extra" {if empty($data.extra)}style="display:none"{/if}>
-              <label for="inputEmail3" class="col-xs-2 control-label">Jenis <sup class="text-danger">*</sup></label>
+            <div class="form-group" id="subjenis-div" {if empty($data.subjenis) || $data.subjenis == ''}style="display:none"{/if}>
+              <label for="inputEmail3" class="col-xs-2 control-label">Sub Jenis <sup class="text-danger">*</sup></label>
               <div class="col-xs-5">
-                <select class="form-control" style="width: 100%;" name="extra" id="extra-opt">
-                  <option value="" disabled selected>- Pilih -</option>
+                <select class="form-control" style="width: 100%;" name="subjenis" id="subjenis" onchange="return subSubProduk(this)">
+                  <option value="" {if empty($data.subjenis) || $data.subjenis == ''}selected{/if} readonly>- Pilih -</option>                
+                  <option value="Standar Nasional Indonesia" {if $data.subjenis == 'Standar Nasional Indonesia'}selected{/if}>Standar Nasional Indonesia</option>
+                  <option value="Komite Teknis" {if $data.subjenis == 'Komite Teknis'}selected{/if}>Komite Teknis</option>
+                  <option value="Lainnya" {if $data.subjenis == 'Lainnya'}selected{/if}>Lainnya</option>
                 </select>
               </div>
             </div>
 
-            {if !empty($data.extra)}
-            <input type="hidden" id="id_jenis-old" value="{$data.id_jenis}">
-            <input type="hidden" id="extra-old" value="{$data.extra}">
-            {/if}
+            <div class="form-group" id="subsub-div" {if empty($data.subsub) || $data.subsub == ''}style="display:none"{/if}>
+              <label for="inputEmail3" class="col-xs-2 control-label"></label>
+              <div class="col-xs-5">
+                <select class="form-control" style="width: 100%;" name="subsub" id="subsub">
+                  <option value="" {if empty($data.subsub) || $data.subsub == ''}selected{/if} readonly>- Pilih -</option>   
+                  <option value="Penetapan SNI" {if $data.subsub == 'Penetapan SNI'}selected{/if}>Penetapan SNI</option>
+                  <option value="Penetapan Revisi" {if $data.subsub == 'Penetapan Revisi'}selected{/if}>Penetapan Revisi</option>
+                  <option value="Abolisi" {if $data.subsub == 'Abolisi'}selected{/if}>Abolisi</option>
+                </select>
+              </div>
+            </div>
 
             <div class="form-group">
               <label for="inputEmail3" class="col-xs-2 control-label">Judul <sup class="text-danger">*</sup></label>
@@ -196,52 +206,29 @@
 <script>
     function jenisProduk(item)
     {
-      $("#extra-opt").empty();
-      select = document.getElementById('extra-opt');
+      select = document.getElementById('subjenis');
       if ($(item).val() == '10') {
-        var opt = document.createElement('option');
-        opt.value = "Standar Nasional Indonesia";
-        opt.innerHTML = "Standar Nasional Indonesia";
-        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
-        select.appendChild(opt);
-        var opt = document.createElement('option');
-        opt.value = "Komite Teknis";
-        opt.innerHTML = "Komite Teknis";
-        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
-        select.appendChild(opt);
-        var opt = document.createElement('option');
-        opt.value = "Lainnya";
-        opt.innerHTML = "Lainnya";
-        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
-        select.appendChild(opt);
-        $('#extra').show(500);
-      } else if ($(item).val() == 8) {
-        var opt = document.createElement('option');
-        opt.value = "Penetapan SNI";
-        opt.innerHTML = "Penetapan SNI";
-        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
-        select.appendChild(opt);
-        var opt = document.createElement('option');
-        opt.value = "Penetapan Revisi";
-        opt.innerHTML = "Penetapan Revisi";
-        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
-        select.appendChild(opt);
-        var opt = document.createElement('option');
-        opt.value = "Abolisi";
-        opt.innerHTML = "Abolisi";
-        if ($('#extra-old').val() == opt.value) opt.setAttribute('selected', true);
-        select.appendChild(opt);
-        $('#extra').show(500);
+        $('#subjenis-div').show(500);
       } else {
-        $("#extra").hide(500);
-        var opt = document.createElement('option');
-        opt.value = '';
-        select.appendChild(opt);
+        $("#subjenis-div").hide(500);
+        $("#subsub-div").hide(500);
+        $("#subjenis").val(null);
+        $("#subsub").val(null);
+      }
+    }
+
+    function subSubProduk(item)
+    {
+      select = document.getElementById('subsub');
+      if ($(item).val() == 'Standar Nasional Indonesia') {
+        $('#subsub-div').show(500);
+      } else {
+        $("#subsub-div").hide(500);
+        $("#subsub").val(null);
       }
     }
 
     $(function () {
-        jenisProduk('#id_jenis-old');
         $("#example1").DataTable();
         //Datemask dd/mm/yyyy
         $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
