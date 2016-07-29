@@ -66,7 +66,7 @@
                               <div class="form-group">
                                 <label for="select" class="col-sm-4 control-label">Jenis Produk Hukum</label>
                                     <div class="col-sm-8">
-                                      <select class="form-control" name="id_jenis">
+                                      <select class="form-control" name="id_jenis" required onchange="return jenisProduk(this)">
                                         <option selected>Pilih Produk Hukum</option>
                                         {foreach $jenis as $val}
 										{if $val.id_jenis == $filter_id_jenis}
@@ -80,26 +80,26 @@
                                     </div>
                               </div>
 
-                              <div class="form-group" id="subjenis-div" {if empty($data.subjenis) || $data.subjenis == ''}style="display:none"{/if}>
-                                <label for="inputEmail3" class="col-sm-4 control-label">Sub Jenis <sup class="text-danger">*</sup></label>
+                              <div class="form-group" id="subjenis-div" {if empty($param.subjenis) || $param.subjenis == ''}style="display:none"{/if}>
+                                <label for="inputEmail3" class="col-sm-4 control-label">Sub Jenis <sup class="text-danger"></sup></label>
                                 <div class="col-sm-8">
                                   <select class="form-control" style="width: 100%;" name="subjenis" id="subjenis" onchange="return subSubProduk(this)">
-                                    <option value="" {if empty($data.subjenis) || $data.subjenis == ''}selected{/if} readonly>- Pilih -</option>                
-                                    <option value="Standar Nasional Indonesia" {if $data.subjenis == 'Standar Nasional Indonesia'}selected{/if}>Standar Nasional Indonesia</option>
-                                    <option value="Komite Teknis" {if $data.subjenis == 'Komite Teknis'}selected{/if}>Komite Teknis</option>
-                                    <option value="Lainnya" {if $data.subjenis == 'Lainnya'}selected{/if}>Lainnya</option>
+                                    <option value="" {if empty($param.subjenis) || $param.subjenis == ''}selected{/if} readonly>- Pilih -</option>                
+                                    <option value="Standar Nasional Indonesia" {if $param.subjenis == 'Standar Nasional Indonesia'}selected{/if}>Standar Nasional Indonesia</option>
+                                    <option value="Komite Teknis" {if $param.subjenis == 'Komite Teknis'}selected{/if}>Komite Teknis</option>
+                                    <option value="Lainnya" {if $param.subjenis == 'Lainnya'}selected{/if}>Lainnya</option>
                                   </select>
                                 </div>
                               </div>
 
-                              <div class="form-group" id="subsub-div" {if empty($data.subsub) || $data.subsub == ''}style="display:none"{/if}>
-                                <label for="inputEmail3" class="col-xs-2 control-label"></label>
+                              <div class="form-group" id="subsub-div" {if empty($param.subsub) || $param.subsub == ''}style="display:none"{/if}>
+                                <label for="inputEmail3" class="col-sm-4 control-label">&nbsp;</label>
                                 <div class="col-sm-8">
                                   <select class="form-control" style="width: 100%;" name="subsub" id="subsub">
-                                    <option value="" {if empty($data.subsub) || $data.subsub == ''}selected{/if} readonly>- Pilih -</option>   
-                                    <option value="Penetapan SNI" {if $data.subsub == 'Penetapan SNI'}selected{/if}>Penetapan SNI</option>
-                                    <option value="Penetapan Revisi" {if $data.subsub == 'Penetapan Revisi'}selected{/if}>Penetapan Revisi</option>
-                                    <option value="Abolisi" {if $data.subsub == 'Abolisi'}selected{/if}>Abolisi</option>
+                                    <option value="" {if empty($param.subsub) || $param.subsub == ''}selected{/if} readonly>- Pilih -</option>   
+                                    <option value="Penetapan SNI" {if $param.subsub == 'Penetapan SNI'}selected{/if}>Penetapan SNI</option>
+                                    <option value="Penetapan Revisi" {if $param.subsub == 'Penetapan Revisi'}selected{/if}>Penetapan Revisi</option>
+                                    <option value="Abolisi" {if $param.subsub == 'Abolisi'}selected{/if}>Abolisi</option>
                                   </select>
                                 </div>
                               </div>
@@ -118,7 +118,7 @@
                                     </div>
                              </div>
                              <div class="pull-right">
-                                <button type="submit" class="btn btn-ar btn-primary" data-dismiss="modal">Tampilkan</button>
+                                <button type="submit" class="btn btn-ar btn-primary" param-dismiss="modal">Tampilkan</button>
                              </div>
                              
                         </form>
@@ -164,7 +164,7 @@
                     {else}
                      <div class="content-box">
                       <div class="row">  
-                        Tidak ada data
+                        Tidak ada param
                       </div>
                     </div>
                     {/if}
@@ -183,7 +183,7 @@
 
                 <!-- Tab panes -->
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#berita" data-toggle="tab">Berita Hukum</a></li>
+              <li class="active"><a href="#berita" param-toggle="tab">Berita Hukum</a></li>
               
             </ul>
                   <div class="tab-pane" id="berita">
@@ -229,17 +229,46 @@
 <input type="hidden" id="param_thn" value="{$param.tahun}">
 <input type="hidden" id="param_jns" value="{$param.id_jenis}">
 <input type="hidden" id="param_sts" value="{$param.status_akhir}">
+<input type="hidden" id="param_subjenis" value="{$param.subjenis}">
+<input type="hidden" id="param_subsub" value="{$param.subsub}">
 
 {literal}
 <script type="text/javascript">
+  
+  function jenisProduk(item)
+    {
+      select = document.getElementById('subjenis');
+      if ($(item).val() == '10') {
+        $('#subjenis-div').show(500);
+      } else {
+        $("#subjenis-div").hide(500);
+        $("#subsub-div").hide(500);
+        $("#subjenis").val(null);
+        $("#subsub").val(null);
+      }
+    }
+
+    function subSubProduk(item)
+    {
+      select = document.getElementById('subsub');
+      if ($(item).val() == 'Standar Nasional Indonesia') {
+        $('#subsub-div').show(500);
+      } else {
+        $("#subsub-div").hide(500);
+        $("#subsub").val(null);
+      }
+    }
+  
+  
   // init bootpag
   $('#page-selection').bootpag({
       total: Math.ceil($("#total").val()/3)
   }).on("page", function(event, num){
     $.ajax({
-      url: basedomain+"produk/ajaxSearchProduk/?site="+num+"&tgl="+$("#param_tgl").val()+"&tgl2="+$("#param_tgl_2").val()+"&thn="+$("#param_thn").val()+"&jns="+$("#param_jns").val()+"&sts="+$("#param_sts").val(),
-    }).done(function(data) {
-      $("#content").html( data );
+      //url: basedomain+"produk/ajaxSearchProduk/?site="+num+"&tgl="+$("#param_tgl").val()+"&tgl2="+$("#param_tgl_2").val()+"&thn="+$("#param_thn").val()+"&jns="+$("#param_jns").val()+"&sts="+$("#param_sts").val(),
+      url: basedomain+"produk/ajaxSearchProduk/?site="+num+"&tgl="+$("#param_tgl").val()+"&tgl2="+$("#param_tgl_2").val()+"&thn="+$("#param_thn").val()+"&jns="+$("#param_jns").val()+"&sts="+$("#param_sts").val()+"&subjenis="+$("#param_subjenis").val()+"&subsub="+$("#param_subsub").val(),
+    }).done(function(param) {
+      $("#content").html( param );
     });
   });
   
@@ -261,9 +290,9 @@
 			text = 'Telah dibaca ';
 			param = 'ref_berita_'+id;
 		}
-		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(data){
-							if(data.hit > 0){
-								$('#'+param).text(text+data.hit+' kali');
+		$.post(basedomain+"home/ajax_count", {id: id, type: type}, function(param){
+							if(param.hit > 0){
+								$('#'+param).text(text+param.hit+' kali');
 							}else{
 								//nothing	
 							}
