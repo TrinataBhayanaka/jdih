@@ -52,6 +52,12 @@
             <span>Statistik</span>
           </a>
         </li>
+		<li class="{if $page.page eq 'kontak'}active{/if}">
+          <a href="{$basedomain}kontak">
+            <i class="fa fa-envelope"></i>
+            <span>Kontak</span>
+          </a>
+        </li>
         {if $admin.type eq 1}
         <li class="{if $page.page eq 'pengaturan'}active{/if}">
           <a href="{$basedomain}pengaturan">

@@ -318,7 +318,7 @@ class produk extends Controller {
 		$set = implode(' AND ', $tmpset);
 		$set = str_replace("tanggal_2","tanggal",$set);
 		// pr($set);
-		$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 AND {$set}",'tanggal',1);
+		$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 AND {$set}",'tanggal',3);
 		foreach ($produk as $key => $value) {
 			$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
 			$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
