@@ -201,6 +201,8 @@ class produk extends Controller {
     	$param['tahun'] = $_GET['thn'];
     	$param['id_jenis'] = $_GET['jns'];
     	$param['status_akhir'] = $_GET['sts'];
+    	$param['subjenis'] = $_GET['subjenis'];
+    	$param['subsub'] = $_GET['subsub'];
 
     	$searchParam = array_filter($param);
 
@@ -252,6 +254,7 @@ class produk extends Controller {
     function search()
     {
     	global $basedomain;
+		// pr($_POST);
 		// start add by iman
 		$tgl = $_POST['tanggal'];
 		$tgl_2 = $_POST['tanggal_2'];
@@ -294,6 +297,7 @@ class produk extends Controller {
 		//end
 		
     	$searchParam = array_filter($_POST);
+		// pr($searchParam);
 		if(isset($searchParam['tanggal'])){
     		$searchParam['tanggal'] = changeFormatDate($searchParam['tanggal'],'d/m/Y','Y-m-d');
     	}
@@ -313,7 +317,8 @@ class produk extends Controller {
         }
 		$set = implode(' AND ', $tmpset);
 		$set = str_replace("tanggal_2","tanggal",$set);
-		$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 AND {$set}",'tanggal',3);
+		// pr($set);
+		$produk = $this->contentHelper->fetchData('jdih_produk',1,"n_status = 1 AND publish = 1 AND {$set}",'tanggal',1);
 		foreach ($produk as $key => $value) {
 			$produk[$key]['deskripsi'] = html_entity_decode(htmlspecialchars_decode($value['deskripsi'], ENT_NOQUOTES));
 			$produk[$key]['tanggal'] = dateFormat($value['tanggal'],'article-day');
